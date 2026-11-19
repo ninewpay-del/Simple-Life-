@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#F8FAFC"><title>Simple Life</title>
+<style>
+:root{--bg:#F8FAFC;--cd:#FFFFFF;--cd2:#FFFFFF;--bd:#E2E8F0;--bd2:#CBD5E1;--pr:#0F172A;--pr2:#0F172A;--lil:#334155;--eye:#0F766E;--skin:#B45309;--tx:#0F172A;--mu:#64748B;--cy:#0F172A;--gr:#0F172A;--am:#B45309}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*,*::before,*::after{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select,[contenteditable],[contenteditable] *{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+::selection{background:transparent}
+input::selection,textarea::selection,[contenteditable] ::selection{background:rgba(59,130,246,.3)}
+html,body{margin:0;color:var(--tx);font-family:'Noto Sans Thai','Sarabun','Leelawadee UI',Tahoma,system-ui,sans-serif;touch-action:manipulation;background:var(--bg)}
+body{background:var(--bg);min-height:100vh}
+#app{padding:calc(env(safe-area-inset-top,0px) + 12px) 14px calc(100px + env(safe-area-inset-bottom,0px));max-width:560px;margin:auto}
+h2{margin:8px 0 14px;font-size:24px;font-weight:800;letter-spacing:.2px}h3{margin:0 0 10px;font-size:16px;font-weight:700}
+.ic{flex:0 0 auto;vertical-align:middle}
+/* การ์ด + มุมกรอบเส้นบาง */
+.c{position:relative;background:#FFFFFF;border:1px solid var(--bd);border-radius:20px;padding:18px 18px 16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 24px -16px rgba(15,23,42,.18)}
+.c::before,.c::after{display:none}
+
+
+.sec{display:flex;align-items:center;gap:10px;margin:18px 2px 12px;color:var(--lil);font-size:13px;font-weight:700;letter-spacing:.6px}
+.sec i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--bd2))}.sec i:last-child{background:linear-gradient(90deg,var(--bd2),transparent)}
+.sec span::before,.sec span::after{content:"";display:inline-block;width:5px;height:5px;background:var(--skin);transform:rotate(45deg);margin:0 8px 1px}
+.b{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:18px;border:1px solid var(--bd2);background:#FFFFFF;color:var(--tx);font:inherit;font-size:16px;font-weight:600;line-height:1.3;text-align:center;overflow-wrap:anywhere;min-width:0;padding:10px 16px;width:100%;margin:5px 0;box-shadow:0 1px 2px rgba(15,23,42,.04),0 6px 14px -10px rgba(15,23,42,.25);transition:transform .15s,box-shadow .15s}
+.b:active{transform:scale(.97)}
+.b.p{background:#0F172A;border-color:#0F172A;color:#fff;font-weight:800;box-shadow:0 10px 22px -12px rgba(15,23,42,.6)}
+.b.g{background:#0F766E;border-color:#0F766E;color:#fff;font-weight:800;box-shadow:0 10px 22px -12px rgba(15,118,110,.6)}
+.b.on{border-color:#0F172A;background:#F1F5F9;color:#0F172A;box-shadow:0 0 0 1px #0F172A}
+.b:disabled{opacity:.5}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row .b{width:auto;flex:1 1 90px}
+input{background:#FFFFFF;color:var(--tx);border:1px solid var(--bd2);border-radius:14px;padding:12px;font:inherit;font-size:17px;width:100%;outline:0}
+input:focus{border-color:#0F172A;box-shadow:0 0 0 3px rgba(15,23,42,.08)}
+label{display:block;color:var(--mu);font-size:13px;margin:12px 0 5px}
+.bar{height:10px;background:#E2E8F0;border-radius:999px;overflow:hidden;border:1px solid #E2E8F0}
+.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#475569,#0F172A);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.big{font-size:46px;font-weight:800;line-height:1;color:#0F172A}
+.mu{color:var(--mu);font-size:13px}
+.tag{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--skin);color:var(--skin);margin:0 6px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+/* Hero */
+.hero{position:relative;margin:0 0 10px}
+
+
+
+.htop{position:relative;z-index:13;display:flex;justify-content:flex-end;align-items:center;height:44px;margin:-54px 0 14px;pointer-events:none}
+.hrt{display:flex;gap:8px;pointer-events:auto}
+.ib{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid #CBD5E1;background:rgba(255,255,255,.95);color:#334155;font:inherit;font-size:13.5px;font-weight:600;white-space:nowrap;box-shadow:0 4px 14px -6px rgba(15,23,42,.25)}
+.ib.sq{padding:0;width:42px;justify-content:center}
+.lk{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 6px;background:none;border:0;color:var(--lil);font:inherit;font-size:15px}
+.hbody{position:relative;margin:0 2px}
+.hday{font-size:32px;font-weight:800;line-height:1.2;letter-spacing:.3px;color:#0F172A;overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;border:1px solid #CBD5E1;background:#FFFFFF;padding:4px 10px;font-size:12px;color:#334155}
+.chip.hot{border-color:var(--skin);color:var(--skin)}.chip.ok{border-color:var(--eye);color:var(--eye)}
+
+
+
+/* ระดับ */
+.lvc{display:flex;align-items:center;gap:14px}
+.lvc .x{flex:1}.lvc .t{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.lvc .t b{font-size:16px}
+/* แถบวัน */
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:8px 0 16px}
+.dw{display:flex;flex-direction:column;align-items:center;gap:7px}
+.dy{width:100%;border-radius:999px;border:1px solid var(--bd2);background:#FFFFFF;color:var(--mu);font:inherit;padding:9px 0 8px;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:62px;transition:transform .15s}
+.dy b{font-size:13px;color:var(--tx);font-weight:700}
+.dy:active{transform:scale(.95)}
+.dy.on{background:#0F172A;border-color:#0F172A;color:#fff;box-shadow:0 10px 20px -12px rgba(15,23,42,.6)}.dy.on b{color:#fff}
+.mk{height:7px;display:flex;gap:5px;align-items:center}
+.mk u{text-decoration:none;display:block}
+.bar1{width:14px;height:3px;border-radius:2px;background:var(--skin)}
+.dot{width:6px;height:6px;background:var(--eye);transform:rotate(45deg)}
+/* การ์ดท่า */
+.ch{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;cursor:pointer}
+.cnm{flex:1 1 auto;min-width:0}.cnm b{display:block;font-size:18px;font-weight:800;line-height:1.25;overflow-wrap:anywhere}
+.cnm .th{display:block;color:var(--mu);font-size:13px;line-height:1.4;margin-top:2px;overflow-wrap:anywhere}
+.pills{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;flex:0 0 auto;max-width:44%}
+.pl{border:1px solid var(--bd2);border-radius:999px;padding:2px 10px;font-size:11.5px;line-height:1.5;color:var(--mu);white-space:nowrap}
+.pl.lv{border-color:var(--skin);color:var(--skin);font-weight:700}
+.cm{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:14px 0 4px}
+.cs{font-size:21px;font-weight:800;color:var(--tx)}.cs i{font-style:normal;font-size:12.5px;font-weight:600;color:var(--mu);margin:0 4px 0 3px}
+.cw{display:inline-flex;align-items:center;gap:6px;font-size:13px;line-height:1.35;font-weight:700;color:var(--eye);border:1px solid rgba(15,118,110,.35);border-radius:999px;padding:4px 11px;max-width:100%;overflow-wrap:anywhere}
+.ds{color:var(--mu);font-size:13px;line-height:1.6;margin:8px 0 14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sets{display:flex;gap:8px}
+.sb{flex:1;min-width:0;min-height:52px;border-radius:18px;border:1px solid var(--bd2);background:#FFFFFF;color:var(--tx);font:inherit;font-size:15px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 8px 14px -10px rgba(15,23,42,.25);transition:transform .15s}
+.sb:active{transform:scale(.95)}
+.sb.d{background:#0F766E;border-color:#0F766E;color:#fff;font-weight:800;box-shadow:0 10px 20px -12px rgba(15,118,110,.7);animation:bump .35s}
+.sb.d svg path{stroke-dasharray:24;stroke-dashoffset:24;animation:dr .4s .05s ease-out forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+@keyframes bump{0%{transform:scale(.92)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+/* Modal / sheet */
+.ov{position:fixed;inset:0;background:rgba(15,23,42,.45);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}
+.ov>div{background:#FFFFFF;border:1px solid var(--bd2);border-radius:24px;padding:20px;width:100%;max-width:440px;max-height:86vh;overflow:auto;animation:pop .25s;box-shadow:0 30px 60px -20px rgba(15,23,42,.4)}
+@keyframes pop{from{transform:translateY(10px) scale(.95);opacity:0}to{transform:none;opacity:1}}
+#sh{position:fixed;left:12px;right:12px;bottom:calc(140px + env(safe-area-inset-bottom,0px));z-index:11;max-width:536px;margin:auto;background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--eye);border-radius:22px;padding:14px;display:none;animation:pop .2s;box-shadow:0 20px 40px -14px rgba(15,23,42,.35)}
+.ex{cursor:pointer;display:flex;justify-content:space-between;gap:8px;padding:12px 0;border-top:1px solid var(--bd)}.ex>span:first-child{flex:1;min-width:0;overflow-wrap:anywhere}.ex>span:last-child{text-align:right;max-width:46%;overflow-wrap:anywhere}
+.lock{opacity:.45}
+ol{margin:4px 0 0;padding-left:20px;line-height:1.6}ol li{margin-bottom:6px}
+/* Compact Rest Timer Dock */
+#tb{position:fixed;left:10px;right:10px;bottom:calc(72px + env(safe-area-inset-bottom,0px));max-width:540px;margin:auto;z-index:10;height:58px;border-radius:999px;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--bd2);box-shadow:0 10px 24px -10px rgba(15,23,42,.3);padding:0 6px 0 12px;display:none;align-items:center;gap:6px;overflow:hidden}
+#tpg{position:absolute;left:0;bottom:0;height:2px;width:0;background:#0F172A;transition:width .25s linear}
+.dkt{display:flex;align-items:center;gap:5px;flex:1 1 auto;min-width:0;color:var(--lil)}
+#tt{font-size:22px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;color:var(--tx)}
+#tt.z{color:var(--skin)}
+.adj{display:flex;gap:4px;flex:0 0 auto}
+.adj button{border:1px solid var(--bd2);background:#FFFFFF;color:#334155;border-radius:999px;padding:0 6px;font:inherit;font-size:11px;min-height:34px;min-width:34px}
+.pbtn{flex:0 0 auto;min-width:54px;min-height:40px;border:0;border-radius:999px;background:#0F172A;color:#fff;font:inherit;font-weight:800;font-size:14px;padding:0 12px}
+.sbtn{flex:0 0 auto;min-height:40px;border:1px solid var(--bd2);border-radius:999px;background:#F1F5F9;color:#334155;font:inherit;font-weight:600;font-size:12px;padding:0 10px}
+.aub{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:1px solid var(--bd2);background:#FFFFFF;color:var(--mu);display:inline-flex;align-items:center;justify-content:center;padding:0}
+.aub.on{color:var(--eye);border-color:var(--eye)}
+.pbtn:active,.sbtn:active,.adj button:active{transform:scale(.96)}
+/* Navigation: Home (บนซ้าย) / Menu (ล่าง) เป็นวงกลมไอคอน กดค้างเพื่อขยายและแสดงชื่อ */
+.tnav{position:sticky;top:calc(env(safe-area-inset-top,0px) + 6px);z-index:12;height:44px;margin:0 0 10px;display:flex;align-items:center;pointer-events:none}
+.bnav{position:fixed;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:11;display:flex;justify-content:center;gap:10px;pointer-events:none}
+.cn{position:relative;pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;height:44px;min-width:44px;padding:0;border-radius:999px;border:1px solid var(--bd2);background:rgba(26,18,48,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--lil);font:inherit;font-size:15px;font-weight:700;box-shadow:0 6px 16px -6px rgba(0,0,0,.7);transition:transform .14s cubic-bezier(.2,.9,.3,1.3),box-shadow .14s;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:none}
+.cn *{pointer-events:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.cn::selection,.cn *::selection{background:transparent}
+.tnav,.bnav{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.cn .lb{position:absolute;opacity:0;white-space:nowrap;padding:7px 14px;border-radius:999px;font-size:14px;font-weight:700;line-height:1.2;background:#1E1540;color:#F2EDFC;border:1px solid var(--bd2);box-shadow:0 10px 22px -8px rgba(0,0,0,.7);transition:opacity .12s,transform .16s cubic-bezier(.2,.9,.3,1.3)}
+.bnav .cn .lb{left:50%;bottom:calc(100% + 14px);transform:translate(-50%,8px) scale(.92)}
+.tnav .cn .lb{left:calc(100% + 14px);top:50%;transform:translate(-8px,-50%) scale(.92)}
+.cn.lp{transform:scale(1.1);box-shadow:0 12px 26px -8px rgba(0,0,0,.8)}
+.bnav .cn.lp .lb{opacity:1;transform:translate(-50%,0) scale(1)}
+.tnav .cn.lp .lb{opacity:1;transform:translate(0,-50%) scale(1)}
+.cn.on{background:linear-gradient(135deg,#A97BFF,#6D28D9);color:#fff;border-color:transparent}
+#app.wd{padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))}
+/* Hub: รายการฟังก์ชันของแต่ละหัวข้อใหญ่ */
+.hub h1{margin:4px 2px 2px;font-size:28px;font-weight:800;letter-spacing:.3px}
+.hub .sub{color:var(--mu);font-size:13.5px;margin:0 2px 16px}
+.mgrp{font-size:13px;font-weight:700;color:#64748B;margin:18px 2px 10px;letter-spacing:.3px}
+.tiles{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;justify-content:flex-start}
+.tile,.havw{position:relative;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation;transition:transform .14s cubic-bezier(.2,.9,.3,1.3),box-shadow .14s;cursor:pointer}
+.tile *,.havw *{pointer-events:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.tile{width:56px;height:56px;padding:0;border-radius:16px;border:1px solid #E2E8F0;background:#FFFFFF;color:#0F172A;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 24px -16px rgba(15,23,42,.22)}
+.tile:active{background:#F1F5F9}
+.tile.lp,.havw.lp{transform:scale(1.08)}
+.tip{position:absolute;opacity:0;white-space:nowrap;padding:7px 14px;border-radius:999px;font-size:14px;font-weight:700;line-height:1.2;background:#0F172A;color:#FFFFFF;box-shadow:0 10px 22px -8px rgba(15,23,42,.45);bottom:calc(100% + 12px);transform:translateY(8px) scale(.92);transition:opacity .12s,transform .16s cubic-bezier(.2,.9,.3,1.3)}
+.tile .tip{left:0;transform-origin:left bottom}
+.havw .tip{right:0;transform-origin:right bottom}
+.tile.lp .tip,.havw.lp .tip{opacity:1;transform:translateY(0) scale(1)}
+/* Home hub: แถบพื้นหลังโปรไฟล์เต็มความกว้าง + รูปวงกลมมุมขวา */
+.hband{position:relative;margin:calc(-66px - env(safe-area-inset-top,0px)) -14px 14px;padding:calc(70px + env(safe-area-inset-top,0px)) 16px 18px;min-height:176px;border-radius:0 0 26px 26px;border-bottom:1px solid #E2E8F0;overflow:visible;box-sizing:border-box}
+.hband.hb{border-bottom-color:transparent}
+.hbg{position:absolute;inset:0;border-radius:0 0 26px 26px;overflow:hidden;background:#E8EDF3}
+.hbg img,.hbg video{width:100%;height:100%;object-fit:cover;display:block}
+.hsh{position:absolute;inset:0;border-radius:0 0 26px 26px;background:linear-gradient(90deg,rgba(248,250,252,.95) 0%,rgba(248,250,252,.72) 48%,rgba(248,250,252,.08) 100%)}
+.hhd{position:relative;max-width:58%}
+.hhd h1{margin:0 2px 2px;font-size:28px;font-weight:800;letter-spacing:.3px;color:#0F172A}
+.hhd .sub{color:#64748B;font-size:13.5px;margin:0 2px}
+.havw{position:absolute;right:18px;bottom:18px;width:96px;height:96px;border-radius:50%}
+.havm{width:100%;height:100%;border-radius:50%;background:#EEF2F6;border:4px solid #FFFFFF;box-shadow:0 6px 18px -6px rgba(15,23,42,.4);overflow:hidden;display:flex;align-items:center;justify-content:center;color:#94A3B8;box-sizing:border-box}
+.havm img,.havm video{width:100%;height:100%;object-fit:cover;display:block}
+/* Home: Clean Light Theme */
+html.lt,html.lt body{background:#F8FAFC;color:#0F172A}
+html.lt .cn{background:rgba(255,255,255,.95);border-color:#E2E8F0;color:#334155;box-shadow:0 4px 14px -6px rgba(15,23,42,.25)}
+html.lt .cn .lb{background:#0F172A;color:#FFFFFF;border-color:#0F172A;box-shadow:0 10px 22px -8px rgba(15,23,42,.45)}
+html.lt .cn.on{background:#0F172A;color:#fff;border-color:#0F172A}
+html.lt .hub .sub{color:#64748B}
+.pf h1{margin:6px 2px 12px;font-size:26px;font-weight:800;color:#0F172A}
+.pf .sub{color:#64748B;font-size:13.5px;margin:0 2px 16px}
+.hc{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:22px;padding:20px 18px;margin-bottom:14px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 24px -16px rgba(15,23,42,.18)}
+.av{display:flex;flex-direction:column;align-items:center;gap:12px}
+.avw{position:relative;width:132px;height:132px}
+.avm{width:132px;height:132px;border-radius:50%;background:#EEF2F6;border:1px solid #E2E8F0;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#94A3B8}
+.avm img,.avm video{width:100%;height:100%;object-fit:cover;display:block}
+.mt{position:absolute;right:0;bottom:2px;width:38px;height:38px;border-radius:50%;border:1px solid #CBD5E1;background:#FFFFFF;color:#0F172A;display:inline-flex;align-items:center;justify-content:center;padding:0;box-shadow:0 4px 10px -4px rgba(15,23,42,.3)}
+.ubtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid #CBD5E1;background:#FFFFFF;color:#0F172A;font:inherit;font-size:14.5px;font-weight:600}
+.ubtn:active{background:#F1F5F9}
+.hint{color:#94A3B8;font-size:12px;text-align:center;line-height:1.5}
+.fl{display:block;color:#475569;font-size:13.5px;font-weight:700;margin:0 0 6px}
+.fl small{display:block;font-weight:400;color:#94A3B8;font-size:12px;margin-top:1px}
+.fg{margin-bottom:16px}.fg:last-child{margin-bottom:0}
+.pin{background:#FFFFFF;color:#0F172A;border:1px solid #CBD5E1;border-radius:14px;padding:12px 14px;font:inherit;font-size:16px;width:100%;outline:0;display:block}
+.pin::placeholder{color:#94A3B8}
+.pin:focus{border-color:#0F172A;box-shadow:0 0 0 3px rgba(15,23,42,.08)}
+textarea.pin{resize:none;min-height:104px;line-height:1.55}
+.cnt{text-align:right;color:#94A3B8;font-size:12.5px;margin-top:5px;font-variant-numeric:tabular-nums}
+.cnt.max{color:#B45309}
+.avw.sm,.avw.sm .avm{width:104px;height:104px}
+.avm.ring{border:4px solid #FFFFFF;box-shadow:0 4px 14px -6px rgba(15,23,42,.35)}
+.avm[role=button],.cover{cursor:pointer}
+.pvc .hint{padding-bottom:6px}
+.cover{position:relative;height:150px;border-radius:18px;overflow:hidden;background:#E8EDF3;display:flex;align-items:center;justify-content:center;color:#94A3B8}
+.cover.big{height:200px}
+.pvc{padding-bottom:16px}
+.cover img,.cover video{width:100%;height:100%;object-fit:cover;display:block}
+.cover .ph{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12.5px}
+.mt.bm{top:10px;right:10px;bottom:auto;width:34px;height:34px}
+.pvc{padding:12px 12px 0}
+.pvb{padding:0 6px 22px;text-align:center}
+.pvav{display:flex;justify-content:center;margin-top:-52px;position:relative;z-index:2}
+.pvn{margin:10px 0 2px;font-size:22px;font-weight:800;color:#0F172A}
+.pvm{color:#64748B;font-size:14px}
+.pvbio{color:#334155;font-size:14.5px;line-height:1.6;margin:12px 0 16px;white-space:pre-wrap;word-break:break-word}
+/* ===== Quick Note (Home) ===== */
+.qnw{margin:2px 2px 16px}
+.qnh{display:flex;justify-content:flex-start}
+.qnb{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid #CBD5E1;background:#FFFFFF;color:#0F172A;font:inherit;font-size:14.5px;font-weight:700;box-shadow:0 1px 2px rgba(15,23,42,.04),0 8px 18px -12px rgba(15,23,42,.25);transition:background .15s,transform .15s}
+.qnb:active{background:#F1F5F9;transform:scale(.97)}
+.qnb .chv{display:inline-flex;color:#64748B;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.qnb.on .chv{transform:rotate(180deg)}
+.qd{position:absolute;top:-3px;right:-3px;width:12px;height:12px;border-radius:50%;background:#EF4444;border:2px solid #F8FAFC;box-sizing:border-box}
+.qd[hidden]{display:none}
+.qbw{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .4s cubic-bezier(.2,.8,.2,1),visibility 0s .4s}
+.qbw.open{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+.qin{overflow:hidden;min-height:0;padding:0 2px}
+.qcard{margin:12px 0 6px;background:#FFFFFF;border:1px solid var(--bd);border-radius:22px;padding:12px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 22px -18px rgba(15,23,42,.2)}
+.qbd{position:relative;display:flex;align-items:flex-start;min-height:250px;padding:24px 10px 18px;border-radius:16px;overflow:hidden;background-color:#F1F5F9;background-image:radial-gradient(#CBD5E1 1px,transparent 1.3px);background-size:14px 14px}
+.qpol{position:relative;z-index:2;flex:0 0 46%;max-width:220px;margin-top:14px;padding:10px 10px 0;background:#FFFFFF;border:1px solid #E5E7EB;border-radius:3px;transform:rotate(-3deg);transform-origin:50% 0;box-shadow:0 16px 22px -14px rgba(15,23,42,.5),0 2px 5px rgba(15,23,42,.14)}
+.qph{position:relative;aspect-ratio:1/1;background:linear-gradient(145deg,#1F2937,#0B1220);overflow:hidden;box-shadow:inset 0 2px 8px rgba(0,0,0,.55)}
+.qph img,.qph video{width:100%;height:100%;object-fit:cover;display:block}
+.qph0{width:100%;height:100%;border:0;background:transparent;color:#94A3B8;font:inherit;font-size:11.5px;line-height:1.4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:0;text-align:center}
+.qph0:active{color:#E2E8F0}
+.qstrip{height:40px;display:flex;align-items:center;justify-content:flex-end;gap:6px}
+.qtb{width:28px;height:28px;border-radius:50%;border:1px solid #CBD5E1;background:#FFFFFF;color:#334155;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.qtb:active{background:#F1F5F9}
+.qpap{position:relative;z-index:1;flex:1 1 0;min-width:0;margin:0 0 0 -5%;background:#FFFFFF;border:1px solid #E5E7EB;border-radius:2px;transform:rotate(1.6deg);transform-origin:50% 0;box-shadow:0 14px 22px -14px rgba(15,23,42,.45),0 2px 4px rgba(15,23,42,.1)}
+.qpn{position:absolute;top:-21px;left:50%;margin-left:-15px;z-index:3;pointer-events:none;overflow:visible}
+.qta{display:block;width:100%;min-height:208px;height:208px;border:0;outline:0;resize:none;border-radius:2px;color:#1E293B;font:inherit;font-size:15px;line-height:24px;padding:24px 10px 8px 24px;background-color:transparent;background-image:linear-gradient(to bottom,transparent 23px,#C3D7F0 23px);background-size:100% 24px;background-repeat:repeat-y;background-attachment:local}
+.qta::placeholder{color:#94A3B8}
+.qft{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:0 2px}
+.qs{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#94A3B8;font-variant-numeric:tabular-nums}
+.qs.dirty{color:#B45309}
+.qs.ok{color:#0F766E;font-weight:700}
+.qs.ok svg path{stroke-dasharray:24;stroke-dashoffset:24;animation:dr .4s .05s ease-out forwards}
+.qsv{min-height:42px;padding:0 24px;border-radius:999px;border:1px solid #0F172A;background:#0F172A;color:#fff;font:inherit;font-size:14.5px;font-weight:800;box-shadow:0 10px 20px -12px rgba(15,23,42,.6)}
+.qsv:active{transform:scale(.96)}
+.qnh{gap:10px;flex-wrap:wrap}
+.svs{margin:8px 4px 0;font-size:12px;line-height:1.5;color:#64748B}
+.svs.ok{color:#0F766E}.svs.err{color:#B91C1C}
+/* ===== Note (Menu) ===== */
+.nhead{margin:4px 2px 14px}
+.nhead h1{margin:0 0 2px;font-size:28px;font-weight:800;letter-spacing:.3px}
+.nhead .sub{color:var(--mu);font-size:13.5px;margin:0}
+.nsr{position:relative;margin-bottom:12px}
+.nsr>.ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#94A3B8;pointer-events:none}
+.nsr input{height:48px;padding:0 44px 0 44px;border-radius:999px;font-size:16px}
+.nsx{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:#94A3B8;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.nsx[hidden]{display:none}
+.ntabs{display:flex;gap:8px;overflow-x:auto;margin:0 -14px;padding:2px 14px 10px;scrollbar-width:none}
+.ntabs::-webkit-scrollbar{display:none}
+.ntab{flex:0 0 auto;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid #CBD5E1;background:#FFFFFF;color:#475569;font:inherit;font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.ntab small{font-size:11.5px;opacity:.6;font-weight:600}
+.ntab.on{background:#0F172A;border-color:#0F172A;color:#fff}
+.ntool{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 10px}
+.nvs{display:inline-flex;background:#E2E8F0;border-radius:999px;padding:3px}
+.nvs button{width:40px;height:32px;border-radius:999px;border:0;background:transparent;color:#64748B;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.nvs button.on{background:#FFFFFF;color:#0F172A;box-shadow:0 1px 3px rgba(15,23,42,.18)}
+.nlab{display:flex;align-items:center;gap:6px;margin:4px 2px 8px;color:#64748B;font-size:12.5px;font-weight:700;letter-spacing:.4px}
+.ngrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.ngrid.l{grid-template-columns:minmax(0,1fr)}
+.nc{position:relative;min-width:0;padding:13px 12px 11px 14px;border:1px solid rgba(15,23,42,.1);border-radius:18px;cursor:pointer;box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 22px -18px rgba(15,23,42,.3);transition:transform .14s}
+.nc:active{transform:scale(.98)}
+.nct{display:flex;align-items:flex-start;gap:2px}
+.nct h4{flex:1;min-width:0;margin:3px 0 0;font-size:15.5px;font-weight:800;line-height:1.35;color:#0F172A;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.nca{display:flex;flex:0 0 auto;margin:-5px -6px 0 0}
+.nib{width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#94A3B8;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.nib:active{background:rgba(15,23,42,.08)}
+.nib.on{color:#0F172A}
+.nib.pn.on svg{fill:currentColor;fill-opacity:.15}
+.ncb{margin-top:6px;font-size:13.5px;line-height:1.55;color:#334155;white-space:pre-wrap;word-break:break-word;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;transition:filter .2s}
+.ncb.lc{display:block}
+.ncb.bl{filter:blur(6px);-webkit-user-select:none;user-select:none}
+.ncl{display:flex;align-items:center;gap:7px;padding:2px 0;font-size:13.5px;line-height:1.4;white-space:normal}
+.ncl span{min-width:0;overflow-wrap:anywhere}
+.ncl.d span{text-decoration:line-through;color:#94A3B8}
+.ncm{color:#64748B;font-size:12px;padding-top:2px}
+.ck{flex:0 0 auto}
+.ck rect{fill:transparent;transition:fill .2s,stroke .2s}
+.ck path{opacity:0;stroke:#fff}
+.ncl.d .ck rect,.cki.d .ck rect{fill:#0F172A;stroke:#0F172A}
+.ncl.d .ck path,.cki.d .ck path{opacity:1}
+.ncf{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:10px;color:#64748B;font-size:11.5px}
+.ncat{border:1px solid rgba(15,23,42,.16);border-radius:999px;padding:1px 8px;white-space:nowrap;background:rgba(255,255,255,.55)}
+.ncf time{text-align:right;min-width:0}
+.nempty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:46px 20px;color:#94A3B8;text-align:center;font-size:13.5px;line-height:1.6}
+.nempty b{color:#475569;font-size:15.5px}
+.nfab{position:fixed;right:max(14px,calc(50vw - 266px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:11;min-height:46px;padding:0 20px 0 16px;border-radius:999px;border:1px solid #0F172A;background:#0F172A;color:#fff;font:inherit;font-size:14.5px;font-weight:800;display:inline-flex;align-items:center;gap:8px;box-shadow:0 14px 26px -12px rgba(15,23,42,.65)}
+.nfab:active{transform:scale(.96)}
+/* editor */
+.nea{display:flex;gap:4px}
+.nea .nib{width:42px;height:42px;border:1px solid #CBD5E1;background:#FFFFFF;color:#334155}
+.nea .nib.on{color:#0F172A;border-color:#0F172A}
+.nea .nib.pn.on svg{fill:currentColor;fill-opacity:.15}
+.ned{padding:16px 16px 12px;border:1px solid rgba(15,23,42,.1);border-radius:22px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 24px -16px rgba(15,23,42,.2);transition:background-color .25s}
+.nti{display:block;width:100%;border:0;border-radius:0;background:transparent;padding:2px 0;font-size:23px;font-weight:800;line-height:1.3;color:#0F172A}
+.nti:focus,.cit:focus{box-shadow:none;border-color:transparent}
+.nti::placeholder,.cit::placeholder,.nta::placeholder{color:#94A3B8;font-weight:500}
+.nmeta{color:#64748B;font-size:12.5px;margin:2px 0 4px}
+.nlbl{margin:14px 0 7px;color:#64748B;font-size:12px;font-weight:700;letter-spacing:.4px}
+.nchips{display:flex;flex-wrap:wrap;gap:6px}
+.nchip{min-height:34px;padding:0 13px;border-radius:999px;border:1px solid rgba(15,23,42,.18);background:rgba(255,255,255,.7);color:#334155;font:inherit;font-size:13px;font-weight:600}
+.nchip.on{background:#0F172A;border-color:#0F172A;color:#fff}
+.ncol{display:flex;flex-wrap:wrap;gap:12px;padding:2px}
+.ncd{width:30px;height:30px;border-radius:50%;border:1px solid rgba(15,23,42,.22);padding:0;display:inline-flex;align-items:center;justify-content:center;color:#0F172A}
+.ncd.on{box-shadow:0 0 0 2px #fff,0 0 0 3.5px #0F172A}
+.nseg{display:inline-flex;margin:16px 0 10px;padding:3px;background:rgba(15,23,42,.07);border-radius:999px}
+.nseg button{min-height:36px;padding:0 15px;border:0;border-radius:999px;background:transparent;color:#475569;font:inherit;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.nseg button.on{background:#FFFFFF;color:#0F172A;box-shadow:0 1px 3px rgba(15,23,42,.18)}
+.nta{display:block;width:100%;min-height:220px;border:0;outline:0;resize:none;overflow:hidden;background:transparent;color:#1E293B;font:inherit;font-size:16px;line-height:1.7;padding:4px 0}
+.cki{display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(15,23,42,.08)}
+.ckb,.ckx{flex:0 0 auto;width:34px;height:40px;border:0;background:transparent;padding:0;display:inline-flex;align-items:center;justify-content:center;color:#0F172A}
+.ckx{color:#94A3B8}
+.cit{flex:1;min-width:0;border:0;border-radius:0;background:transparent;padding:10px 0;font-size:16px;color:#1E293B}
+.cki.d .cit{text-decoration:line-through;color:#94A3B8}
+.ckadd{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:4px;padding:0 4px;border:0;background:transparent;color:#475569;font:inherit;font-size:14px;font-weight:700}
+.nfoot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;margin-top:14px;padding-top:11px;border-top:1px solid rgba(15,23,42,.09);color:#64748B;font-size:12.5px;font-variant-numeric:tabular-nums}
+.nfoot span:last-child{margin-left:auto;text-align:right}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ===== Running (Menu) ===== */
+#run-root,#run-beta-timer{--rb-or:#EA580C;--rb-ord:#C2410C;--rb-ort:#FFF1E6;--rb-ink:#0F172A;--rb-mu:#64748B;--rb-ln:#E2E8F0;--rb-ln2:#CBD5E1;--rb-ok:#0F766E;--rb-chip:#F1F5F9}
+#run-root{color:var(--rb-ink)}
+.run-beta-dash{padding-bottom:150px}
+.run-beta-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin:4px 2px 14px}
+.run-beta-top h1{margin:0 0 2px;font-size:28px;font-weight:800;letter-spacing:.3px}
+.run-beta-sub{color:var(--rb-mu);font-size:13.5px;margin:0 0 8px}
+.run-beta-top .run-beta-sub{margin:0}
+.run-beta-set{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid var(--rb-ln2);background:#fff;color:#334155;font:inherit;font-size:13.5px;font-weight:600;white-space:nowrap;box-shadow:0 4px 14px -6px rgba(15,23,42,.25);cursor:pointer}
+.run-beta-ic{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--rb-ln2);background:#fff;color:var(--rb-ink);padding:0;cursor:pointer}
+.run-beta-card,.run-beta-lane{position:relative;background:#fff;border:1px solid var(--rb-ln);border-radius:20px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 24px -16px rgba(15,23,42,.18)}
+.run-beta-card h2{margin:0 0 4px;font-size:17px;font-weight:800}
+.run-beta-steps{display:flex;gap:6px;margin:6px 2px 14px}.run-beta-steps i{flex:1;height:4px;border-radius:99px;background:var(--rb-ln)}.run-beta-steps i.on{background:var(--rb-or)}
+.run-beta-field{margin-bottom:14px}
+.run-beta-field>label,.run-beta-lbl{display:block;margin:0 0 6px;color:var(--rb-ink);font-size:14px;font-weight:700}
+.run-beta-input{width:100%;min-height:48px;border:1px solid var(--rb-ln2);border-radius:14px;padding:8px 12px;font:inherit;font-size:17px;background:#fff;color:var(--rb-ink);outline:0}
+.run-beta-input:focus{border-color:var(--rb-ink);box-shadow:0 0 0 3px rgba(15,23,42,.08)}
+.run-beta-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.run-beta-opts{display:flex;flex-wrap:wrap;gap:8px}
+.run-beta-opt{position:relative;display:block;margin:0;color:inherit;font-size:inherit}
+.run-beta-opt input{position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;padding:0;border:0;cursor:pointer;-webkit-appearance:none;appearance:none}
+.run-beta-opt span{display:block;padding:10px 14px;border:1px solid var(--rb-ln2);border-radius:999px;background:#fff;font-size:14.5px;color:var(--rb-ink)}
+.run-beta-opt input:checked+span{background:var(--rb-ort);border-color:var(--rb-or);color:var(--rb-ord);font-weight:700;box-shadow:0 0 0 1px var(--rb-or)}
+.run-beta-opt input:focus-visible+span{outline:3px solid rgba(234,88,12,.35);outline-offset:2px}
+.run-beta-list .run-beta-opt{width:100%}.run-beta-list .run-beta-opt span{border-radius:16px}
+.run-beta-days .run-beta-opt span{padding:10px 11px;min-width:40px;text-align:center}
+.run-beta-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin:8px 0 0;border:1px solid var(--rb-or);border-radius:18px;background:var(--rb-or);color:#fff;font:inherit;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 10px 22px -12px rgba(234,88,12,.6)}
+.run-beta-btn.run-beta-ghost{background:#fff;color:var(--rb-ink);border-color:var(--rb-ln2);box-shadow:none;font-weight:600}
+.run-beta-btn:disabled{opacity:.45;box-shadow:none}
+.run-beta-err{color:#B91C1C;font-size:13px;min-height:1em;margin:0 2px}
+.run-beta-warn{background:#FEF3C7;color:#92400E;border-radius:14px;padding:10px 14px;margin-bottom:8px;font-size:13.5px}
+.run-beta-warnbox{margin-bottom:12px}.run-beta-warnbox summary{display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;padding:8px 2px;color:#92400E;list-style:none}.run-beta-warnbox summary::-webkit-details-marker{display:none}
+.run-beta-sum{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.run-beta-sum span{border:1px solid var(--rb-ln2);background:#fff;border-radius:999px;padding:4px 10px;font-size:12.5px;color:#334155}
+.run-beta-why{margin-top:8px;font-size:13px;background:var(--rb-chip);border-radius:12px;padding:8px 10px;color:#334155}
+.run-beta-types dt{font-weight:700;font-size:14px}.run-beta-types dd{margin:0 0 8px;color:var(--rb-mu);font-size:13.5px}
+.run-beta-rows{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0;font-size:13.5px}.run-beta-rows dt{color:var(--rb-mu)}.run-beta-rows dd{margin:0}
+.run-beta-row{display:flex;gap:8px}.run-beta-row .run-beta-btn{margin-top:8px;font-size:14px;min-height:48px}
+.run-beta-lanehead{display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
+.run-beta-lanehead b{display:block;font-size:16px}.run-beta-lvtag{display:block;font-weight:800;font-size:34px;line-height:1.1;color:var(--rb-or)}
+.run-beta-xp{font-variant-numeric:tabular-nums;font-weight:700;color:var(--rb-mu)}
+.run-beta-track{position:relative;height:20px;margin:12px 0 4px;border-radius:999px;overflow:hidden;border:1px solid var(--rb-ln);background:repeating-linear-gradient(90deg,transparent 0 24px,var(--rb-ln2) 24px 25px),var(--rb-ort)}
+.run-beta-fill{position:absolute;left:0;top:0;bottom:0;background:var(--rb-or);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.run-beta-runner{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;border:3px solid var(--rb-ord);box-sizing:border-box}
+.run-beta-marks{display:flex;justify-content:space-between;font-size:11px;color:var(--rb-mu);letter-spacing:1px}
+.run-beta-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:6px 0 16px}
+.run-beta-dayb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:62px;padding:6px 0;border-radius:999px;border:1px dashed var(--rb-ln2);background:#fff;color:var(--rb-mu);font:inherit;cursor:pointer}
+.run-beta-dayb b{font-size:13px;color:var(--rb-ink)}.run-beta-dayb i{font-style:normal;font-size:11px;display:inline-flex;align-items:center}
+.run-beta-dayb.is-run{border-style:solid;border-color:var(--rb-or)}.run-beta-dayb.is-run i{color:var(--rb-ord)}
+.run-beta-dayb.is-sel{background:var(--rb-or);border-color:var(--rb-or);color:#fff;box-shadow:0 10px 20px -12px rgba(234,88,12,.7)}
+.run-beta-dayb.is-sel b,.run-beta-dayb.is-sel i{color:#fff}
+.run-beta-dayb.is-rest.is-sel{background:var(--rb-ink);border-color:var(--rb-ink);box-shadow:none}
+.run-beta-ph{display:flex;gap:12px;background:#fff;border:1px solid var(--rb-ln);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 24px -16px rgba(15,23,42,.18)}
+.run-beta-ph.is-done{border-color:var(--rb-ok);background:#F0FDFA}
+.run-beta-phn{flex:none;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--rb-or);color:var(--rb-ord);display:grid;place-items:center;font-weight:800}
+.is-done .run-beta-phn{background:var(--rb-ok);border-color:var(--rb-ok);color:#fff}
+.run-beta-phb{flex:1;min-width:0}.run-beta-phb h3{margin:0 0 2px;font-size:16px;font-weight:800}.run-beta-phb p{margin:0 0 6px;font-size:13.5px;color:var(--rb-mu)}
+.run-beta-ph-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.run-beta-mini{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid var(--rb-ln2);background:#fff;color:var(--rb-ink);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.run-beta-done{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:1;min-width:150px;min-height:46px;border-radius:999px;border:0;background:var(--rb-or);color:#fff;font:inherit;font-weight:800;cursor:pointer}
+.is-done .run-beta-done{background:#fff;color:#B91C1C;border:1px solid #FCA5A5}
+.run-beta-timer{position:fixed;left:14px;right:14px;max-width:532px;margin:0 auto;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:10;display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--rb-ink);color:#fff;border-radius:22px;box-shadow:0 14px 30px -12px rgba(15,23,42,.55)}
+.run-beta-tdisp{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;min-width:82px}
+.run-beta-timer.is-end .run-beta-tdisp{animation:run-beta-blink .8s infinite}
+.run-beta-tbtns{display:flex;flex:1;gap:6px}.run-beta-tbtns button{flex:1;min-height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;font:inherit;font-size:12.5px;cursor:pointer;padding:0 2px}
+.run-beta-tbtns button.p{background:var(--rb-or);border-color:var(--rb-or);font-weight:800}
+.run-beta-modal,.run-beta-lvup{position:fixed;top:0;left:0;right:0;bottom:0;z-index:30;background:rgba(15,23,42,.5);display:flex;align-items:flex-end;justify-content:center}
+.run-beta-lvup{align-items:center;padding:20px}
+.run-beta-sheet{background:#F8FAFC;width:100%;max-width:560px;max-height:90%;overflow:auto;border-radius:24px 24px 0 0;padding:16px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.run-beta-sheet section{margin-bottom:20px}.run-beta-sheet h2{margin:0;font-size:20px;font-weight:800}.run-beta-sheet h3{margin:0 0 8px;font-size:15px;font-weight:800}
+.run-beta-sheethd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.run-beta-zone{display:flex;justify-content:space-between;font-size:13.5px;padding:5px 0;border-bottom:1px dashed var(--rb-ln2)}
+.run-beta-danger{width:100%;min-height:52px;border-radius:18px;border:0;background:#B91C1C;color:#fff;font:inherit;font-size:16px;font-weight:800;cursor:pointer}
+.run-beta-pop{background:#fff;border:2px solid var(--rb-or);border-radius:24px;padding:26px 20px;text-align:center;max-width:360px;animation:run-beta-pop .5s}
+.run-beta-pop h2{font-size:34px;margin:0;color:var(--rb-or);font-weight:800}.run-beta-pop p{margin:6px 0}
+@keyframes run-beta-pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes run-beta-blink{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.run-beta-pop,.run-beta-timer.is-end .run-beta-tdisp{animation:none}.run-beta-fill{transition:none}}
+.run-beta-timer[hidden]{display:none}
+.fc-card{background:#fff;border:1px solid #E2E8F0;border-radius:20px;padding:16px;margin:0 0 14px;box-shadow:0 10px 24px -18px rgba(15,23,42,.25);color:#0F172A}
+.fc-ti{font-size:14px;font-weight:700;margin:0 0 12px}
+.fc-in{width:100%;border:1px solid #E2E8F0;background:#F8FAFC;border-radius:14px;padding:11px 14px;font:inherit;font-size:14px;color:#0F172A;outline:none}
+.fc-in:focus{border-color:#0F172A}
+.fc-rw{position:relative;width:240px;height:240px;margin:14px auto}
+.fc-tm{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.fc-tm #fc-time{font-size:48px;font-weight:800;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.fc-tm small{color:#64748B;font-size:12px;margin-top:2px}
+.fc-pr{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 12px}
+.fc-pr.l{justify-content:flex-start}
+.fc-pill{border:1px solid #E2E8F0;background:#fff;color:#334155;border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:600}
+.fc-pill.on{background:#0F172A;color:#fff;border-color:#0F172A}
+.fc-pill:disabled{opacity:.45}
+.fc-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid #0F172A;background:#0F172A;color:#fff;border-radius:999px;padding:11px 22px;font:inherit;font-size:14px;font-weight:700}
+.fc-btn.ghost{background:#fff;color:#0F172A;border-color:#E2E8F0}
+.fc-btn.sq{padding:0;width:44px;height:44px;justify-content:center;flex:none;border-radius:14px}
+.fc-vl{display:flex;align-items:center;gap:10px;color:#64748B}
+.fc-vl input{flex:1;accent-color:#0F172A}
+.fc-h{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #F1F5F9;font-size:14px}
+.fc-h span{flex:1}.fc-h span.dn{color:#94A3B8;text-decoration:line-through}
+.fc-ck{width:24px;height:24px;border-radius:8px;border:1.5px solid #CBD5E1;background:#fff;color:#fff;display:flex;align-items:center;justify-content:center;padding:0;flex:none}
+.fc-ck.on{background:#0F172A;border-color:#0F172A}
+.fc-x{border:0;background:none;color:#94A3B8;padding:4px;display:flex}
+.fc-add{display:flex;gap:8px;margin-top:12px}
+.fc-em{color:#94A3B8;font-size:12.5px;margin:8px 0 0}
+.fc-sk{display:flex;align-items:baseline;gap:8px;margin:0 0 12px}.fc-sk b{font-size:34px;font-variant-numeric:tabular-nums}.fc-sk span{color:#64748B;font-size:13px}
+.fc-hm{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.fc-c{aspect-ratio:1;border-radius:6px;background:#EEF2F6}
+.fc-c.l1{background:#CBD5E1}.fc-c.l2{background:#94A3B8}.fc-c.l3{background:#475569}.fc-c.l4{background:#0F172A}
+.fc-c.td{outline:2px solid #3B82F6;outline-offset:1px}
+.xtop{position:sticky;top:calc(env(safe-area-inset-top,0px) + 6px);z-index:11;height:44px;margin:-54px 0 10px;padding-left:58px;display:flex;align-items:center;pointer-events:none}
+.xtop .lk{pointer-events:auto;background:rgba(255,255,255,.95);border:1px solid #E2E8F0;border-radius:999px;height:44px;padding:0 16px 0 10px;color:#334155}
+.fc-tm .fc-ph{font-size:12px;font-weight:700;color:#64748B;letter-spacing:.5px}
+.fc-bar{margin:0 0 12px}.fc-bn{display:flex;justify-content:space-between;font-size:12.5px;color:#334155;margin-bottom:5px}.fc-bn span:last-child{color:#64748B}
+.fc-bt{height:8px;border-radius:99px;background:#EEF2F6;overflow:hidden}.fc-bt i{display:block;height:100%;background:#0F172A;border-radius:99px}
+.fc-zen{position:fixed;inset:0;z-index:40;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px}
+.fc-zen .zx{position:absolute;top:calc(env(safe-area-inset-top,0px) + 14px);right:16px;padding:10px}
+.fc-zg{font-size:18px;font-weight:700;text-align:center;max-width:320px}
+.rt-g{font-size:12.5px;font-weight:700;color:#64748B;margin:14px 0 2px}
+.rt-p{float:right;font-variant-numeric:tabular-nums}
+.rt-bar{height:10px;border-radius:99px;background:#EEF2F6;overflow:hidden}.rt-bar i{display:block;height:100%;background:#0F172A;border-radius:99px;transition:width .3s}
+button.fc-c{border:0;padding:0}.fc-c.sl{box-shadow:0 0 0 2px #0F172A}
+.md-o{display:block;width:100%;text-align:left;border:1px solid #E2E8F0;background:#fff;color:#0F172A;border-radius:14px;padding:13px 14px;margin:0 0 8px;font:inherit;font-size:14px}
+.md-o.on{background:#0F172A;color:#fff;border-color:#0F172A}
+.md-tx{font-size:13.5px;line-height:1.6;color:#334155;margin:0 0 8px}.md-tx b{color:#0F172A}
+.md-pt{pointer-events:none}.md-pt span{font-size:16px;font-weight:700}
+.md-big{font-size:40px;font-weight:800;font-variant-numeric:tabular-nums;margin:4px 0 12px}
+.md-sp{display:flex;align-items:flex-end;gap:5px;height:34px;margin:6px 0 10px}.md-sp i{width:10px;background:#94A3B8;border-radius:3px}
+.fc-cu{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:#334155;margin:0 0 12px;flex-wrap:wrap}.fc-num{width:64px;border:1px solid #E2E8F0;background:#F8FAFC;border-radius:10px;padding:8px;font:inherit;font-size:14px;text-align:center;color:#0F172A}
+/* colour theme for Focus / Routine / Meditation */
+.fc-btn:not(.ghost){background:linear-gradient(135deg,#6366F1,#8B5CF6);border-color:transparent;box-shadow:0 10px 20px -10px rgba(99,102,241,.7)}
+.fc-pill.on,.md-o.on{background:linear-gradient(135deg,#6366F1,#8B5CF6);border-color:transparent;color:#fff}
+.fc-ck.on{background:#6366F1;border-color:#6366F1}
+.fc-bt i,.rt-bar i{background:linear-gradient(90deg,#6366F1,#EC4899)}
+.fc-c.l1{background:#E0E7FF}.fc-c.l2{background:#A5B4FC}.fc-c.l3{background:#6366F1}.fc-c.l4{background:#4338CA}.fc-c.sl{box-shadow:0 0 0 2px #EC4899}
+.fc-sk b,.rt-p{background:linear-gradient(135deg,#6366F1,#EC4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fc-tm #fc-time{font-size:50px;font-weight:800}
+.md-big{background:linear-gradient(135deg,#6366F1,#06B6D4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.md-a{background:linear-gradient(160deg,#EEF2FF,#F0FDFA 70%,#fff)}.md-b{background:linear-gradient(160deg,#F5F3FF,#fff 70%)}
+.md-sp i{background:linear-gradient(180deg,#6366F1,#2DD4BF)}
+.fc-zen{background:radial-gradient(circle at 50% 30%,#F5F3FF,#fff 70%)}
+input,textarea,[contenteditable],[contenteditable] *{-webkit-user-select:text!important;user-select:text!important}
+</style></head><body>
+<div id="app"><div style="padding:60px 0;text-align:center;color:#64748B;font-size:14px">กำลังโหลด…</div></div>
+<div id="sh"></div>
+<div id="tb"><div id="tpg"></div>
+<div class="dkt"><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M9.5 3h5"/></svg><span id="tt">01:00</span></div>
+<div class="adj"><button onclick="tadj(-15)">-15</button><button onclick="tadj(15)">+15</button></div>
+<button class="pbtn" id="tbtn" onclick="tgo()">เริ่ม</button><button class="sbtn" onclick="treset()">รีเซ็ต</button>
+<button class="aub" id="tau" aria-label="เริ่มจับเวลาอัตโนมัติหลังจบเซต" onclick="S.auto=!S.auto;save();tview()"><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 0 1-13 5M4.5 12a7.5 7.5 0 0 1 13-5M17.5 3.5V7H14M6.5 20.5V17H10"/></svg></button></div>
+<div class="ov" id="md"><div id="mdc"></div></div>
+<script>
+var STO=(function(){
+var PRE=/^(tactfit|sl_)/,mem={},ts=0,media={},ls=null,lsOK=false,db=null,idbOK=false,restored=false,tmr=null;
+try{ls=window.localStorage;ls.setItem('__sl_t','1');ls.removeItem('__sl_t');lsOK=true}catch(e){lsOK=false}
+function openDB(){return new Promise(function(res){try{if(!window.indexedDB){res(null);return}
+var rq=indexedDB.open('simple_life',1);
+rq.onupgradeneeded=function(){var d=rq.result;if(!d.objectStoreNames.contains('kv'))d.createObjectStore('kv');if(!d.objectStoreNames.contains('media'))d.createObjectStore('media')};
+rq.onsuccess=function(){res(rq.result)};rq.onerror=function(){res(null)};rq.onblocked=function(){res(null)}}catch(e){res(null)}})}
+function readAll(st){return new Promise(function(res){try{var o=db.transaction(st,'readonly').objectStore(st),out={},rq=o.openCursor();
+rq.onsuccess=function(){var c=rq.result;if(c){out[c.key]=c.value;c.continue()}else res(out)};rq.onerror=function(){res(null)}}catch(e){res(null)}})}
+function idbFlush(){return new Promise(function(res){if(!db){res(false);return}try{var tx=db.transaction('kv','readwrite'),o=tx.objectStore('kv');o.clear();for(var k in mem)o.put(mem[k],k);o.put(String(ts),'__ts');
+tx.oncomplete=function(){res(true)};tx.onerror=tx.onabort=function(){res(false)}}catch(e){res(false)}})}
+function syncLs(){if(!lsOK)return;try{var del=[],i,k;for(i=0;i<ls.length;i++){k=ls.key(i);if(PRE.test(k)&&!(k in mem))del.push(k)}del.forEach(function(x){ls.removeItem(x)});for(k in mem)ls.setItem(k,mem[k]);ls.setItem('__sl_ts',String(ts))}catch(e){}}
+function load(){var lsMem={},lsTs=0;
+if(lsOK){try{for(var i=0;i<ls.length;i++){var k=ls.key(i);if(PRE.test(k))lsMem[k]=ls.getItem(k)}lsTs=+ls.getItem('__sl_ts')||0}catch(e){}}
+mem=lsMem;ts=lsTs;
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+return Promise.race([openDB(),new Promise(function(r){setTimeout(function(){r(null)},2500)})]).then(function(d){
+db=d;idbOK=!!d;if(!d)return null;return Promise.all([readAll('kv'),readAll('media')])}).then(function(a){
+if(!a)return;var kv=a[0],md=a[1];if(md)media=md;
+var idTs=kv&&kv.__ts?+kv.__ts:0;
+if(kv&&idTs>lsTs){mem={};for(var k in kv){if(k!=='__ts'&&PRE.test(k))mem[k]=kv[k]}ts=idTs;restored=true;syncLs()}
+}).catch(function(){})}
+function touch(){ts=Date.now();if(lsOK){try{ls.setItem('__sl_ts',String(ts))}catch(e){}}clearTimeout(tmr);tmr=setTimeout(function(){flush()},400)}
+function flush(){clearTimeout(tmr);var r={ls:false,idb:false,keys:Object.keys(mem).length,media:Object.keys(media).length};
+if(lsOK){try{var ok=true;for(var k in mem){ls.setItem(k,mem[k]);if(ls.getItem(k)!==mem[k])ok=false}ls.setItem('__sl_ts',String(ts));r.ls=ok}catch(e){r.ls=false}}
+return idbFlush().then(function(ok){r.idb=ok;if(!ok||!db)return r;return readAll('kv').then(function(kv){if(kv){var g=true;for(var k in mem)if(kv[k]!==mem[k])g=false;r.idb=g}return r})})}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')flush()});
+window.addEventListener('pagehide',function(){flush()});
+return{
+getItem:function(k){return Object.prototype.hasOwnProperty.call(mem,k)?mem[k]:null},
+setItem:function(k,v){k=String(k);v=String(v);mem[k]=v;if(lsOK){try{ls.setItem(k,v)}catch(e){}}touch()},
+removeItem:function(k){delete mem[k];if(lsOK){try{ls.removeItem(k)}catch(e){}}touch()},
+blob:function(n){return media[n]||null},
+putBlob:function(n,b,t){media[n]={blob:b,t:t};if(db){try{db.transaction('media','readwrite').objectStore('media').put(media[n],n)}catch(e){}}},
+delBlob:function(n){delete media[n];if(db){try{db.transaction('media','readwrite').objectStore('media').delete(n)}catch(e){}}},
+status:function(){return{ls:lsOK,idb:idbOK,restored:restored}},
+flush:flush,load:load}
+})();
+</script>
+<script type="text/plain" id="appsrc">
+const E=i=>document.getElementById(i);
+const IJ={k:'เข่า',b:'หลังส่วนล่าง',s:'หัวไหล่',w:'ข้อมือ',a:'ข้อเท้า'};
+const ST={STR:'ความแข็งแรง',SPD:'ความเร็ว',END:'ความอึด',COR:'แกนกลาง',MOB:'ยืดหยุ่น'};
+const U={r:'ครั้ง',t:'วินาที',n:'รอบ',m:'นาที'};
+// ฐานข้อมูลท่า 12 สาย x 5 ขั้น = 60 ท่า
+// [ไทย, อังกฤษ, อุปกรณ์(+ = ต้องมีทั้งหมด), จุดบาดเจ็บที่ห้าม, กล้ามเนื้อ, [วิธีทำ 3 ขั้นตอน], การหายใจ, ข้อควรระวัง, โหมดเฉพาะท่า(ถ้ามี)]
+const L={
+push:{n:'สายดัน',s:'STR',m:'r',x:[
+['วิดพื้นกับกำแพง','Wall Push-up','','','อก ไหล่ ไตรเซ็ป',['ยืนห่างกำแพงหนึ่งช่วงแขน วางฝ่ามือกว้างเท่าไหล่ที่ระดับอก','งอศอกให้หน้าอกเอียงเข้าหากำแพงช้าๆ ส้นเท้าไม่ยก','ดันกลับจนแขนเกือบตรง เกร็งท้องให้ลำตัวเป็นเส้นตรง'],'หายใจเข้าตอนงอศอกเข้าหากำแพง หายใจออกตอนดันตัวกลับ','คนมักปล่อยสะโพกยื่นไปด้านหลัง ให้เกร็งท้องและก้นค้างไว้ และอย่ากางศอกออกด้านข้างจนไหล่ตึง'],
+['วิดพื้นคุกเข่า','Knee Push-up','','','อก ไหล่ ไตรเซ็ป',['คุกเข่าบนพื้นนุ่ม วางมือกว้างกว่าไหล่เล็กน้อย ลำตัวตรงจากเข่าถึงศีรษะ','ลดอกลงช้าๆ 2 วินาทีจนเกือบแตะพื้น ศอกทำมุมราว 45 องศา','ดันขึ้นจนแขนตรง ล็อกตัวด้วยการเกร็งท้อง'],'หายใจเข้าตอนลดอกลง หายใจออกตอนดันขึ้น','ห้ามพับสะโพกเพื่อให้ง่ายขึ้น เพราะแกนกลางจะไม่ได้ทำงาน และอย่ากางศอกเป็นรูปตัว T เพื่อป้องกันไหล่'],
+['วิดพื้นมาตรฐาน','Push-up','','w','อก ไหล่ ไตรเซ็ป แกนกลาง',['ตั้งท่าแพลงก์มือสูง มือใต้ไหล่ ลำตัวเป็นเส้นตรง','ลดอกลงช้าๆ จนเกือบแตะพื้น ศอกทำมุมราว 45 องศา','ดันพื้นขึ้นแรงๆ จนแขนตรง เกร็งท้องและก้นตลอด'],'หายใจเข้าตอนลดตัวลง หายใจออกแรงๆ ตอนดันพื้นขึ้น','ข้อผิดพลาดที่พบบ่อยคือสะโพกตกหรือยกสูง และศีรษะยื่น ให้มองพื้นเหนือมือเล็กน้อย ถ้าข้อมือปวดให้กำหมัดวิดหรือใช้ที่จับ'],
+['วิดพื้นไดมอนด์','Diamond Push-up','','ws','ไตรเซ็ป อกด้านใน',['วางมือชิดกันใต้อก ให้นิ้วโป้งและนิ้วชี้ประกบเป็นรูปเพชร','ลดตัวช้าๆ โดยศอกแนบลำตัว จนอกเกือบแตะมือ','ดันขึ้นโดยโฟกัสไตรเซ็ป เกร็งท้องให้ลำตัวตรง'],'หายใจเข้าตอนลดตัว หายใจออกตอนดันขึ้น','ท่านี้กดข้อมือและข้อศอกมาก ถ้าเจ็บให้ถ่างมือกว้างขึ้น และอย่าให้ศอกบานออกด้านข้าง'],
+['วิดพื้นอาร์เชอร์','Archer Push-up','','ws','อก ไหล่ ไตรเซ็ป แกนกลาง',['ตั้งท่าวิดพื้นโดยวางมือกว้างกว่าไหล่มาก ปลายเท้าตั้ง','ลดตัวไปทางมือข้างหนึ่ง ให้แขนข้างนั้นงอ ส่วนแขนอีกข้างเหยียดตรงรับน้ำหนักเล็กน้อย','ดันกลับมากลางตัวแล้วสลับข้าง'],'หายใจเข้าตอนเคลื่อนตัวลงไปข้างหนึ่ง หายใจออกตอนดันกลับ','ห้ามล็อกข้อศอกข้างที่เหยียดแรงๆ และอย่าเอียงสะโพก ถ้ายังไม่ไหวให้กลับไปฝึกวิดพื้นไดมอนด์จนทำได้ 12 ครั้ง']]},
+press:{n:'สายเพรส (อุปกรณ์)',s:'STR',m:'r',x:[
+['ดันยางยืดหน้าอก','Band Chest Press','band','s','อก ไหล่',['คล้องยางยืดไว้หลังหลังส่วนบน จับปลายสองข้างที่ระดับอก','ดันสองมือไปข้างหน้าจนแขนเกือบตรง','ปล่อยกลับช้าๆ 2-3 วินาที รักษาแรงตึงของยาง'],'หายใจออกตอนดันไปข้างหน้า หายใจเข้าตอนปล่อยกลับ','ตรวจยางว่าไม่มีรอยฉีกเพราะอาจดีดใส่หน้า และอย่ายกไหล่ขึ้นใกล้หู'],
+['ดัมเบลฟลอร์เพรส','DB Floor Press','db','s','อก ไตรเซ็ป',['นอนหงาย เข่างอ เท้าราบ ถือดัมเบลเหนืออกแขนตรง','ลดดัมเบลช้าๆ จนต้นแขนแตะพื้นเบาๆ','ดันกลับขึ้นจนแขนตรง บีบอกที่จุดสูงสุด'],'หายใจเข้าตอนลดดัมเบล หายใจออกตอนดันขึ้น','อย่าให้ศอกกระแทกพื้น และอย่าแอ่นหลังส่วนล่าง ให้เกร็งท้อง เลือกน้ำหนักที่คุมได้ก่อน'],
+['ดัมเบลเบนช์เพรส','DB Bench Press','db+bench','s','อก ไหล่ ไตรเซ็ป',['นั่งบนม้านั่งโดยพาดดัมเบลไว้บนต้นขา แล้วนอนลง เท้าติดพื้น','ลดดัมเบลช้าๆ ให้อยู่ระดับอก ศอกทำมุม 45-60 องศา','ดันขึ้นตรงเหนืออก บีบอกที่จุดสูงสุด'],'หายใจเข้าตอนลดดัมเบล หายใจออกตอนดันขึ้น','ห้ามกระแทกดัมเบลเข้าหากันที่จุดบน และอย่าลดต่ำจนไหล่ถูกดึงมากเกินไป เมื่อหมดแรงให้วางดัมเบลลงข้างตัวอย่างระวัง'],
+['ดัมเบลโอเวอร์เฮดเพรส','DB Overhead Press','db','sb','ไหล่ ไตรเซ็ป แกนกลาง',['ยืนกว้างเท่าไหล่ ถือดัมเบลที่ระดับไหล่ ฝ่ามือหันไปข้างหน้า เกร็งท้องและก้น','ดันดัมเบลขึ้นเหนือศีรษะจนแขนเกือบตรง','ลดกลับที่ระดับไหล่ช้าๆ'],'หายใจเข้าก่อนดัน หายใจออกตอนดันขึ้น หายใจเข้าตอนลดกลับ','คนมักแอ่นหลังเพื่อช่วยดัน ให้เกร็งท้องและก้นเสมอหรือลดน้ำหนักลง ถ้าหลังส่วนล่างหรือไหล่เจ็บให้หยุด'],
+['บาร์เบลเบนช์เพรส','Barbell Bench Press','gym','s','อก ไหล่ ไตรเซ็ป',['นอนบนม้านั่งให้ตาอยู่ใต้บาร์ จับบาร์กว้างกว่าไหล่เล็กน้อย บีบสะบักเข้าหากัน','ยกบาร์ออกจากแร็ค ลดช้าๆ จนแตะอกส่วนล่าง','ดันขึ้นตรงเหนือไหล่ เท้ากดพื้นตลอด'],'หายใจเข้าลึกก่อนลดบาร์ หายใจออกตอนดันผ่านจุดที่ยากที่สุด','ต้องมีคนสปอตหรือตั้งเซฟตี้บาร์ทุกครั้ง ห้ามจับแบบไม่ใช้นิ้วโป้งโอบบาร์ และอย่ากระดอนบาร์จากอก']]},
+legs:{n:'สายขา',s:'STR',m:'r',x:[
+['สควอทครึ่งทาง','Half Squat','','','ต้นขา ก้น',['ยืนกว้างเท่าไหล่ ปลายเท้าชี้ออกเล็กน้อย','ดันสะโพกไปด้านหลังแล้วย่อลงประมาณครึ่งทาง หลังตรง น้ำหนักอยู่ที่ส้นเท้า','ดันพื้นยืนขึ้นและบีบก้นที่จุดบน'],'หายใจเข้าตอนย่อ หายใจออกตอนยืนขึ้น','อย่ายกส้นเท้า และอย่าก้มหลังโค้ง ให้มองตรงไปข้างหน้า'],
+['บอดี้เวทสควอท','Bodyweight Squat','','k','ต้นขา ก้น',['ยืนกว้างเท่าไหล่ ยื่นแขนไปข้างหน้าเพื่อช่วยทรงตัว','ย่อลงจนต้นขาขนานพื้น เข่าชี้ไปทางเดียวกับปลายเท้า','ดันส้นเท้ายืนขึ้นโดยหลังตรงตลอด'],'หายใจเข้าตอนย่อ หายใจออกตอนดันขึ้น','เข่าบานเข้าด้านในเป็นข้อผิดพลาดหลัก ให้ดันเข่ากางออกตลอดการเคลื่อนไหว และอย่าย่อลึกถ้าเข่าเจ็บ'],
+['บัลแกเรียนสปลิทสควอท','Bulgarian Split Squat','','k','ต้นขา ก้น',['วางหลังเท้าหลังบนเก้าอี้หรือเตียง ก้าวเท้าหน้าให้ห่างพอสมควร','ย่อลงด้วยขาหน้าจนเข่าหลังเกือบแตะพื้น ลำตัวตั้งตรง','ดันส้นเท้าหน้ายืนขึ้น ทำครบแล้วสลับข้าง'],'หายใจเข้าตอนย่อลง หายใจออกตอนดันขึ้น','ระยะก้าวสั้นไปจะทำให้เข่าล้ำปลายเท้ามาก ถ้าเข่าหน้าปวดให้ก้าวไกลขึ้น และจับเสาช่วยทรงตัวได้'],
+['จัมพ์สควอท','Jump Squat','','ka','ต้นขา ก้น น่อง',['ยืนกว้างเท่าไหล่ ย่อลงเป็นสควอทตื้นๆ แกว่งแขนไปด้านหลัง','ระเบิดตัวขึ้นกระโดดสูงสุด เหยียดสะโพก เข่า และข้อเท้าเต็มที่','ลงนุ่มด้วยปลายเท้าถึงส้นเท้า แล้วย่อรับแรงทันที'],'หายใจเข้าตอนย่อ หายใจออกแรงๆ ตอนกระโดด หายใจเข้าตอนลงพื้น','ห้ามลงด้วยขาตรงหรือเข่าบานเข้าด้านใน ใช้พื้นเรียบไม่ลื่น และพักให้พอเมื่อล้า'],
+['พิสทอลสควอท','Pistol Squat','','ka','ต้นขา ก้น การทรงตัว',['ยืนขาเดียว ยื่นอีกขาไปข้างหน้า แขนยื่นไปข้างหน้าถ่วงสมดุล','ย่อลงช้าๆ จนก้นเกือบแตะน่อง ส้นเท้าไม่ยก','ดันขึ้นยืนด้วยขาเดียวโดยไม่ให้เข่าบานเข้า'],'หายใจเข้าตอนย่อลง หายใจออกตอนดันขึ้น','ยืดข้อเท้าและสะโพกก่อนทำ ถ้าลงไม่สุดให้ใช้เก้าอี้รองก้นหรือจับเสา และอย่าทิ้งตัวลง']]},
+wlegs:{n:'สายขา (อุปกรณ์)',s:'STR',m:'r',x:[
+['กอบเบล็ตสควอท','Goblet Squat','db','k','ต้นขา ก้น',['กอดดัมเบลตั้งไว้ที่หน้าอกโดยจับปลายด้านบน ยืนกว้างเท่าไหล่','ย่อลงลึก ให้ศอกอยู่ระหว่างเข่า หลังตรง','ดันส้นเท้ายืนขึ้นโดยดัมเบลชิดอก'],'หายใจเข้าตอนย่อ หายใจออกตอนยืนขึ้น','อย่าให้ดัมเบลดึงตัวก้มไปข้างหน้า ให้ยกอกขึ้นไว้ตลอด และเลือกน้ำหนักที่ทำให้หลังไม่โค้ง'],
+['ดัมเบลรูมาเนียนเดดลิฟต์','DB Romanian Deadlift','db','b','ต้นขาหลัง ก้น',['ยืนเท้ากว้างเท่าสะโพก ถือดัมเบลหน้าต้นขา','ดันสะโพกไปด้านหลังโดยเข่าเกือบตรง ให้ดัมเบลไถลชิดขาจนตึงต้นขาหลัง','บีบก้นดันสะโพกกลับมายืนตรง'],'หายใจเข้าตอนดันสะโพกไปหลัง หายใจออกตอนยืนขึ้น','ห้ามโค้งหลัง ให้หลังเรียบตลอด หยุดลงที่ระดับที่ยังรักษาหลังตรงได้ ถ้าเจ็บหลังส่วนล่างให้หยุด'],
+['เคตเทิลเบลสวิง','Kettlebell Swing','kb','b','ก้น ต้นขาหลัง แกนกลาง',['ยืนกว้างกว่าไหล่เล็กน้อย เคตเทิลเบลอยู่ด้านหน้า โน้มสะโพกไปหลังแล้วจับด้วยสองมือ','เหวี่ยงเบลไปด้านหลังระหว่างขา แล้วดีดสะโพกไปข้างหน้าให้เบลลอยระดับอก','ให้แขนผ่อนคลาย ยืนตรงเกร็งก้นที่จุดบน แล้วปล่อยเบลกลับ'],'หายใจเข้าตอนเบลแกว่งลง หายใจออกแรงๆ ตอนดีดสะโพก','คนมักใช้แขนยกและย่อเข่าแบบสควอท ต้องเป็นการพับสะโพกเท่านั้น ห้ามแอ่นหลังที่จุดบน และเริ่มด้วยน้ำหนักเบา'],
+['ดัมเบลลันจ์','DB Lunge','db','k','ต้นขา ก้น',['ยืนตรงถือดัมเบลสองข้าง ก้าวขาไปข้างหน้าก้าวใหญ่','ย่อลงจนเข่าหลังเกือบแตะพื้น ลำตัวตั้งตรง เข่าหน้าอยู่เหนือข้อเท้า','ดันส้นเท้าหน้ากลับมายืน แล้วสลับข้าง'],'หายใจเข้าตอนย่อ หายใจออกตอนดันกลับ','ก้าวสั้นเกินไปจะทำให้เข่าเลยปลายเท้ามาก ให้ก้าวยาวขึ้น และอย่าปล่อยเข่าบานเข้าด้านใน'],
+['บาร์เบลสควอท','Barbell Squat','gym','kb','ขา ก้น แกนกลาง',['เข้าใต้บาร์ วางบาร์บนกล้ามเนื้อหลังส่วนบน บีบสะบัก แล้วถอยออกจากแร็ค','ย่อลงโดยดันสะโพกไปหลังและเข่าชี้ตามปลายเท้า จนต้นขาขนานพื้นหรือลึกกว่า','ดันพื้นขึ้นด้วยส้นเท้า หลังเกร็งแน่น'],'หายใจเข้าลึกและเกร็งท้องก่อนย่อ หายใจออกผ่านจุดที่ยากที่สุดขณะยืนขึ้น','ต้องตั้งเซฟตี้บาร์หรือมีคนสปอต ห้ามให้หลังโค้งหรือส้นเท้ายก และอย่าเพิ่มน้ำหนักเร็วเกินไป']]},
+pull:{n:'สายดึง',s:'STR',m:'r',x:[
+['ซูเปอร์แมนนอนคว่ำ','Superman','','b','หลัง ก้น',['นอนคว่ำ เหยียดแขนไปข้างหน้า ขาตรง','ยกแขนและขาลอยจากพื้นพร้อมกัน บีบสะบักและก้น','ค้าง 1 วินาที แล้วลดลงช้าๆ'],'หายใจออกตอนยกตัวขึ้น หายใจเข้าตอนลดลง','อย่าเงยคอมากเกินไป ให้มองพื้นเพื่อรักษาแนวคอ และไม่ยกสูงจนหลังส่วนล่างแอ่นมาก'],
+['พายยางยืด','Band Row','band','','หลัง ไบเซ็ป',['คล้องยางยืดกับเสาแน่นหนาที่ระดับอก นั่งหรือยืนห่างจนยางตึง','ดึงศอกไปด้านหลังลำตัว บีบสะบักเข้าหากัน','ปล่อยกลับช้าๆ 2-3 วินาที ไม่ปล่อยให้ยางดีด'],'หายใจออกตอนดึง หายใจเข้าตอนปล่อยกลับ','ห้ามยกไหล่ขึ้นหูหรือโน้มตัวไปมา และตรวจจุดผูกยางว่าแน่น เพื่อกันยางหลุดดีดใส่'],
+['โหนบาร์ลดลง','Negative Pull-up','bar','s','หลัง ไบเซ็ป',['กระโดดหรือใช้เก้าอี้ขึ้นไปให้คางพ้นบาร์ จับกว้างกว่าไหล่','ลดตัวลงช้าๆ ใช้เวลา 3-5 วินาที','ปล่อยตัวจนแขนตรง แล้วกลับไปตั้งท่าใหม่'],'หายใจเข้าตอนลดตัวช้าๆ หายใจออกตอนขึ้นไปเริ่มใหม่','อย่าปล่อยตัวหล่นเร็วเพราะไหล่จะถูกกระชาก และอย่าห้อยไหล่ ให้เกร็งสะบักลงเล็กน้อยที่จุดล่าง'],
+['ดึงข้อ','Pull-up','bar','s','หลัง ไบเซ็ป แรงบีบมือ',['จับบาร์คว่ำมือกว้างกว่าไหล่ ห้อยตัว ดึงสะบักลงและเกร็งท้อง','ดึงศอกลงข้างลำตัว ยกตัวจนคางพ้นบาร์','ลดลงควบคุมจนแขนตรง'],'หายใจออกตอนดึงตัวขึ้น หายใจเข้าตอนลดลง','ห้ามแกว่งหรือเตะขาเพื่อช่วย และอย่าปล่อยไหล่หลุดที่จุดล่าง ถ้าไหล่เจ็บให้ลดจำนวนและกลับไปฝึกท่าลดตัว'],
+['ดึงข้ออาร์เชอร์','Archer Pull-up','bar','s','หลัง ไบเซ็ป แรงบีบมือ',['จับบาร์กว้างมาก ห้อยตัว เกร็งท้องและสะบัก','ดึงตัวขึ้นเอียงไปทางมือข้างหนึ่ง ให้แขนข้างนั้นงอ ส่วนอีกข้างเหยียดตรง','ลดลงช้าๆ กลับกลางตัว แล้วดึงไปอีกข้าง'],'หายใจออกตอนดึงตัวไปด้านข้าง หายใจเข้าตอนลดลง','ท่ายากมากต่อไหล่และข้อศอก ควรทำดึงข้อให้ได้ 10 ครั้งก่อน และอย่าล็อกข้อศอกข้างที่เหยียดแรงๆ']]},
+core:{n:'สายแกนกลาง',s:'COR',m:'t',x:[
+['แพลงก์คุกเข่า','Knee Plank','','','หน้าท้อง',['วางศอกใต้ไหล่ คุกเข่า แขนท่อนล่างราบกับพื้น','ยกสะโพกให้ลำตัวเป็นเส้นตรงจากเข่าถึงศีรษะ','เกร็งท้องและก้นค้างตามเวลา'],'หายใจเข้าออกช้าๆ ลึกๆ ต่อเนื่องขณะค้าง ไม่กลั้น','อย่าปล่อยสะโพกตกหรือยกเป็นเต็นท์ และมองพื้นระหว่างมือเพื่อไม่ให้คอเกร็ง'],
+['แพลงก์','Plank','','','หน้าท้อง ไหล่ ก้น',['วางศอกใต้ไหล่ ปลายเท้าตั้ง ขาตรง','เกร็งท้อง ก้น และต้นขา ให้ลำตัวตรงเป็นแผ่นไม้','ค้างโดยดันพื้นด้วยศอกและมองพื้น'],'หายใจเข้าทางจมูกช้าๆ หายใจออกทางปากช้าๆ ไม่กลั้น','สะโพกตกทำให้หลังส่วนล่างรับแรงมาก ให้หยุดทันทีเมื่อเริ่มตก และไม่ค้างเกินเวลาที่ฟอร์มยังดี'],
+['ฮอลโลว์ฮอลด์','Hollow Hold','','b','หน้าท้องลึก',['นอนหงาย เหยียดแขนเหนือศีรษะ ขาชิด','กดหลังส่วนล่างติดพื้น ยกไหล่และขาลอยจากพื้น','ค้างเป็นรูปเรือโดยท้องเกร็งแน่น'],'หายใจสั้นๆ ตื้นๆ แต่สม่ำเสมอเพื่อรักษาการเกร็งท้อง ไม่กลั้น','ถ้าหลังส่วนล่างแอ่นลอยพื้นให้ยกขาสูงขึ้นหรืองอเข่าเพื่อลดความยาก ห้ามฝืนจนหลังแอ่น'],
+['ยกขานอนราบ','Lying Leg Raise','','b','หน้าท้องส่วนล่าง',['นอนหงาย วางมือใต้สะโพก ขาตรงชิดกัน','กดหลังติดพื้น ยกขาตรงขึ้นเป็นมุม 90 องศา','ลดขาช้าๆ ใกล้พื้นแต่ไม่แตะ'],'หายใจออกตอนยกขาขึ้น หายใจเข้าตอนลดขา','ข้อผิดพลาดคือหลังแอ่นตอนลดขา ถ้าแอ่นให้งอเข่าหรือหยุดไว้ก่อนถึงพื้น ถ้าเจ็บหลังส่วนล่างให้งดท่านี้','r'],
+['แอล-ซิท','L-Sit','','w','หน้าท้อง สะโพก ไตรเซ็ป',['นั่งบนพื้น วางมือข้างสะโพก หรือใช้เก้าอี้สองตัว','ดันมือลงให้สะโพกลอยจากพื้น ไหล่กดลง แขนตรง','ยื่นขาตรงไปข้างหน้าขนานพื้นและค้างไว้'],'หายใจสั้นๆ สม่ำเสมอ ห้ามกลั้นแม้จะต้องเกร็งมาก','ข้อมือรับน้ำหนักมาก ให้อบอุ่นข้อมือก่อน ถ้ายกขาตรงไม่ไหวให้งอเข่า และอย่าปล่อยไหล่ยกขึ้นหู']]},
+cardio:{n:'สายคาร์ดิโอ',s:'END',m:'t',x:[
+['เดินสวิงแขนอยู่กับที่','March in Place','','','หัวใจ ขา',['ยืนตรง เกร็งท้องเล็กน้อย','เดินยกเข่าอยู่กับที่ สวิงแขนสลับกับขา','รักษาจังหวะสม่ำเสมอ'],'หายใจเข้า 2 ก้าว หายใจออก 2 ก้าว ตามจังหวะ','ลงปลายเท้าเบาๆ ไม่กระแทก และอย่าก้มตัวไปข้างหน้า'],
+['จัมปิ้งแจ็ค','Jumping Jack','','a','หัวใจ ทั้งตัว',['ยืนเท้าชิด แขนข้างลำตัว','กระโดดแยกขาออกพร้อมยกแขนเหนือศีรษะ','กระโดดกลับท่าเดิมอย่างต่อเนื่อง'],'หายใจเข้าตอนแยกออก หายใจออกตอนกลับเข้า ให้สม่ำเสมอ','ลงปลายเท้าถึงส้นเท้านุ่มๆ ไม่ลงด้วยเท้าแบนแข็ง ถ้าข้อเท้าเจ็บให้ใช้เวอร์ชันก้าวแทนกระโดด'],
+['ไฮนีส์','High Knees','','ka','หัวใจ สะโพก',['ยืนตรง ยกเข่าขึ้นระดับสะโพก','สลับขาเร็วๆ เหมือนวิ่งอยู่กับที่ สวิงแขนสลับ','รักษาลำตัวตั้งตรงตลอด'],'หายใจเข้า 2 ก้าว หายใจออก 2 ก้าวอย่างสม่ำเสมอ','ห้ามเอนหลัง ใช้ปลายเท้าลงเบาๆ เพื่อลดแรงกระแทกเข่า ถ้าเจ็บเข่าหรือข้อเท้าให้หยุด'],
+['กระโดดเชือก','Jump Rope','rope','a','หัวใจ น่อง',['จับเชือกสองข้าง ศอกแนบลำตัว มือห่างสะโพก','หมุนเชือกด้วยข้อมือ กระโดดเตี้ยๆ ราว 2-3 ซม.','ลงที่ปลายเท้าและใช้เข่านุ่ม'],'หายใจตามจังหวะกระโดดแบบสม่ำเสมอ ไม่กลั้น','อย่ากระโดดสูงเกินไป ต้องใช้พื้นไม่ลื่น และเชือกยาวพอดีคือปลายด้ามถึงรักแร้เมื่อเหยียบกลางเชือก'],
+['เบอร์พี','Burpee','','wkb','ทั้งตัว หัวใจ',['ยืนตรง ย่อลงวางมือกับพื้น','ถีบขาไปด้านหลังเป็นท่าวิดพื้น แล้วกระโดดเท้าเข้ามา','กระโดดขึ้นเหนือศีรษะแล้วลงนุ่มๆ'],'หายใจออกตอนถีบขาไปหลังและตอนกระโดด หายใจเข้าตอนย่อลง','อย่าปล่อยสะโพกตกในท่าแพลงก์เพราะหลังส่วนล่างจะรับแรง ลดความเร็วเมื่อล้า และก้าวเท้ากลับแทนการกระโดดถ้าเข่าไม่ไหว']]},
+endur:{n:'สายความอึดระบบหายใจ',s:'END',m:'m',x:[
+['เดินเร็วต่อเนื่อง','Brisk Walk','','','หัวใจ ขา',['เริ่มเดินปกติ 2 นาที แล้วเร่งเป็นเดินเร็วที่ยังพูดเป็นประโยคได้','สวิงแขน 90 องศา ส้นเท้าลงก่อนแล้วกลิ้งไปปลายเท้า','รักษาความเร็วคงที่ตลอดเวลา'],'หายใจเข้า 3 ก้าว หายใจออก 3 ก้าว','ใส่รองเท้าที่รองรับดี และอย่าก้มมองพื้นมากเกินไป ให้มองไปข้างหน้า'],
+['จ็อกกิ้งโซน 2','Easy Jog','','ka','หัวใจ ขา',['วอร์มด้วยเดินเร็ว 2 นาที','จ็อกเบาๆ ด้วยความเร็วที่ยังพูดเป็นประโยคได้','ก้าวสั้นถี่ ให้เท้าลงใต้สะโพก'],'หายใจเข้า 3 ก้าว หายใจออก 2 ก้าว ทั้งทางจมูกและปาก','อย่าเร็วเกินไปในช่วงแรกเพราะเสี่ยงเจ็บหน้าแข้งและเข่า ควรเพิ่มเวลาทีละน้อยไม่เกิน 10% ต่อสัปดาห์'],
+['วิ่งเทมโป','Tempo Run','','ka','หัวใจ ขา',['วอร์มด้วยจ็อกเบา 3 นาที','เร่งเป็นความเร็วที่ท้าทายจนพูดได้แค่สองสามคำ','รักษาความเร็วคงที่ แล้วชะลอเป็นเดินพัก'],'หายใจเข้า 2 ก้าว หายใจออก 2 ก้าวอย่างสม่ำเสมอ','อย่าออกตัวเร็วเกินไปในนาทีแรก ถ้าเจ็บแปลบที่หน้าแข้งหรือเข่าให้หยุดทันที'],
+['วิ่งอินเทอร์วัล','Interval Run','','ka','หัวใจ ขา',['วอร์มด้วยจ็อกเบา 3 นาที','วิ่งเร็ว 1 นาที สลับจ็อกหรือเดินช้า 1 นาที','ทำต่อเนื่องตามเวลาที่กำหนด แล้วคูลดาวน์ด้วยการเดิน'],'หายใจออกแรงช่วงวิ่งเร็ว หายใจลึกช่วงพักเพื่อลดชีพจร','อย่าวิ่งเร็วจนฟอร์มพัง ใช้ช่วงพักให้ชีพจรลดลงจริง และหยุดถ้าเวียนหัวหรือเจ็บหน้าอก'],
+['วิ่งขึ้นบันได','Stair Run','','kab','หัวใจ ขา ก้น',['เลือกบันไดที่ปลอดภัย วอร์มก่อน','วิ่งขึ้นบันไดโดยลงปลายเท้าถึงกลางเท้า โน้มตัวไปข้างหน้าเล็กน้อย','เดินลงช้าๆ เพื่อพัก แล้วทำซ้ำต่อเนื่อง'],'หายใจออกแรงตามจังหวะขึ้นบันได หายใจเข้าตอนเดินลง','เดินลงเท่านั้น ห้ามวิ่งลงเพราะเข่ารับแรงกระแทกสูง จับราวเมื่อพื้นลื่น และหยุดเมื่อเข่าปวด']]},
+sprint:{n:'สายสปรินต์',s:'SPD',m:'n',x:[
+['เดินเร่งก้าวยาว','Power Stride','','','ขา สะโพก',['ยืนตรง ก้าวยาวไปข้างหน้า สวิงแขน 90 องศา','ดันสะโพกไปข้างหน้าทุกก้าว ให้เท้าลงใต้ลำตัว','เดินเร่งระยะ 20 เมตรแล้วกลับ (1 รอบ = 20 เมตร)'],'หายใจเข้า 2 ก้าว หายใจออก 2 ก้าว สม่ำเสมอ','อย่าก้าวจนส้นเท้าเหยียบไกลหน้าลำตัวเพราะจะเอนหลัง ให้ลำตัวตั้งตรงและเท้าลงใต้สะโพก'],
+['เอ-สกิป','A-Skip','','a','สะโพก น่อง',['ยืนตรง ยกเข่าข้างหนึ่งให้ต้นขาขนานพื้น พร้อมสวิงแขนตรงข้าม','สกิปเด้งเบาๆ บนขาที่รับพื้น แล้วสลับข้าง','เคลื่อนไปข้างหน้า 20 เมตรด้วยจังหวะสม่ำเสมอ (1 รอบ = 20 เมตร)'],'หายใจเข้า 2 จังหวะ หายใจออก 2 จังหวะ','ห้ามเอนตัวไปด้านหลัง และอย่าเหยียดเท้าไปไกลหน้า ถ้าข้อเท้าเจ็บให้งดท่านี้'],
+['สปรินต์ 10 วินาที','10s Sprint','','kab','ขา ก้น',['วอร์มเบาๆ 3 นาที แล้วตั้งท่าเอนตัวไปข้างหน้าเล็กน้อย','ออกวิ่งเร็วสุด 10 วินาที ส่งแรงผลักพื้นด้วยปลายเท้า','ชะลอค่อยๆ และเดินพักจนหายใจปกติ (1 รอบ = 1 เที่ยว)'],'หายใจเข้าออกแรงและเร็วตามความต้องการ ห้ามกลั้น','ต้องวอร์มให้พอ มิฉะนั้นกล้ามต้นขาหลังเสี่ยงฉีก ใช้พื้นเรียบไม่ลื่น และอย่าหยุดกะทันหัน'],
+['สปรินต์ 20 วินาที','20s Sprint','','kab','ขา ก้น หัวใจ',['วอร์มเบาๆ แล้วตั้งท่าเอนตัวเล็กน้อย','เร่งความเร็ว 5 วินาทีแรก แล้วรักษาความเร็วสูงสุดจนครบ 20 วินาที','ชะลอและเดินพักเต็มที่ก่อนรอบต่อไป (1 รอบ = 1 เที่ยว)'],'หายใจแรงเป็นจังหวะ หายใจออกยาวช่วงท้าย ไม่กลั้น','ผ่อนไหล่และอย่ากำมือแน่น ถ้าฟอร์มพังหรือเจ็บต้นขาหลังให้หยุดทันที'],
+['บาวด์ดิง','Bounding','','kab','ขา ก้น พลังระเบิด',['วิ่งเหยาะเตรียมตัว 3-4 ก้าว','ก้าวกระโดดยาวสลับขา ลอยตัวให้นานและเหวี่ยงแขนช่วย','ลงปลายเท้าถึงส้นเท้านุ่มๆ แล้วส่งต่อก้าวถัดไป (1 รอบ = 20 เมตร)'],'หายใจเข้า 2 ก้าว หายใจออก 2 ก้าวตามจังหวะกระโดด','แรงกระแทกสูงมาก ใช้พื้นนุ่ม ลงใต้สะโพกไม่ใช่ไกลหน้า และหยุดเมื่อเริ่มล้า']]},
+agi:{n:'สายความคล่องตัวและทรงตัว',s:'COR',m:'t',x:[
+['ยืนทรงตัวขาเดียว','Single-Leg Balance','','','สะโพก ข้อเท้า แกนกลาง',['ยืนขาเดียว ยกอีกข้างลอย มือเท้าเอว','จ้องจุดเดียวข้างหน้า เกร็งท้องและสะโพกให้นิ่ง','ค้างตามเวลาแล้วสลับข้าง'],'หายใจเข้าออกช้าๆ สม่ำเสมอ','อย่าล็อกเข่าตรงสุด ให้เข่าอ่อนเล็กน้อย และยืนใกล้กำแพงเผื่อเสียหลัก'],
+['ชัฟเฟิลข้าง','Lateral Shuffle','','','ขา สะโพก',['ย่อเข่าเล็กน้อย โน้มตัวไปข้างหน้า เท้ากว้างกว่าไหล่','ก้าวข้างไปทางหนึ่ง 3-4 ก้าวโดยเท้าไม่ไขว้กัน','หยุดแล้วเปลี่ยนทิศทางทันที'],'หายใจเข้า 2 ก้าว หายใจออก 2 ก้าวตามจังหวะ','ต้องรักษาตัวต่ำและอย่าไขว้ขา อย่าเปลี่ยนทิศขณะเข่าตรงเพราะเสี่ยงเข่าบิด','t'],
+['ซิกแซกวิ่งหลบหลัก','Zigzag Cone Run','','ka','ขา แกนกลาง',['วางขวดน้ำหรือสิ่งของ 4 จุดเป็นแนวซิกแซก ห่างกัน 2 เมตร','วิ่งอ้อมแต่ละจุด ย่อตัวต่ำที่มุมเลี้ยวและใช้เท้านอกดันตัว','วิ่งครบแถวแล้ววิ่งกลับ นับเป็น 1 รอบ'],'หายใจเป็นจังหวะเร็ว เข้าออกสม่ำเสมอ','ใช้เท้านอกดันตัวเมื่อเลี้ยว ไม่หมุนเข่าขณะเท้าติดพื้น และใช้พื้นที่ไม่ลื่น','n'],
+['กระโดดสี่มุม','Four-Corner Box Drill','','ka','น่อง ข้อเท้า สะโพก',['ตีกรอบสี่เหลี่ยมราว 50 ซม. ยืนเท้าชิดที่มุมหนึ่ง','กระโดดเด้งเบาๆ ไปมุมถัดไป ไปหน้า ข้าง หลัง ข้าง วนต่อเนื่อง','ลงปลายเท้านุ่ม เข่างอเล็กน้อยทุกครั้ง'],'หายใจออกตอนกระโดดแต่ละครั้ง และหายใจให้สม่ำเสมอ','ห้ามลงด้วยเข่าล็อก และอย่าเร่งจนฟอร์มพัง ถ้าข้อเท้าเคยเคล็ดให้ใช้การก้าวแทนกระโดด','t'],
+['กระโดดขาเดียวทรงตัว','Single-Leg Hop & Stick','','ka','ขา ก้น แกนกลาง',['ยืนขาเดียว งอเข่าเล็กน้อย แกว่งแขนไปด้านหลัง','กระโดดไปข้างหน้าราว 50-100 ซม. ด้วยขาเดียว','ลงขาเดิมแล้วทรงตัวนิ่ง 2 วินาทีก่อนทำซ้ำ'],'หายใจเข้าตอนย่อ หายใจออกตอนกระโดด แล้วหายใจปกติตอนทรงตัว','ต้องลงให้เข่าชี้ตรงไปข้างหน้า ไม่บานเข้าใน ถ้าล้มให้ลดระยะกระโดด และทำบนพื้นเรียบนุ่ม','r']]},
+plyo:{n:'สายพลังระเบิดและกระโดด',s:'SPD',m:'r',x:[
+['โพโก้ฮอป','Pogo Hop','','a','น่อง ข้อเท้า',['ยืนตัวตรง เข่าเกือบตรง แขนข้างลำตัว','กระโดดเด้งเตี้ยๆ โดยใช้ข้อเท้าและน่องเป็นหลัก','ลงปลายเท้าแล้วเด้งต่อเนื่อง'],'หายใจเป็นจังหวะต่อเนื่อง ไม่กลั้น','ห้ามงอเข่ามากเพราะท่านี้เน้นข้อเท้า ใช้พื้นไม่ลื่น และหยุดถ้าเจ็บเอ็นร้อยหวาย'],
+['กระโดดไกล','Broad Jump','','ka','ต้นขา ก้น น่อง',['ยืนเท้ากว้างเท่าไหล่ ย่อตัวและแกว่งแขนไปด้านหลัง','ดันสะโพกและแขนไปข้างหน้ากระโดดให้ไกลที่สุด','ลงนุ่มด้วยสองเท้า ย่อรับแรงและทรงตัว'],'หายใจเข้าตอนย่อ หายใจออกตอนกระโดด','ห้ามลงด้วยเข่าล็อกหรือบานเข้าใน ต้องมีพื้นที่โล่งข้างหน้า และเดินกลับมาแทนการกระโดดกลับ'],
+['สเกตเตอร์บาวด์','Skater Bound','','ka','ก้น ต้นขา การทรงตัว',['ยืนขาเดียว งอเข่าเล็กน้อย','กระโดดไปด้านข้างไกลๆ ลงบนขาอีกข้าง แกว่งขาหลังไขว้ด้านหลัง','ทรงตัว 1 วินาทีแล้วกระโดดกลับ'],'หายใจออกตอนกระโดด หายใจเข้าตอนทรงตัว','ลงให้เข่าชี้ตามปลายเท้า ไม่บิดเข่า ถ้าทรงตัวไม่ได้ให้ลดระยะกระโดด'],
+['ทักจัมพ์','Tuck Jump','','kab','ขา แกนกลาง',['ยืนกว้างเท่าไหล่ ย่อเล็กน้อยแล้วระเบิดขึ้น','ดึงเข่าสองข้างเข้าหาอกที่จุดสูงสุด','ปล่อยขาลงแล้วลงนุ่มพร้อมย่อรับแรง'],'หายใจออกตอนกระโดดขึ้น หายใจเข้าตอนลงพื้น','แรงกระแทกสูงมาก ห้ามทำต่อเนื่องจนล้า ให้ทำทีละครั้งพร้อมพักสั้นๆ และหยุดเมื่อฟอร์มเริ่มพัง'],
+['วิดพื้นตบมือ','Clap Push-up','','ws','อก ไหล่ ไตรเซ็ป',['ตั้งท่าวิดพื้น ลดตัวลงอย่างควบคุม','ดันพื้นแรงที่สุดให้มือลอยจากพื้น แล้วตบมือหน้าอก','มือกลับลงรับพื้นด้วยศอกงอเล็กน้อย แล้วลดตัวต่อ'],'หายใจเข้าตอนลดตัว หายใจออกแรงตอนระเบิดขึ้น','ถ้าศอกล็อกตรงตอนมือลงรับพื้นจะเสี่ยงข้อมือและศอก ควรทำวิดพื้นมาตรฐานได้ 20 ครั้งก่อน และพื้นต้องไม่ลื่น']]},
+mob:{n:'สายยืดหยุ่น',s:'MOB',m:'t',x:[
+['แคท-คาว','Cat-Cow','','','กระดูกสันหลัง',['คลานสี่ขา มือใต้ไหล่ เข่าใต้สะโพก','หายใจเข้าแอ่นหลังลง ยกศีรษะและก้นขึ้น','หายใจออกโค้งหลังขึ้น เก็บคางและสอดก้น'],'หายใจเข้าตอนแอ่นหลัง หายใจออกตอนโค้งหลัง','เคลื่อนไหวช้าๆ ไม่ฝืนสุดช่วง ถ้าปวดข้อมือให้กำหมัดหรือทำบนศอก'],
+['ยืดสะโพกคุกเข่า','Kneeling Hip Flexor Stretch','','k','สะโพกด้านหน้า',['คุกเข่าข้างหนึ่ง อีกข้างงอเข่า 90 องศาไปข้างหน้า รองเข่าหลังด้วยผ้า','เกร็งก้นข้างหลังและดันสะโพกไปข้างหน้าเล็กน้อย','ค้างจนรู้สึกตึงหน้าสะโพก แล้วสลับข้าง'],'หายใจเข้าลึก หายใจออกยาวเพื่อผ่อนให้ยืดลึกขึ้น','อย่าแอ่นหลังส่วนล่างเพื่อให้รู้สึกยืดมากขึ้น และอย่าให้เข่าหน้าเลยปลายเท้ามาก'],
+['หมุนอกท่าร้อยเข็ม','Thread the Needle','','s','อกส่วนบน ไหล่',['คลานสี่ขา สอดแขนข้างหนึ่งใต้ลำตัวไปด้านตรงข้าม','ลดไหล่และหูลงพื้น หมุนอกลง','ค้างและหายใจ แล้วหมุนกลับและสลับข้าง'],'หายใจเข้าก่อนสอดแขน หายใจออกยาวตอนค้าง','อย่าดันไหล่ลงพื้นจนปวดหรือชา ให้ลดช่วงลง และให้สะโพกอยู่เหนือเข่า ไม่ถอยหลัง'],
+['ย่อลึกค้าง','Deep Squat Hold','','k','สะโพก ข้อเท้า',['ยืนกว้างกว่าไหล่ ปลายเท้าชี้ออกเล็กน้อย','ย่อลงลึกที่สุดเท่าที่หลังยังตรง ประกบมือหน้าอก ศอกดันเข่ากาง','ค้างโดยส้นเท้าติดพื้น'],'หายใจเข้าออกช้าๆ ให้ท้องและอกขยายอย่างสม่ำเสมอ','ถ้าส้นเท้ายกให้รองแผ่นหนังสือใต้ส้น และถ้าเจ็บเข่าให้ย่อตื้นขึ้น ห้ามฝืนลง'],
+['หมุนไหล่ยางยืด','Band Shoulder Dislocate','band','s','ไหล่ อก',['ยืนตรง จับยางยืดกว้างกว่าไหล่ แขนตรง','ยกยางข้ามศีรษะไปด้านหลังช้าๆ โดยแขนตรง','กลับมาด้านหน้าอย่างควบคุม'],'หายใจเข้าตอนยกยางขึ้น หายใจออกตอนข้ามไปด้านหลัง','ถ้าไหล่ตึงจนต้องงอแขน ให้จับกว้างขึ้นเพื่อป้องกันไหล่ และอย่าแอ่นหลังชดเชย']]}
+};
+const LS=Object.keys(L);
+const G=[['วิ่งสปรินต์ทำความเร็ว',['sprint','legs','plyo']],['ความอึดและระบบหายใจ',['endur','cardio']],['สร้างมวลกล้ามเนื้อ',['push','press','wlegs','pull']],['ลดไขมันและลีนหุ่น',['cardio','wlegs','endur']],['พลังระเบิดและกระโดดสูง',['plyo','legs','sprint']],['ความแข็งแรงแกนกลางลำตัว',['core']],['ความยืดหยุ่นและข้อต่อ',['mob']],['แก้บุคลิกภาพและออฟฟิศซินโดรม',['mob','pull','core']],['พละกำลังช่วงบน',['push','pull','press']],['พละกำลังช่วงล่าง',['legs','wlegs']],['ทักษะบอดี้เวทขั้นสูง',['pull','push','core']],['ความคล่องตัวและการทรงตัว',['agi','sprint','mob']],['แรงบีบมือและท่อนแขน',['pull','wlegs']],['สุขภาพหัวใจและหลอดเลือด',['endur','cardio']],['ฟื้นฟูร่างกายและลดความเครียด',['mob']],['สมรรถภาพนักกีฬาภาพรวม',['legs','sprint','push','core','plyo','agi']]];
+const EQ=[['none','บอดี้เวทล้วน'],['db','ดัมเบล'],['bar','บาร์โหน'],['band','ยางยืด'],['rope','เชือกกระโดด'],['kb','เคตเทิลเบล'],['bench','ม้านั่ง'],['gym','ยิมครบชุด']];
+
+
+// ================= ระบบตารางฝึกรายสัปดาห์ + เลเวลวิวัฒนาการท่า =================
+const DAYS=['จ.','อ.','พ.','พฤ.','ศ.','ส.','อา.'],DAYN=['จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์','อาทิตย์'];
+const GU=['push','press','pull'],GL=['legs','wlegs','plyo'],GC=['core','agi','mob'],GK=['cardio','endur','sprint'];
+const MG={push:'U',press:'U',pull:'U',legs:'L',wlegs:'L',plyo:'L',sprint:'L',core:'C',agi:'C',cardio:'K',endur:'K',mob:'M'};
+const PAT={2:[0,3],3:[0,2,4],4:[0,1,3,4],5:[0,1,2,4,5],6:[0,1,2,3,4,5]};
+const TPL={2:['F','F'],3:['F','F','F'],4:['U','L','U','L'],5:['U','L','K','U','L'],6:['U','L','K','U','L','K']};
+const SLOT={F:[GU,GL,GC.concat(GK),GK.concat(GC),GU,GL],U:[GU,GU,GC,GU,GU,GC],L:[GL,GL,GC,GL,GL,GK],K:[GK,GK,GC,GK,GK,GC]};
+const RB={push:60,press:75,legs:75,wlegs:90,pull:75,core:45,cardio:30,endur:60,sprint:90,agi:45,plyo:75,mob:20};
+let S=null,W=null,VIEW='wk',SEL=todayIx(),QR=null,AC=null,SH=null;
+try{S=JSON.parse(STO.getItem('tactfit'))}catch(e){}
+const save=()=>{try{STO.setItem('tactfit',JSON.stringify(S))}catch(e){}};
+function todayIx(){return(new Date().getDay()+6)%7}
+function monday(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+const need=l=>60+30*l;
+const ep=k=>(S.lp[k]||0)+(S.lv-1)*3;
+const tier=k=>Math.min(5,1+Math.floor(ep(k)/40));
+const have=e=>!e||S.p.eq.includes('gym')||e.split('+').every(k=>S.p.eq.includes(k));
+const okEx=x=>have(x[2])&&![...x[3]].some(c=>S.p.inj.includes(c));
+function pick(k){for(let t=tier(k);t>=1;t--){if(okEx(L[k].x[t-1]))return t}return 0}
+const hasW=x=>x[2].split('+').some(q=>q=='db'||q=='kb');
+function raw(){const o={};for(const s in ST){const a=LS.filter(k=>L[k].s==s).map(k=>S.lp[k]||0);o[s]=a.reduce((x,y)=>x+y,0)/a.length/2}return o}
+function stats(){const r=raw(),o={};for(const s in r)o[s]=Math.min(100,Math.round(r[s]));return o}
+// ---------- ปรับข้อมูลเซฟให้ครบทุกฟิลด์ (รองรับเซฟเดิม) ----------
+function ensure(){if(!S||!S.lp)return;
+const src={endur:'cardio',agi:'core',plyo:'legs'};for(const k in src)if(S.lp[k]==null)S.lp[k]=Math.round((S.lp[src[k]]||10)*.7);
+S.kg=S.kg||{};const b=(S.p.sex==1?2:4)+(S.p.exp||0);['press','wlegs'].forEach(k=>{if(S.kg[k]==null)S.kg[k]=b});
+S.tl=S.tl||{};S.tp=S.tp||{};LS.forEach(k=>{if(S.tl[k]==null)S.tl[k]=S.lv;if(S.tp[k]==null)S.tp[k]=pick(k)});
+S.lvh=S.lvh||[];S.hist=S.hist||[];S.boost=S.boost||{};S.slow=S.slow||0;S.flash=S.flash||0;if(S.auto==null)S.auto=true;S.mult=S.mult||1;
+if(!S.snap)S.snap=raw();
+if(!S.wk||S.wk.id!==monday()){if(S.wk)weekRoll();buildWeek()}}
+// ---------- ตรวจสมดุลรายสัปดาห์: สายที่พัฒนาช้ากว่าสัดส่วนเป้าหมายจะถูกเพิ่มน้ำหนัก ----------
+function weekRoll(){const now=raw(),sn=S.snap||now,sc=scores(),ws={},g={};let tw=0,tg=0;
+for(const s in ST){ws[s]=0;g[s]=Math.max(0,now[s]-(sn[s]||0));tg+=g[s]}
+LS.forEach(k=>ws[L[k].s]+=sc[k]);for(const s in ST)tw+=ws[s];
+for(const s in ST){const gs=tw?ws[s]/tw:0,as=tg?g[s]/tg:0,b=S.boost[s]||1;S.boost[s]=(gs>.05&&tg>0&&as<gs*.7)?Math.min(2,b*1.25):Math.max(1,b*.9)}
+S.snap=now}
+function scores(){const sc={};LS.forEach(k=>sc[k]=0);S.p.goals.forEach((g,i)=>{const w=i<2?.3:.4/3,ls=G[g][1];ls.forEach(k=>sc[k]+=w/ls.length)});return sc}
+// ---------- สร้างรายการท่า ----------
+const pen=()=>(S.p.fat>=4?1:0)+(S.p.sleep<6?1:0);
+const nsets=()=>Math.max(2,Math.min(5,2+Math.floor(S.lv/4))-pen());
+function tgt(t,m,dl){const x=S.mult;
+if(m=='r')return Math.min(24,Math.max(4,Math.round((12-t+Math.round(1.5*dl))*x)));
+if(m=='t')return Math.min(90,Math.round((20+t*5+7*dl)*x));
+if(m=='m')return Math.min(25,Math.max(3,Math.round((4+t*2+dl)*x)));
+return Math.min(12,Math.max(3,Math.round((3+Math.ceil(t/2)+dl)*x)))}
+function restOf(k,t){let r=RB[k]||60;if(L[k].s=='STR'&&t>=4)r+=15;return Math.max(20,r-Math.min(15,3*Math.floor(S.lv/4)))}
+function mk(k,t,ss,o){o=o||{};const x=L[k].x[t-1],m=x[8]||L[k].m,dl=Math.max(0,S.lv-(S.tl[k]==null?S.lv:S.tl[k])),v=o.v||tgt(t,m,dl);
+return{k,t,m,rest:o.rest!=null?o.rest:restOf(k,t),kg:hasW(x)?(S.kg[k]||4):0,f:o.f||{},s:Array.from({length:m=='m'?1:ss},()=>({v,d:0}))}}
+function restDay(){let a=[];for(let t=Math.max(1,pick('mob')||1);t>=1&&a.length<4;t--){if(okEx(L.mob.x[t-1]))a.push(['mob',t])}a.reverse();
+[['cardio',1],['core',1]].forEach(z=>{if(a.length<3&&okEx(L[z[0]].x[0]))a.push(z)});
+return{type:'rest',done:false,items:a.map(z=>mk(z[0],z[1],3,{v:z[0]=='mob'?Math.min(60,30+z[1]*5):30,rest:30,f:{rec:1}}))}}
+function trainDay(tp,cnt,prev){const n=({15:2,30:3,45:5,60:6})[S.p.dur]||3,sc=scores(),used=new Set(),items=[];
+const bl=k=>prev.has(MG[k])&&(MG[k]=='U'||MG[k]=='L');
+const w=k=>(sc[k]*(S.boost[L[k].s]||1)+.03)/(cnt[k]+1);
+SLOT[tp].slice(0,n).forEach(g=>{let c=g.filter(k=>pick(k)>0&&!used.has(k)&&!bl(k));
+if(!c.length)c=LS.filter(k=>pick(k)>0&&!used.has(k)&&!bl(k)&&MG[k]!='M');if(!c.length)return;
+c.sort((a,b)=>w(b)-w(a));const k=c[0];used.add(k);cnt[k]++;items.push(mk(k,pick(k),nsets(),{f:{main:1}}))});
+const wu=mk('cardio',1,1,{v:40,rest:20,f:{wu:1}}),cd=mk('mob',Math.min(2,pick('mob')||1),1,{v:40,rest:20,f:{cd:1}});
+return{type:'train',tpl:tp,done:false,items:[wu,...items,cd]}}
+const touched=d=>d&&(d.done||d.items.some(i=>i.s.some(z=>z.d)));
+function buildWeek(){const mon=monday(),old=S.wk&&S.wk.id==mon?S.wk.days:null,pat=PAT[S.p.days]||PAT[3],tp=TPL[S.p.days]||TPL[3],cnt={};LS.forEach(k=>cnt[k]=0);
+let prev=new Set();const days=[];
+for(let d=0;d<7;d++){const o=old&&old[d];let day;
+if(touched(o)){day=o;if(day.type=='train')day.items.filter(i=>i.f&&i.f.main).forEach(i=>cnt[i.k]++)}
+else{const ix=pat.indexOf(d);day=ix<0?restDay():trainDay(tp[ix],cnt,prev)}
+days.push(day);prev=new Set(day.type=='train'?day.items.filter(i=>i.f&&i.f.main).map(i=>MG[i.k]):[])}
+S.wk={id:mon,days};save()}
+// อัปเดตวันที่ยังไม่ได้เริ่มฝึกให้ตรงกับขั้น/โหลดล่าสุด
+function refresh(){S.wk.days.forEach((d,i)=>{if(touched(d))return;if(d.type=='rest'){S.wk.days[i]=restDay();return}
+d.items=d.items.map(it=>{if(it.f.main)return mk(it.k,pick(it.k)||it.t,nsets(),{f:it.f});
+if(it.f.wu)return mk('cardio',1,1,{v:40,rest:20,f:it.f});return mk('mob',Math.min(2,pick('mob')||1),1,{v:40,rest:20,f:it.f})})})}
+// ---------- EXP / เลเวล / วิวัฒนาการท่า ----------
+function addLp(k,a){const g=a*(S.slow>0?.5:1);S.lp[k]=Math.min(200,(S.lp[k]||0)+g);return g}
+function addXp(n){S.xp+=n;let lv=0;while(S.xp>=need(S.lv)){S.xp-=need(S.lv);S.lv++;lv++;S.lvh.push({lv:S.lv,t:Date.now()});
+S.kg.press=+(S.kg.press+.5).toFixed(1);S.kg.wlegs=+(S.kg.wlegs+1).toFixed(1)}return lv}
+function sync(){const ups=[];LS.forEach(k=>{const t=pick(k);if(t>S.tp[k]){S.tl[k]=S.lv;ups.push('ท่าใหม่ L'+t+': '+L[k].x[t-1][0]+' (สาย'+L[k].n+')')}S.tp[k]=t});return ups}
+const kgtxt=(it,x)=>hasW(x)?it.kg.toFixed(1)+' กก.'+(x[2].includes('db')?'/ข้าง':''):x[2]=='band'?'ยางยืด':x[2]=='rope'?'เชือกกระโดด':x[2].includes('bar')?'บาร์โหน':x[2]=='gym'?'ตามถนัด':'น้ำหนักตัว';
+// ---------- ตัวจับเวลาพัก ----------
+let TT={dur:60,left:60,run:false,end:0};
+const tfmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function tcur(){return TT.run?Math.max(0,Math.ceil((TT.end-Date.now())/1000)):TT.left}
+function tview(){if(!E('tt'))return;const l=tcur();E('tt').textContent=tfmt(l);E('tt').className=TT.run||l>0?'':'z';E('tbtn').textContent=TT.run?'หยุด':'เริ่ม';E('tpg').style.width=(TT.dur?(TT.dur-l)/TT.dur*100:0)+'%';if(S)E('tau').classList.toggle('on',!!S.auto)}
+function tstart(d){TT.dur=d;TT.left=d;TT.end=Date.now()+d*1000;TT.run=true;tview()}
+function tgo(){if(TT.run){TT.left=tcur();TT.run=false}else{if(TT.left<=0)TT.left=TT.dur;TT.end=Date.now()+TT.left*1000;TT.run=true}tview()}
+function treset(){TT.run=false;TT.left=TT.dur;tview()}
+function tadj(d){const l=Math.max(0,tcur()+d);if(d>0)TT.dur=Math.max(TT.dur,l);if(TT.run)TT.end=Date.now()+l*1000;else TT.left=l;tview()}
+setInterval(()=>{if(TT.run&&TT.end-Date.now()<=0){TT.run=false;TT.left=0;beep()}tview()},250);
+function beep(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();[0,.25,.5].forEach((t,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=i==2?1175:880;o.type='sine';g.gain.setValueAtTime(.3,AC.currentTime+t);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+t+.18);o.connect(g);g.connect(AC.destination);o.start(AC.currentTime+t);o.stop(AC.currentTime+t+.2)})}catch(e){}if(navigator.vibrate)navigator.vibrate([200,100,200,100,400])}
+document.addEventListener('click',()=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.state=='suspended'&&AC.resume()}catch(e){}},{once:true});
+// ---------- Wizard ----------
+const DEF={sex:0,age:25,h:170,w:65,exp:0,goals:[],eq:['none'],pu:8,sq:20,pl:30,st:3,days:3,dur:30,inj:[],sleep:7,job:0,fat:2};
+function wizStart(){W={i:0,d:JSON.parse(JSON.stringify(S?S.p:DEF))};R()}
+const seg=(k,o,v)=>`<div class="row">${o.map((t,i)=>{const val=v?v[i]:i;return`<button class="b ${W.d[k]==val?'on':''}" onclick="W.d['${k}']=${val};R()">${t}</button>`}).join('')}</div>`;
+const num=(k,t)=>`<label>${t}</label><input type="number" inputmode="numeric" value="${W.d[k]}" onchange="W.d['${k}']=+this.value">`;
+function tg(k,v){const a=W.d[k];if(k=='goals'){const i=a.indexOf(v);if(i>=0)a.splice(i,1);else if(a.length<5)a.push(v)}else if(k=='eq'){if(v=='none'){W.d.eq=['none']}else{const i=a.indexOf(v);i>=0?a.splice(i,1):a.push(v);W.d.eq=a.filter(x=>x!='none');if(!W.d.eq.length)W.d.eq=['none']}}else{if(v=='none'){W.d.inj=[]}else{const i=a.indexOf(v);i>=0?a.splice(i,1):a.push(v)}}R()}
+function mv(i,d){const g=W.d.goals,j=i+d;if(j<0||j>=g.length)return;[g[i],g[j]]=[g[j],g[i]];R()}
+function wiz(){const Y0=window.scrollY||window.pageYOffset||0,d=W.d,N=6;let b='';
+if(W.i==0)b='<h2>ข้อมูลพื้นฐาน</h2><label>เพศ</label>'+seg('sex',['ชาย','หญิง','อื่นๆ'])+num('age','อายุ (ปี)')+num('h','ส่วนสูง (ซม.)')+num('w','น้ำหนัก (กก.)')+'<label>ประสบการณ์ออกกำลังกาย</label>'+seg('exp',['มือใหม่','เคยฝึกบ้าง','ฝึกประจำ']);
+if(W.i==1)b=`<h2>เลือกเป้าหมาย (สูงสุด 5)</h2><p class="mu">2 ข้อแรกคือเป้าหมายหลัก (น้ำหนัก 60%) อีก 3 ข้อเป็นเป้าหมายรอง (40%) กดลูกศรเพื่อสลับลำดับ</p><div class="row">${G.map((g,i)=>`<button class="b ${d.goals.includes(i)?'on':''}" style="flex-basis:46%" onclick="tg('goals',${i})">${g[0]}</button>`).join('')}</div><div class="c" style="margin-top:10px"><h3>ลำดับความสำคัญ</h3>${d.goals.map((g,i)=>`<div class="row" style="align-items:center;flex-wrap:nowrap"><span style="flex:1;color:${i<2?'var(--cy)':'var(--tx)'}">${i+1}. ${G[g][0]} <span class="mu">${i<2?'หลัก':'รอง'}</span></span><button class="b" style="width:48px;flex:0 0 48px" onclick="mv(${i},-1)">${ic('up',18)}</button><button class="b" style="width:48px;flex:0 0 48px" onclick="mv(${i},1)">${ic('down',18)}</button></div>`).join('')||'<span class="mu">ยังไม่ได้เลือก</span>'}</div>`;
+if(W.i==2)b=`<h2>อุปกรณ์ที่มี</h2><p class="mu">ระบบจะเลือกเฉพาะท่าที่ใช้อุปกรณ์ที่คุณมีจริง</p><div class="row">${EQ.map(e=>`<button class="b ${d.eq.includes(e[0])?'on':''}" style="flex-basis:46%" onclick="tg('eq','${e[0]}')">${e[1]}</button>`).join('')}</div>`;
+if(W.i==3)b='<h2>ทดสอบสมรรถภาพเริ่มต้น</h2>'+num('pu','วิดพื้นต่อเนื่องสูงสุด (ครั้ง)')+num('sq','สควอทต่อเนื่องสูงสุด (ครั้ง)')+num('pl','แพลงก์ค้างนานสุด (วินาที)')+'<label>ความเหนื่อยเมื่อขึ้นบันได 3 ชั้น (1 สบาย - 5 เหนื่อยมาก)</label>'+seg('st',['1','2','3','4','5'],[1,2,3,4,5])+'<button class="b" onclick="W.d.pu=5;W.d.sq=15;W.d.pl=20;W.d.st=3;W.i++;R()">ข้ามและใช้ค่าเริ่มต้น</button>';
+if(W.i==4)b=`<h2>ตารางเวลาและข้อจำกัด</h2><label>วันฝึกต่อสัปดาห์</label>${seg('days',['2','3','4','5','6'],[2,3,4,5,6])}<label>เวลาต่อครั้ง (นาที)</label>${seg('dur',['15','30','45','60'],[15,30,45,60])}<label>จุดบาดเจ็บหรือบริเวณที่ต้องเลี่ยง</label><div class="row">${[['k','เข่า'],['b','หลังส่วนล่าง'],['s','หัวไหล่'],['w','ข้อมือ'],['a','ข้อเท้า'],['none','ไม่มี']].map(e=>`<button class="b ${(e[0]=='none'?!d.inj.length:d.inj.includes(e[0]))?'on':''}" onclick="tg('inj','${e[0]}')">${e[1]}</button>`).join('')}</div>`;
+if(W.i==5)b='<h2>ไลฟ์สไตล์และการฟื้นตัว</h2>'+num('sleep','ชั่วโมงนอนเฉลี่ยต่อคืน')+'<label>ลักษณะกิจกรรมระหว่างวัน</label>'+seg('job',['นั่งโต๊ะ','ยืนเดินบ้าง','ใช้แรงงาน'])+'<label>ความล้าสะสมตอนนี้ (1 สดชื่น - 5 ล้ามาก)</label>'+seg('fat',['1','2','3','4','5'],[1,2,3,4,5]);
+const ok=W.i!=1||d.goals.length>0;
+E('app').innerHTML=navH()+`<div class="bar" style="margin:6px 0 14px"><i style="width:${(W.i+1)/N*100}%"></i></div><div class="mu">ขั้นที่ ${W.i+1} จาก ${N}</div>${b}<div class="row" style="margin-top:14px">${W.i>0?'<button class="b" onclick="W.i--;R()">ย้อนกลับ</button>':S?'<button class="b" onclick="W=null;R()">ยกเลิก</button>':''}<button class="b p" ${ok?'':'disabled style="opacity:.4"'} onclick="${ok?(W.i<N-1?'W.i++;R()':'wizDone()'):''}">${W.i<N-1?'ถัดไป':'สร้างแผนของฉัน'}</button></div>`;E('tb').style.display='none';if(W._ls!==W.i){W._ls=W.i;scrollTo(0,0)}else scrollTo(0,Y0)}
+function wizDone(){const p=W.d,old=S;
+if(!old){const e=p.exp*10,lp={};LS.forEach(k=>lp[k]=10+e);
+lp.push=lp.press=Math.min(120,p.pu*3+e);lp.legs=lp.wlegs=Math.min(120,p.sq*2.5+e);lp.core=Math.min(120,p.pl*1.5+e);lp.pull=Math.min(100,p.pu*1.5+e);
+lp.cardio=(6-p.st)*20+e;lp.sprint=(6-p.st)*16+e;lp.mob=20+e;
+lp.endur=Math.round(lp.cardio*.8);lp.agi=Math.round(lp.core*.7);lp.plyo=Math.round(lp.legs*.6);
+S={p,lp,lv:Math.min(8,1+Math.floor((p.pu+p.sq/2+p.pl/10)/10)),xp:0,streak:0,last:'',sd:0,mult:1,rec:false,w:null,done:0};ensure()}
+else{old.p=p;ensure();buildWeek()}
+W=null;VIEW='wk';SEL=todayIx();save();R()}
+// ---------- หน้าจอ ----------
+// ================= UI v2: ไอคอน SVG เส้น + Hero ตัวละคร + การ์ดพรีเมียม =================
+const IC={
+back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',
+book:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5zM4 5.5v16M8.5 7.5H16"/>',
+image:'<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.3"/><path d="M4 17l5-4.5 4 3.5 3-2.5 4 3.5"/>',
+check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+up:'<path d="M6 15l6-6 6 6"/>',
+down:'<path d="M6 9l6 6 6-6"/>',
+moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+dumb:'<path d="M3 9.5v5M6 7v10M18 7v10M21 9.5v5M6 12h12"/>',
+flame:'<path d="M12 3c.8 3.3 5 5.2 5 9.8a5 5 0 0 1-10 0c0-2.2 1.1-3.7 2.6-4.8.3 1.3 1 2 1.9 2.3C11.2 8.4 11.6 6 12 3z"/>',
+home:'<path d="M4 11l8-7 8 7v9H4zM10 20v-6h4v6"/>',
+tree:'<path d="M12 3v7M12 10l-6 6M12 10l6 6M6 16v5M18 16v5"/>',
+bolt:'<path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/>',
+target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/>',
+save:'<path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/>',
+load:'<path d="M12 15V4M7.5 8.5L12 4l4.5 4.5M5 19.5h14"/>',
+trash:'<path d="M5 7h14M9.5 7V4.5h5V7M7 7l1 12.5h8L17 7"/>',
+refresh:'<path d="M19.5 12a7.5 7.5 0 0 1-13 5M4.5 12a7.5 7.5 0 0 1 13-5M17.5 3.5V7H14M6.5 20.5V17H10"/>',
+coach:'<circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3.4-6 7-6s6.2 2 7 6"/>',
+edit:'<path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/>',
+next:'<path d="M9 6l6 6-6 6"/>',
+routine:'<g stroke-width="1.5"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16M9 15l2 2 4-4"/></g>',
+lotus:'<g stroke-width="1.5"><path d="M12 5c2.2 2.4 2.8 5.2 0 8.5-2.8-3.3-2.2-6.1 0-8.5zM12 13.5c-3.5.3-6.2-1.2-8-4.5 3.2-.2 5.6.6 7.2 2.2M12 13.5c3.5.3 6.2-1.2 8-4.5-3.2-.2-5.6.6-7.2 2.2M6 17.5c2 1.4 4 2 6 2s4-.6 6-2"/></g>',
+focus:'<g stroke-width="1.5"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 1.5M9.5 3h5M12 3v2.5"/></g>',
+menu:'<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>',
+toji:'<circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c.9-4.2 3.8-6.5 7.5-6.5s6.6 2.3 7.5 6.5M13.8 10.6l1.9 1.3"/>',
+user:'<circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c.9-4.2 3.8-6.5 7.5-6.5s6.6 2.3 7.5 6.5"/>',
+vol:'<path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5zM15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>',
+mute:'<path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5zM16 9.5l5 5M21 9.5l-5 5"/>'};
+const ic=(n,s)=>`<svg class="ic" width="${s||18}" height="${s||18}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+const sec=t=>`<div class="sec"><i></i><span>${t}</span><i></i></div>`;
+function lvBadge(n){return`<svg width="58" height="58" viewBox="0 0 56 56" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#64748B"/><stop offset="1" stop-color="#0F172A"/></linearGradient></defs><path d="M28 3l21 12v26L28 53 7 41V15z" fill="#F1F5F9" stroke="url(#lg)" stroke-width="1.6" stroke-linejoin="round"/><path d="M28 9l16 9.2v19.6L28 47 12 37.8V18.2z" fill="none" stroke="#94A3B8" stroke-opacity=".6" stroke-width="1" stroke-linejoin="round"/><text x="28" y="34" text-anchor="middle" font-size="19" font-weight="800" fill="#0F172A">${n}</text></svg>`}
+// ---------- ตัวละครประจำหมวด: โทจิ (ล็อกถาวร ไม่มีระบบเปลี่ยนรูป) ----------
+try{STO.removeItem('tactfit_hero')}catch(e){}
+function hero(o){return`<section class="hero"><div class="htop"><div class="hrt"><button class="ib" onclick="closeSh();VIEW='set';R()">${ic('book',17)}<span>คู่มือ &amp; ตั้งค่า</span></button></div></div>
+<div class="hbody"><div class="hday">${o.title}</div><div class="chips">${o.chips}</div></div></section>`}
+// ---------- หน้าตารางฝึก ----------
+function card(it,i){const x=L[it.k].x[it.t-1],lab=it.f.wu?'วอร์มอัพ':it.f.cd?'คูลดาวน์':it.f.rec?'ฟื้นฟู':'ท่าหลัก',wt=kgtxt(it,x);
+return`<div class="c"><div class="ch" onclick="guide('${it.k}',${it.t})"><div class="cnm"><b>${x[1]}</b><span class="th">${x[0]}</span></div><div class="pills"><span class="pl lv">L${it.t}</span><span class="pl">${lab}</span></div></div>
+<div class="cm"><div class="cs">${it.s.length}<i>เซ็ต</i>×<span style="margin-left:6px">${it.s[0].v}</span><i>${U[it.m]}</i></div><span class="cw">${ic('dumb',15)}${wt}</span></div>
+<div class="ds">${x[5][0]} ${x[5][1]}</div>
+<div class="sets">${it.s.map((s,j)=>`<button class="sb ${s.d?'d':''}" onclick="setTap(${i},${j})">${s.d?ic('check',18)+s.v:'เซต '+(j+1)}</button>`).join('')}</div></div>`}
+function wkView(){const d=S.wk.days[SEL],td=todayIx(),tot=d.items.reduce((a,x)=>a+x.s.length,0),dn=d.items.reduce((a,x)=>a+x.s.filter(z=>z.d).length,0),rest=d.type=='rest';
+const chips=`<span class="chip ${rest?'':'hot'}" style="${rest?'':'border-color:#CBD5E1;color:#334155'}">${ic(rest?'moon':'dumb',14)}${rest?'วันพักฟื้น':'วันฝึก'}</span>${SEL==td?`<span class="chip hot">${ic('bolt',13)}วันนี้</span>`:''}${d.done?`<span class="chip ok">${ic('check',13)}ฝึกครบแล้ว</span>`:''}`;
+return hero({title:DAYN[SEL],chips})+
+`<div class="c"><div class="lvc">${lvBadge(S.lv)}<div class="x"><div class="t"><b>LV. ${S.lv}</b><span class="mu">${S.xp}/${need(S.lv)} EXP</span></div><div class="bar"><i style="width:${Math.min(100,S.xp/need(S.lv)*100)}%"></i></div></div></div></div>
+<div class="days">${S.wk.days.map((x,i)=>`<div class="dw"><button class="dy ${i==SEL?'on':''}" onclick="SEL=${i};closeSh();R()"><b>${DAYS[i]}</b>${ic(x.done?'check':x.type=='rest'?'moon':'dumb',15)}</button><span class="mk">${i==td?'<u class="bar1"></u>':''}${x.done?'<u class="dot"></u>':''}</span></div>`).join('')}</div>
+${rest?`<div class="c"><h3 style="display:flex;align-items:center;gap:8px;color:var(--lil)">${ic('moon',18)}วันพักฟื้น (Active Recovery)</h3><div class="mu" style="line-height:1.6">เหยียดยืดเบาๆ ราว 10-15 นาที ได้โบนัสแต้มสายความยืดหยุ่น (MOB)</div></div>`:''}
+${d.items.map(card).join('')}
+<button class="b ${d.done?'':'p'}" style="min-height:58px;font-size:17px;margin-top:6px" ${d.done?'disabled':''} onclick="finishDay()">${d.done?ic('check',20)+'ฝึกเสร็จแล้ว':'จบการฝึกวันนี้'}</button>`}
+function radar(){const s=stats(),k=Object.keys(ST),P=(i,r)=>{const a=(-90+72*i)*Math.PI/180;return[(100+Math.cos(a)*72*r).toFixed(1),(100+Math.sin(a)*72*r).toFixed(1)]};
+const ring=r=>`<polygon points="${k.map((_,i)=>P(i,r).join(',')).join(' ')}" fill="none" stroke="#CBD5E1" stroke-width="1"/>`,pts=k.map((x,i)=>P(i,Math.max(.06,s[x]/100)));
+return`<svg viewBox="0 0 200 200" width="100%" style="max-width:300px;display:block;margin:auto" role="img" aria-label="กราฟค่าพลัง"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#475569" stop-opacity=".35"/><stop offset="1" stop-color="#0F172A" stop-opacity=".35"/></linearGradient></defs>${[.33,.66,1].map(ring).join('')}${k.map((_,i)=>`<line x1="100" y1="100" x2="${P(i,1)[0]}" y2="${P(i,1)[1]}" stroke="#CBD5E1" stroke-width="1"/>`).join('')}<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="url(#rg)" stroke="#0F172A" stroke-width="1.6" stroke-linejoin="round"/>${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.4"/>`).join('')}${k.map((x,i)=>{const q=P(i,1.22);return`<text x="${q[0]}" y="${(+q[1]+3).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#64748B">${x} <tspan fill="#0F172A">${s[x]}</tspan></text>`}).join('')}</svg>`}
+function ov(){const p=S.p,td=S.wk.days[todayIx()],rest=td.type=='rest';
+const chips=`<span class="chip hot">${ic('flame',13)}ต่อเนื่อง ${S.streak} วัน</span><span class="chip">${ic('bolt',13)}LV. ${S.lv}</span>`;
+return hero({title:'ภาพรวม',chips})+
+`<div class="c"><div class="lvc">${lvBadge(S.lv)}<div class="x"><div class="t"><b>เลเวลปัจจุบัน</b><span class="mu">${S.xp}/${need(S.lv)} EXP</span></div><div class="bar"><i style="width:${Math.min(100,S.xp/need(S.lv)*100)}%"></i></div></div></div></div>
+${sec('ค่าพลัง 5 สาย')}<div class="c">${radar()}</div>
+${sec('เป้าหมายของฉัน')}<div class="c">${p.goals.map((g,i)=>`<div style="padding:7px 0;display:flex;align-items:center;gap:10px;${i<2?'color:var(--lil)':''}">${ic('target',17)}<span style="flex:1">${G[g][0]}</span><span class="tag" style="${i<2?'':'color:var(--mu);border-color:var(--bd2)'}">${i<2?'หลัก':'รอง'}</span></div>`).join('')}</div>
+${sec('วันนี้ (' + DAYN[todayIx()] + ')')}<div class="c"><div class="mu" style="line-height:1.6">${rest?'วันพักฟื้น เหยียดยืดเบาๆ':'วันฝึก: '+td.items.filter(i=>i.f.main).map(i=>L[i.k].n).join(' · ')}</div></div>
+<button class="b g" style="min-height:60px;font-size:18px" onclick="SEL=todayIx();VIEW='wk';R()">${ic('dumb',20)}ไปตารางฝึกสัปดาห์นี้</button>
+<button class="b" onclick="TBK='ov';VIEW='tree';R()">${ic('tree',19)}สายท่าและคลังท่า</button>`}
+function tree(){return`<div class="top"><button class="lk" onclick="VIEW=TBK;R()">${ic('back',18)}กลับ</button><span></span></div><h2>สายท่าและคลังท่า</h2>`+LS.map(k=>{const t=tier(k);return`<div class="c"><h3 style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span>${L[k].n}</span><span class="mu">${L[k].s} · ขั้นปัจจุบัน ${pick(k)||'-'}</span></h3>${L[k].x.map((x,i)=>{const lk=i+1>t,bad=!okEx(x);return`<div class="ex ${lk||bad?'lock':''}" onclick="guide('${k}',${i+1})"><span><b style="color:var(--skin)">L${i+1}</b> &nbsp;${x[0]}</span><span class="mu">${lk?'ล็อก (ต้องการแต้ม '+Math.max(0,i*40-(S.lv-1)*3)+')':bad?'ไม่ตรงอุปกรณ์/ข้อจำกัด':'ปลดล็อก'}</span></div>`}).join('')}</div>`}).join('')}
+function set(){const s=stats();return`<div class="top"><button class="lk" onclick="VIEW='wk';R()">${ic('back',18)}กลับ</button><span></span></div><h2>คู่มือ &amp; ตั้งค่า</h2>
+${sec('ค่าพลัง 5 สาย')}<div class="c">${radar()}${Object.keys(ST).map(k=>`<div style="margin:10px 0 0"><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px"><span>${k} · ${ST[k]}</span><b>${s[k]}</b></div><div class="bar"><i style="width:${s[k]}%"></i></div></div>`).join('')}</div>
+${sec('ประวัติการอัปเลเวล')}<div class="c">${S.lvh.length?S.lvh.slice(-4).reverse().map(h=>`<div style="padding:4px 0;display:flex;justify-content:space-between"><b style="color:var(--lil)">LV.${h.lv}</b><span class="mu">${new Date(h.t).toLocaleDateString('th-TH')}</span></div>`).join(''):'<div class="mu">ยังไม่มีการอัปเลเวลในเครื่องนี้</div>'}</div>
+${sec('แผนการฝึก')}<div class="c"><button class="b p" onclick="wizStart()">${ic('target',19)}แก้ไขเป้าหมายและตาราง</button><button class="b" onclick="TBK='set';VIEW='tree';R()">${ic('tree',19)}ดูคลังท่าฝึก</button><button class="b" onclick="buildWeek();VIEW='wk';R()">${ic('refresh',19)}จัดวันฝึกใหม่</button></div>
+${sec('ข้อมูล')}<div class="c"><button class="b" style="color:#B91C1C;border-color:#FCA5A5" onclick="if(confirm('รีเซ็ตเป็นค่าเริ่มต้น? ข้อมูลการฝึกทั้งหมดจะถูกลบ')){try{STO.removeItem('tactfit')}catch(e){}S=null;W=null;VIEW='wk';R()}">${ic('trash',19)}รีเซ็ตค่าเริ่มต้น</button></div>`}
+
+// ---------- Modal / คู่มือ ----------
+function modal(h){E('mdc').innerHTML=h;E('md').style.display='flex'}function closeM(){E('md').style.display='none'}
+function guide(k,t){const x=L[k].x[t-1],inj=[...x[3]].map(c=>IJ[c]).join(', ');
+modal(`<h2 style="margin:0">${x[0]}</h2><div class="mu">${x[1]} · L${t} · สาย ${L[k].s}${x[2]?' · อุปกรณ์: '+x[2].split('+').map(q=>(EQ.find(e=>e[0]==q)||[0,q])[1]).join(' + '):''}</div><h3 style="margin-top:12px">กล้ามเนื้อที่ใช้</h3>${x[4]}<h3 style="margin-top:12px">วิธีทำ</h3><ol>${x[5].map(s=>`<li>${s}</li>`).join('')}</ol><h3 style="margin-top:12px">การหายใจ</h3>${x[6]}<h3 style="margin-top:12px">ข้อควรระวัง</h3>${x[7]}${inj?'<div class="mu" style="margin-top:6px">ห้ามเล่นถ้ามีอาการที่: '+inj+'</div>':''}<button class="b p" style="margin-top:12px" onclick="closeM()">ปิด</button>`)}
+// ---------- กดบันทึกเซ็ต ----------
+function setTap(i,j){const day=S.wk.days[SEL],it=day.items[i],s=it.s[j];if(s.d){openSh(i,j);return}
+s.d=1;S.flash=0;s.lpg=addLp(it.k,day.type=='rest'?2.5:1.5);s.xpg=day.type=='rest'?8:10;const lu=addXp(s.xpg),ups=sync();
+if(lu||ups.length)refresh();if(lu)S.flash=S.lv;save();R();
+if(S.auto)tstart(it.rest);else{TT.dur=it.rest;TT.left=it.rest;TT.run=false;tview()}
+if(lu||ups.length)lvModal(lu,ups);else openSh(i,j)}
+function lvModal(lu,ups){modal(`<h2 style="margin:0;color:var(--gr)">${lu?'LEVEL UP!':'ปลดล็อกท่าใหม่'}</h2>${lu?`<div class="big" style="margin:10px 0">LV. ${S.lv}</div><div style="padding:3px 0">• จำนวนครั้งและเวลาค้างเพิ่มขึ้นตามเลเวล</div><div style="padding:3px 0">• น้ำหนักดัมเบลแนะนำเพิ่มขึ้น</div>`:''}${ups.map(u=>`<div style="padding:3px 0;color:var(--am)">• ${u}</div>`).join('')}<button class="b p" style="margin-top:10px" onclick="closeM()">ลุยต่อ</button>`)}
+function openSh(i,j){SH={i,j};const it=S.wk.days[SEL].items[i],x=L[it.k].x[it.t-1],s=it.s[j];
+E('sh').innerHTML=`<b>${x[0]} · เซต ${j+1}</b><div class="row"><div style="flex:1"><label>${U[it.m]}ที่ทำได้จริง</label><input id="shv" type="number" inputmode="decimal" value="${s.v}"></div>${hasW(x)?`<div style="flex:1"><label>น้ำหนัก (กก.)</label><input id="shk" type="number" inputmode="decimal" step="0.5" value="${s.kg!=null?s.kg:it.kg}"></div>`:''}</div><div class="row"><button class="b p" onclick="saveSh()">บันทึก</button><button class="b" onclick="closeSh()">ปิด</button></div>${s.d?(S.wk.days[SEL].done?'<div class="mu" style="margin-top:6px">จบการฝึกวันนี้แล้ว จึงยกเลิกเซตไม่ได้</div>':'<button class="b" style="color:#B91C1C;border-color:#FCA5A5" onclick="undoSet()">ยกเลิกเซตนี้ (ย้อนกลับเป็นยังไม่ได้ทำ)</button>'):''}`;E('sh').style.display='block'}
+function subXp(n){S.xp-=n;let d=0;while(S.xp<0&&S.lv>1){S.lv--;d++;S.xp+=need(S.lv);S.lvh.pop();S.kg.press=Math.max(0,+(S.kg.press-.5).toFixed(1));S.kg.wlegs=Math.max(0,+(S.kg.wlegs-1).toFixed(1))}if(S.xp<0)S.xp=0;return d}
+function undoSet(){if(!SH)return;const day=S.wk.days[SEL];if(day.done)return;const it=day.items[SH.i],s=it.s[SH.j];if(!s||!s.d)return;
+const rest=day.type=='rest',lp=s.lpg!=null?s.lpg:(rest?2.5:1.5),xp=s.xpg!=null?s.xpg:(rest?8:10);
+s.d=0;delete s.lpg;delete s.xpg;S.lp[it.k]=Math.max(0,(S.lp[it.k]||0)-lp);
+const ld=subXp(xp);if(ld){sync();refresh()}
+save();closeSh();R()}
+function closeSh(){SH=null;E('sh').style.display='none'}
+function saveSh(){if(!SH)return;const it=S.wk.days[SEL].items[SH.i],s=it.s[SH.j],x=L[it.k].x[it.t-1],v=+E('shv').value;if(v>0)s.v=v;
+if(hasW(x)&&E('shk')){const kg=+E('shk').value;if(kg>0){s.kg=kg;if(kg!=it.kg){it.kg=kg;S.kg[it.k]=kg}}}
+save();closeSh();R()}
+// ---------- จบวัน + RPE ----------
+function finishDay(){if(S.wk.days[SEL].done)return;QR={rpe:6,fat:3};rp()}
+function rp(){const left=S.wk.days[SEL].items.reduce((a,x)=>a+x.s.filter(y=>!y.d).length,0);
+modal(`<h2 style="margin:0">ความรู้สึกหลังฝึก</h2>${left?`<div class="mu">ยังเหลือ ${left} เซ็ตที่ไม่ได้ทำ</div>`:''}<label>ระดับความเหนื่อยจริง (RPE 1-10)</label><div class="row">${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="b ${QR.rpe==n?'on':''}" style="flex-basis:15%;min-width:0;padding:8px 0" onclick="QR.rpe=${n};rp()">${n}</button>`).join('')}</div><div class="mu">${QR.rpe<=4?'เบาเกินไป: รอบถัดไปจะเพิ่มโหลด':QR.rpe<=8?'พอดี: เดินตามแผนปกติ':'หนักเกินไป: ชะลอการเพิ่มระดับและเน้นการฟื้นตัว'}</div><label>ความล้าของกล้ามเนื้อ (1-5)</label><div class="row">${[1,2,3,4,5].map(n=>`<button class="b ${QR.fat==n?'on':''}" onclick="QR.fat=${n};rp()">${n}</button>`).join('')}</div><button class="b g" style="margin-top:12px" onclick="fin()">บันทึกผล</button><button class="b" onclick="closeM()">กลับไปฝึกต่อ</button>`)}
+function fin(){const day=S.wk.days[SEL],r=QR.rpe,msgs=[];if(S.slow>0)S.slow--;
+if(r<=4){S.mult=Math.min(1.6,S.mult*1.12);msgs.push('เบาเกินไป: รอบถัดไปเพิ่มโหลด +12%')}
+else if(r>=9){S.mult=Math.max(.7,S.mult*.85);S.slow=2;msgs.push('หนักมาก: ชะลอการเพิ่มระดับและเน้นการฟื้นตัว');
+for(let d=SEL+1;d<7;d++){const x=S.wk.days[d];if(x.type=='train'&&!touched(x)){S.wk.days[d]=restDay();msgs.push('เปลี่ยนวัน'+DAYN[d]+'เป็นวันฟื้นฟู');break}}}
+else if(QR.fat>=5){S.slow=Math.max(S.slow,1);msgs.push('กล้ามเนื้อล้ามาก: ชะลอการเพิ่มระดับ 1 ครั้ง')}
+else msgs.push('เดินหน้าตามแผนปกติ');
+day.done=true;day.rpe=r;if(day.type=='rest')addLp('mob',4);
+const lu=addXp(day.type=='train'?50:30);
+const tn=new Date().toDateString(),yd=new Date(Date.now()-864e5).toDateString();if(S.last!=tn){S.streak=S.last==yd?S.streak+1:1;S.last=tn}
+S.hist.push({d:Date.now(),day:SEL,rpe:r,lv:S.lv});if(S.hist.length>200)S.hist.shift();
+const ups=sync();refresh();if(lu)S.flash=S.lv;save();closeSh();
+modal(`<h2 style="margin:0;color:var(--gr)">จบการฝึกสำเร็จ</h2>${lu?`<div class="big" style="margin:10px 0">LEVEL UP ${S.lv}</div>`:''}<div style="margin:10px 0">${[...ups,...msgs].map(m=>`<div style="padding:3px 0">• ${m}</div>`).join('')}</div><button class="b p" onclick="closeM()">ตกลง</button>`);R()}
+// ================= โครงสร้าง: Home / Menu (แต่ละหัวข้อใหญ่คือศูนย์รวมฟังก์ชัน) =================
+let PAGE='home',HSUB=null,MSUB=null,TBK='wk';
+// ฟังก์ชันใน Menu: เพิ่มฟังก์ชันใหม่ต่อท้ายรายการนี้ (k=รหัส, t=ชื่อที่ขึ้นตอนกดค้าง, i=ไอคอน)
+const FN={menu:[{k:'workout',t:'Forge',i:'dumb'},{k:'note',t:'Note',i:'note'},{k:'running',t:'Running',i:'run'},{k:'focus',t:'Focus',i:'focus'},{k:'routine',t:'Routine',i:'routine'},{k:'med',t:'Meditation',i:'lotus'}]};
+const FNG=[{g:'กิจกรรม',ks:['workout','running','med']},{g:'บริหาร',ks:['note','focus','routine']}];
+const navH=()=>{const a=p=>PAGE==p?' on':'';
+return`<div class="tnav"><button class="cn${a('home')}" data-lp onclick="navTap('home')" aria-label="Home">${ic('home',20)}<span class="lb">Home</span></button></div><div class="bnav"><button class="cn${a('menu')}" data-lp onclick="navTap('menu')" aria-label="Menu">${ic('menu',20)}<span class="lb">Menu</span></button></div>`};
+const hubMedia=(t,u,ph)=>t=='v'?`<video src="${u}" autoplay loop muted playsinline></video>`:t=='i'?`<img src="${u}" alt="">`:ph;
+function homeHub(){const P=PROF,has=!!P.bt;
+return`<div class="hband${has?' hb':''}">${has?`<div class="hbg">${hubMedia(P.bt,P.burl,'')}</div><div class="hsh"></div>`:''}<div class="hhd"><h1>Home</h1><p class="sub">Simple Life</p></div>
+<div class="havw" data-lp role="button" aria-label="โปรไฟล์" onclick="tapFn('home','profile')"><div class="havm">${hubMedia(P.mt,P.url,ic('user',40))}</div><span class="tip">โปรไฟล์</span></div></div>`}
+function menuHub(){const tl=f=>`<button class="tile" data-lp aria-label="${f.t}" onclick="tapFn('menu','${f.k}')">${ic(f.i,24)}<span class="tip">${f.t}</span></button>`;return`<div class="hub"><h1>Menu</h1><p class="sub">เลือกฟังก์ชันที่ต้องการใช้</p>${FNG.map(G=>`<div class="mgrp">${G.g}</div><div class="tiles">${G.ks.map(k=>FN.menu.find(f=>f.k==k)).filter(Boolean).map(tl).join('')}</div>`).join('')}</div>`}
+function tapFn(p,k){if(LPD){LPD=false;return}openFn(p,k)}
+function openFn(p,k){if(p=='home'){HSUB=k;PV=false}else{MSUB=k;VIEW='wk';if(k=='note'){NV='list';NID=null}}scrollTo(0,0);R()}
+// แตะวงกลม: ไปหัวข้อนั้น (หรือกลับมารายการฟังก์ชันของหัวข้อเดิม)
+function navTap(p){if(LPD){LPD=false;return}
+if(PAGE==p&&!(p=='home'?HSUB:MSUB))return;
+PAGE=p;PV=false;if(p=='home')HSUB=null;else MSUB=null;closeSh();closeM();scrollTo(0,0);R()}
+// กดค้างที่วงกลม: ขยายและแสดงชื่อปุ่ม (ปล่อยแล้วหดกลับ ไม่เปลี่ยนหน้า)
+let LPT=null,LPEL=null,LPD=false,LPON=false;
+const inCn=n=>{const e=n&&(n.nodeType==3?n.parentElement:n);return !!(e&&e.closest&&e.closest('[data-lp]'))};
+document.addEventListener('pointerdown',e=>{const b=e.target&&e.target.closest?e.target.closest('[data-lp]'):null;if(!b)return;LPD=false;LPON=true;clearTimeout(LPT);
+LPT=setTimeout(()=>{LPD=true;LPEL=b;b.classList.add('lp');try{getSelection().removeAllRanges()}catch(x){}if(navigator.vibrate)navigator.vibrate(15)},180)});
+function lpEnd(){clearTimeout(LPT);LPON=false;if(LPEL){LPEL.classList.remove('lp');LPEL=null}}
+['pointerup','pointercancel'].forEach(t=>document.addEventListener(t,lpEnd));
+document.addEventListener('contextmenu',e=>{if(inCn(e.target))e.preventDefault()});
+document.addEventListener('selectstart',e=>{if(LPON||inCn(e.target))e.preventDefault()});
+document.addEventListener('selectionchange',()=>{if(LPON){try{getSelection().removeAllRanges()}catch(x){}}});
+const esc=t=>String(t==null?'':t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+// ข้อมูลโปรไฟล์: ข้อความจำไว้ในเครื่องอัตโนมัติ ส่วนรูป/วิดีโอแสดงสดตลอดที่เปิดหน้าเว็บ (เวอร์ชัน Beta)
+let PROF={priv:'',pub:'',age:'',bio:'',mt:'',url:'',muted:false,bt:'',burl:'',bmuted:true};let PV=false;
+try{const q=JSON.parse(STO.getItem('tactfit_prof'));if(q){PROF.priv=q.priv||'';PROF.pub=q.pub||'';PROF.age=q.age||'';PROF.bio=String(q.bio||'').slice(0,150)}}catch(e){}
+(function(){const a=STO.blob('prof'),b=STO.blob('bg');if(a&&a.blob){PROF.url=URL.createObjectURL(a.blob);PROF.mt=a.t;PROF.muted=false}if(b&&b.blob){PROF.burl=URL.createObjectURL(b.blob);PROF.bt=b.t;PROF.bmuted=true}})();
+function pset(k,v){PROF[k]=v;try{STO.setItem('tactfit_prof',JSON.stringify({priv:PROF.priv,pub:PROF.pub,age:PROF.age,bio:PROF.bio}))}catch(e){}}
+function pbio(el){if(el.value.length>150)el.value=el.value.slice(0,150);pset('bio',el.value);const c=E('bcnt');if(c){c.textContent=el.value.length+' / 150';c.classList.toggle('max',el.value.length>=150)}}
+function page(el){if(el.value.length>3)el.value=el.value.slice(0,3);pset('age',el.value)}
+function onMedia(f){const file=f.files&&f.files[0];f.value='';if(!file)return;
+const t=file.type.indexOf('video')==0?'v':file.type.indexOf('image')==0?'i':'';
+if(!t){alert('รองรับเฉพาะไฟล์รูปภาพหรือวิดีโอ');return}
+if(PROF.url){try{URL.revokeObjectURL(PROF.url)}catch(e){}}
+PROF.url=URL.createObjectURL(file);PROF.mt=t;PROF.muted=false;STO.putBlob('prof',file,t);R()}
+function mtUi(){const b=E('pmt');if(b){b.innerHTML=ic(PROF.muted?'mute':'vol',18);b.setAttribute('aria-label',PROF.muted?'เปิดเสียง':'ปิดเสียง')}}
+function pmute(){const v=E('pv');if(!v)return;PROF.muted=!PROF.muted;v.muted=PROF.muted;if(!PROF.muted&&v.paused){const p=v.play();if(p&&p.catch)p.catch(()=>{})}mtUi()}
+function bindProf(){const v=E('pv');
+if(v){v.loop=true;v.muted=PROF.muted;const p=v.play();if(p&&p.catch)p.catch(()=>{v.muted=true;PROF.muted=true;mtUi();const q=v.play();if(q&&q.catch)q.catch(()=>{})})}
+const b=E('bv');
+if(b){b.loop=true;b.muted=PROF.bmuted;const p=b.play();if(p&&p.catch)p.catch(()=>{b.muted=true;PROF.bmuted=true;bmUi();const q=b.play();if(q&&q.catch)q.catch(()=>{})})}}
+function bmUi(){const b=E('bmt');if(b){b.innerHTML=ic(PROF.bmuted?'mute':'vol',18);b.setAttribute('aria-label',PROF.bmuted?'เปิดเสียงพื้นหลัง':'ปิดเสียงพื้นหลัง')}}
+function bmute(){const v=E('bv');if(!v)return;PROF.bmuted=!PROF.bmuted;v.muted=PROF.bmuted;if(!PROF.bmuted&&v.paused){const p=v.play();if(p&&p.catch)p.catch(()=>{})}bmUi()}
+function onBg(f){const file=f.files&&f.files[0];f.value='';if(!file)return;
+const t=file.type.indexOf('video')==0?'v':file.type.indexOf('image')==0?'i':'';
+if(!t){alert('รองรับเฉพาะไฟล์รูปภาพหรือวิดีโอ');return}
+if(PROF.burl){try{URL.revokeObjectURL(PROF.burl)}catch(e){}}
+PROF.burl=URL.createObjectURL(file);PROF.bt=t;PROF.bmuted=true;STO.putBlob('bg',file,t);R()}
+function avH(){const P=PROF,media=P.mt=='v'?`<video id="pv" src="${P.url}" autoplay loop playsinline></video>`:P.mt=='i'?`<img src="${P.url}" alt="รูปโปรไฟล์">`:ic('user',44);
+return`<div class="avw sm"><div class="avm ring" role="button" aria-label="เปลี่ยนรูปโปรไฟล์" onclick="E('pmed').click()">${media}</div>${P.mt=='v'?`<button class="mt" id="pmt" onclick="pmute()" aria-label="${P.muted?'เปิดเสียง':'ปิดเสียง'}">${ic(P.muted?'mute':'vol',18)}</button>`:''}</div>`}
+function bgH(){const P=PROF;return P.bt=='v'?`<video id="bv" autoplay loop playsinline src="${P.burl}"></video>`:P.bt=='i'?`<img src="${P.burl}" alt="พื้นหลังโปรไฟล์">`:`<div class="ph">${ic('image',34)}</div>`}
+function homeP(){const P=PROF;
+return`<div class="pf"><h1>โปรไฟล์</h1>
+<div class="hc pvc"><div class="cover big" role="button" aria-label="เปลี่ยนพื้นหลังโปรไฟล์" onclick="E('bmed').click()">${bgH()}${P.bt=='v'?`<button class="mt bm" id="bmt" onclick="event.stopPropagation();bmute()" aria-label="${P.bmuted?'เปิดเสียงพื้นหลัง':'ปิดเสียงพื้นหลัง'}">${ic(P.bmuted?'mute':'vol',18)}</button>`:''}</div>
+<div class="pvav">${avH()}</div>
+<input id="pmed" type="file" accept="image/*,video/*" style="display:none" onchange="onMedia(this)"><input id="bmed" type="file" accept="image/*,video/*" style="display:none" onchange="onBg(this)"></div>
+<div class="hc"><div class="fg"><label class="fl" for="pn1">ชื่อที่เห็นเฉพาะเรา<small>แสดงให้คุณเห็นคนเดียว</small></label><input class="pin" id="pn1" type="text" maxlength="30" value="${esc(P.priv)}" oninput="pset('priv',this.value)" placeholder="ชื่อเล่นหรือชื่อส่วนตัว" autocomplete="off"></div>
+<div class="fg"><label class="fl" for="pn2">ชื่อที่ตั้งให้คนอื่นเห็น<small>ชื่อที่แสดงต่อสาธารณะ</small></label><input class="pin" id="pn2" type="text" maxlength="30" value="${esc(P.pub)}" oninput="pset('pub',this.value)" placeholder="ชื่อที่ใช้แสดง" autocomplete="off"></div>
+<div class="fg"><label class="fl" for="pn3">อายุ</label><input class="pin" id="pn3" type="number" inputmode="numeric" min="1" max="120" value="${esc(P.age)}" oninput="page(this)" placeholder="ตัวเลขอายุ"></div>
+<div class="fg"><label class="fl" for="pn4">คำอธิบายตัวเอง</label><textarea class="pin" id="pn4" maxlength="150" oninput="pbio(this)" placeholder="แนะนำตัวสั้นๆ">${esc(P.bio)}</textarea><div class="cnt${P.bio.length>=150?' max':''}" id="bcnt">${P.bio.length} / 150</div></div></div></div>`}
+// ================= ไอคอนเพิ่มเติมสำหรับระบบ Note (Inline SVG แบบเส้นบาง) =================
+Object.assign(IC,{
+note:'<rect x="4.5" y="3.5" width="12.5" height="17" rx="2.2"/><path d="M8 8h5M8 11.5h3.5"/><path d="M20.4 8.6l-6 6-.9 3 3-.9 6-6a1.5 1.5 0 0 0 0-2.1l-.1-.1a1.5 1.5 0 0 0-2 .1z" transform="translate(-1.2 0)"/>',
+pin:'<path d="M12 17v5"/><path d="M9 10.8a2 2 0 0 1-1.1 1.8l-1.8.9A2 2 0 0 0 5 15.2V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.8a2 2 0 0 0-1.1-1.8l-1.8-.9A2 2 0 0 1 15 10.8V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>',
+eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>',
+eyeoff:'<path d="M9.9 5.8a9 9 0 0 1 2.1-.3c6 0 9.5 6.5 9.5 6.5a15.500 15.500 0 0 1-2.800 3.600M6.500 7.300C3.800 9 2.500 12 2.500 12s3.500 6.500 9.500 6.500c1.600 0 3-.4 4.200-1M9.900 9.900a2.800 2.800 0 0 0 4 4M3.500 3.500l17 17"/>',
+grid:'<rect x="4" y="4" width="7" height="9" rx="1.7"/><rect x="13" y="4" width="7" height="5.500" rx="1.700"/><rect x="4" y="15" width="7" height="5" rx="1.700"/><rect x="13" y="11.500" width="7" height="8.500" rx="1.700"/>',
+list:'<path d="M9 7h11M9 12h11M9 17h11M4.500 7h.01M4.500 12h.01M4.500 17h.01"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',
+search:'<circle cx="11" cy="11" r="6.500"/><path d="M16 16l4.500 4.500"/>',
+close:'<path d="M6 6l12 12M18 6L6 18"/>',
+swap:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',
+imgadd:'<rect x="3.500" y="4.500" width="17" height="15" rx="2.500"/><path d="M12 9v6M9 12h6"/>',
+lcheck:'<path d="M4.500 7l1.500 1.500 2.500-3M4.500 15l1.500 1.500 2.500-3M12 7h8M12 15h8"/>',
+ltext:'<path d="M5 6.500h14M5 12h14M5 17.500h9"/>',
+doc:'<path d="M7 3.500h7.500L19 8v12.500H7zM14.500 3.500V8H19M10 12.500h6M10 16h4"/>'
+});
+const ckSvg=s=>`<svg class="ck" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><path d="M8 12.5l3 3 5-6"/></svg>`;
+// หมุดปัก (SVG วาดเอง มีแสงเงา)
+const qpin=id=>`<svg class="qpn" width="30" height="40" viewBox="0 0 30 40" aria-hidden="true"><defs><radialGradient id="${id}_h" cx=".34" cy=".28" r=".85"><stop offset="0" stop-color="#DBEAFE"/><stop offset=".38" stop-color="#3B82F6"/><stop offset="1" stop-color="#1E3A8A"/></radialGradient><linearGradient id="${id}_b" x1="0" x2="1"><stop offset="0" stop-color="#1E40AF"/><stop offset=".45" stop-color="#60A5FA"/><stop offset="1" stop-color="#1E3A8A"/></linearGradient><radialGradient id="${id}_s"><stop offset="0" stop-color="#0F172A" stop-opacity=".42"/><stop offset="1" stop-color="#0F172A" stop-opacity="0"/></radialGradient></defs><ellipse cx="20" cy="35" rx="10" ry="3.4" fill="url(#${id}_s)"/><path d="M15 24l1.800 11" stroke="#94A3B8" stroke-width="1.500" stroke-linecap="round" fill="none"/><path d="M8 16.500h14l-1.400 8.500h-11.200z" fill="url(#${id}_b)"/><ellipse cx="15" cy="12" rx="10.500" ry="8.500" fill="url(#${id}_h)"/><ellipse cx="11" cy="8.200" rx="3.800" ry="2.100" fill="#fff" fill-opacity=".65" transform="rotate(-28 11 8.200)"/></svg>`;
+
+// ================= Quick Note บนหน้า Home =================
+// ข้อความที่กดบันทึกแล้วเก็บใน localStorage / รูปหรือวิดีโอแสดงสดตลอดที่เปิดหน้าเว็บ (เวอร์ชัน Beta)
+let QN={saved:'',draft:'',url:'',mt:'',muted:false},QOPEN=false,QT=null;
+try{const q=STO.getItem('sl_qnote');if(q)QN.saved=String(q).slice(0,400)}catch(e){}
+QN.draft=QN.saved;
+(function(){const c=STO.blob('qn');if(c&&c.blob){QN.url=URL.createObjectURL(c.blob);QN.mt=c.t;QN.muted=false}})();
+const qnHas=()=>QN.saved.trim().length>0;
+const qnDirty=()=>QN.draft.trim()!==QN.saved.trim();
+function qnCard(){const m=QN.mt,has=!!m;
+const ph=m=='v'?`<video id="qv" src="${QN.url}" loop playsinline></video>`:m=='i'?`<img src="${QN.url}" alt="รูปภาพในโน้ต">`:`<button class="qph0" type="button" onclick="E('qf').click()" aria-label="เพิ่มรูปภาพหรือวิดีโอ">${ic('imgadd',26)}<span>แตะเพื่อเพิ่ม<br>รูปหรือวิดีโอ</span></button>`;
+const tools=has?`${m=='v'?`<button class="qtb" id="qmt" type="button" onclick="qnMute()" aria-label="${QN.muted?'เปิดเสียง':'ปิดเสียง'}">${ic(QN.muted?'mute':'vol',15)}</button>`:''}<button class="qtb" type="button" onclick="E('qf').click()" aria-label="เปลี่ยนรูปหรือวิดีโอ">${ic('swap',15)}</button><button class="qtb" type="button" onclick="qnDel()" aria-label="ลบรูปหรือวิดีโอ">${ic('trash',15)}</button>`:'';
+return`<div class="qcard"><div class="qbd"><div class="qpol">${qpin('qa')}<div class="qph">${ph}</div><div class="qstrip">${tools}</div></div><div class="qpap">${qpin('qz')}<textarea class="qta" id="qta" maxlength="400" placeholder="จดอะไรไว้สักหน่อย..." aria-label="ข้อความโน้ตด่วน" oninput="qnIn(this)">${esc(QN.draft)}</textarea></div></div><div class="qft"><span class="qs" id="qs" aria-live="polite"></span><button class="qsv" type="button" onclick="qnSave()">บันทึก</button></div><input id="qf" type="file" accept="image/*,video/*" style="display:none" onchange="qnFile(this)"></div>`}
+const qnWrap=()=>`<div class="qnw"><div class="qnh"><button type="button" class="qnb${QOPEN?' on':''}" id="qnb" aria-expanded="${QOPEN}" aria-controls="qbw" onclick="qnTog()">${ic('note',17)}<span>Note</span><span class="chv">${ic('down',15)}</span><i class="qd" id="qd"${qnHas()?'':' hidden'}></i></button><button type="button" class="qnb" id="svb" onclick="doSaveAll()">${ic('disk',17)}<span id="svt">บันทึก</span></button></div><div class="svs${SVC}" id="svs">${esc(svMsg)}</div><div class="qbw${QOPEN?' open':''}" id="qbw"><div class="qin" id="qbd">${qnCard()}</div></div></div>`;
+function qnPlay(){const v=E('qv');if(!v)return;v.loop=true;v.muted=QN.muted;const p=v.play();if(p&&p.catch)p.catch(()=>{v.muted=true;QN.muted=true;qnMuteUi();const q=v.play();if(q&&q.catch)q.catch(()=>{})})}
+function qnBind(){qnStat();const v=E('qv');if(!v)return;v.loop=true;v.muted=QN.muted;if(QOPEN)qnPlay()}
+function qnDraw(){const e=E('qbd');if(e){e.innerHTML=qnCard();qnBind()}}
+function qnTog(){QOPEN=!QOPEN;const w=E('qbw'),b=E('qnb');if(w)w.classList.toggle('open',QOPEN);if(b){b.classList.toggle('on',QOPEN);b.setAttribute('aria-expanded',QOPEN)}const v=E('qv');if(v){if(QOPEN)qnPlay();else v.pause()}}
+function qnDot(){const d=E('qd');if(d)d.hidden=!qnHas()}
+function qnPersist(){try{if(QN.saved)STO.setItem('sl_qnote',QN.saved);else STO.removeItem('sl_qnote')}catch(e){}}
+function qnStat(){const s=E('qs');if(!s)return;clearTimeout(QT);const d=qnDirty();s.className='qs'+(d?' dirty':'');s.textContent=d?'ยังไม่ได้บันทึก':QN.draft.length+' / 400'}
+function qnMsg(t){const s=E('qs');if(!s)return;clearTimeout(QT);s.className='qs ok';s.innerHTML=ic('check',14)+'<span>'+t+'</span>';QT=setTimeout(qnStat,2200)}
+function qnIn(el){QN.draft=el.value;if(!el.value.trim()&&QN.saved){QN.saved='';qnPersist();qnDot()}qnStat()}
+function qnSave(){const has=QN.draft.trim().length>0;QN.saved=has?QN.draft.replace(/\s+$/,''):'';QN.draft=QN.saved;const ta=E('qta');if(ta)ta.value=QN.draft;qnPersist();qnDot();qnMsg(has?'บันทึกแล้ว':'ล้างโน้ตแล้ว')}
+function qnFile(f){const file=f.files&&f.files[0];f.value='';if(!file)return;
+const t=file.type.indexOf('video')==0?'v':file.type.indexOf('image')==0?'i':'';
+if(!t){alert('รองรับเฉพาะไฟล์รูปภาพหรือวิดีโอ');return}
+if(QN.url){try{URL.revokeObjectURL(QN.url)}catch(e){}}
+QN.url=URL.createObjectURL(file);QN.mt=t;QN.muted=false;STO.putBlob('qn',file,t);qnDraw()}
+function qnDel(){if(QN.url){try{URL.revokeObjectURL(QN.url)}catch(e){}}QN.url='';QN.mt='';STO.delBlob('qn');qnDraw()}
+function qnMuteUi(){const b=E('qmt');if(b){b.innerHTML=ic(QN.muted?'mute':'vol',15);b.setAttribute('aria-label',QN.muted?'เปิดเสียง':'ปิดเสียง')}}
+function qnMute(){const v=E('qv');if(!v)return;QN.muted=!QN.muted;v.muted=QN.muted;if(!QN.muted&&v.paused)qnPlay();qnMuteUi()}
+
+// ================= Note ฉบับเต็มในหน้า Menu =================
+const NCATS=['ส่วนตัว','ไอเดีย','งาน/เรียน','สำคัญ'];
+const NCOL=[['w','#FFFFFF','ขาว'],['y','#FEF9C3','เหลือง'],['o','#FFEDD5','ส้ม'],['p','#FCE7F3','ชมพู'],['v','#EDE9FE','ม่วง'],['b','#DBEAFE','ฟ้า'],['g','#DCFCE7','เขียว']];
+const NMON=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+let NOTES=[],NV='list',NID=null,NQ='',NF='all',NGRID=true,NFOC='',NSEG=null;
+try{const a=JSON.parse(STO.getItem('sl_notes'));if(Array.isArray(a))NOTES=a.filter(n=>n&&n.id).map(n=>({id:String(n.id),title:String(n.title||''),body:String(n.body||''),kind:n.kind=='list'?'list':'text',items:Array.isArray(n.items)?n.items.map(i=>({t:String(i&&i.t||''),d:!!(i&&i.d)})):[],cat:NCATS.includes(n.cat)?n.cat:NCATS[0],col:NCOL.some(c=>c[0]==n.col)?n.col:'w',pin:!!n.pin,blur:!!n.blur,ts:+n.ts||Date.now()}))}catch(e){}
+try{NGRID=STO.getItem('sl_nview')!='list'}catch(e){}
+const nsave=()=>{try{STO.setItem('sl_notes',JSON.stringify(NOTES))}catch(e){}};
+const nGet=id=>NOTES.find(n=>n.id==id);
+const nBg=k=>(NCOL.find(c=>c[0]==k)||NCOL[0])[1];
+const nTxt=n=>n.kind=='list'?n.items.map(i=>i.t).join('\n'):n.body;
+const nEmpty=n=>!n.title.trim()&&!nTxt(n).trim();
+function nPurge(){const k=NOTES.length;NOTES=NOTES.filter(n=>!nEmpty(n));if(NOTES.length!=k)nsave()}
+function nFmt(t){const d=new Date(t),n=new Date(),p=x=>String(x).padStart(2,'0');return d.getDate()+' '+NMON[d.getMonth()]+(d.getFullYear()!=n.getFullYear()?' '+(d.getFullYear()+543):'')+' '+p(d.getHours())+':'+p(d.getMinutes())+' น.'}
+function nCount(n){const body=nTxt(n),all=n.title+' '+body.replace(/\n/g,' ');let w=0;
+try{if(window.Intl&&Intl.Segmenter){NSEG=NSEG||new Intl.Segmenter('th',{granularity:'word'});for(const s of NSEG.segment(all))if(s.isWordLike)w++}else w=all.trim()?all.trim().split(/\s+/).length:0}catch(e){w=all.trim()?all.trim().split(/\s+/).length:0}
+return{c:n.title.length+body.replace(/\n/g,'').length,w}}
+function nStatH(n){const k=nCount(n),m=k.w/200,rt=k.w==0?'0 นาที':m<1?'ไม่ถึง 1 นาที':'ประมาณ '+Math.ceil(m)+' นาที';return k.c.toLocaleString('en-US')+' ตัวอักษร · '+k.w.toLocaleString('en-US')+' คำ · อ่าน'+rt}
+function nFiltered(){const q=NQ.trim().toLowerCase();return NOTES.filter(n=>(NF=='all'||n.cat==NF)&&(!q||(n.title+'\n'+nTxt(n)).toLowerCase().includes(q))).sort((a,b)=>(b.pin-a.pin)||(b.ts-a.ts))}
+function nCard(n){let pv;
+if(n.kind=='list'){const it=n.items.filter(i=>i.t.trim());pv=(it.slice(0,4).map(i=>`<div class="ncl${i.d?' d':''}">${ckSvg(15)}<span>${esc(i.t)}</span></div>`).join('')+(it.length>4?`<div class="ncm">และอีก ${it.length-4} รายการ</div>`:''))||'<span class="mu">ไม่มีรายการ</span>'}
+else pv=n.body.trim()?esc(n.body.trim().slice(0,240)):'<span class="mu">ไม่มีเนื้อหา</span>';
+return`<article class="nc" style="background:${nBg(n.col)}" onclick="nOpen('${n.id}')"><div class="nct"><h4>${n.title.trim()?esc(n.title):'<span class="mu" style="font-weight:600">ไม่มีหัวข้อ</span>'}</h4><div class="nca"><button type="button" class="nib${n.blur?' on':''}" aria-label="${n.blur?'แสดงข้อความตัวอย่าง':'ซ่อนข้อความตัวอย่าง'}" aria-pressed="${n.blur}" onclick="event.stopPropagation();nBlur('${n.id}')">${ic(n.blur?'eyeoff':'eye',18)}</button><button type="button" class="nib pn${n.pin?' on':''}" aria-label="${n.pin?'เลิกปักหมุด':'ปักหมุด'}" aria-pressed="${n.pin}" onclick="event.stopPropagation();nPinC('${n.id}')">${ic('pin',18)}</button></div></div><div class="ncb${n.kind=='list'?' lc':''}${n.blur?' bl':''}">${pv}</div><div class="ncf"><span class="ncat">${esc(n.cat)}</span><time>${nFmt(n.ts)}</time></div></article>`}
+function nListH(){const a=nFiltered();
+if(!a.length)return NOTES.length?`<div class="nempty">${ic('search',34)}<b>ไม่พบโน้ตที่ตรงกัน</b><span>ลองเปลี่ยนคำค้นหาหรือเลือกหมวดหมู่อื่น</span></div>`:`<div class="nempty">${ic('doc',38)}<b>ยังไม่มีโน้ต</b><span>แตะปุ่ม โน้ตใหม่ ด้านล่าง<br>เพื่อเริ่มจดบันทึกชิ้นแรกของคุณ</span></div>`;
+const pins=a.filter(n=>n.pin),rest=a.filter(n=>!n.pin),g=l=>`<div class="ngrid${NGRID?'':' l'}">${l.map(nCard).join('')}</div>`;
+return pins.length?`<div class="nlab">${ic('pin',13)}<span>ปักหมุด</span></div>${g(pins)}`+(rest.length?`<div class="nlab" style="margin-top:18px"><span>โน้ตอื่นๆ</span></div>${g(rest)}`:''):g(rest)}
+function nTabsH(){return[['all','ทั้งหมด']].concat(NCATS.map(c=>[c,c])).map(t=>{const k=t[0]=='all'?NOTES.length:NOTES.filter(n=>n.cat==t[0]).length;return`<button type="button" class="ntab${NF==t[0]?' on':''}" onclick="nTab('${t[0]}')">${t[1]}<small>${k}</small></button>`}).join('')}
+function nDraw(tabs){const l=E('nl');if(l)l.innerHTML=nListH();const c=E('ncnt');if(c)c.textContent=nFiltered().length+' โน้ต';if(tabs){const t=E('nt');if(t)t.innerHTML=nTabsH()}const x=E('nsx');if(x)x.hidden=!NQ}
+function nHome(){nPurge();
+return`<div class="top"><button class="lk" onclick="MSUB=null;R()">${ic('back',18)}กลับ</button><span></span></div>
+<div class="nhead"><h1>Note</h1><p class="sub">สมุดบันทึกส่วนตัว ค้นหา จัดหมวด และปักหมุด</p></div>
+<div class="nsr">${ic('search',18)}<input id="nq" type="search" enterkeyhint="search" placeholder="ค้นหาจากชื่อเรื่องหรือเนื้อหา" value="${esc(NQ)}" oninput="NQ=this.value;nDraw(false)" autocomplete="off" aria-label="ค้นหาโน้ต"><button type="button" class="nsx" id="nsx" aria-label="ล้างคำค้นหา" onclick="NQ='';E('nq').value='';nDraw(false);E('nq').focus()"${NQ?'':' hidden'}>${ic('close',16)}</button></div>
+<div class="ntabs" id="nt">${nTabsH()}</div>
+<div class="ntool"><span class="mu" id="ncnt">${nFiltered().length} โน้ต</span><div class="nvs" role="group" aria-label="มุมมอง"><button type="button" class="${NGRID?'on':''}" aria-label="มุมมองการ์ด 2 คอลัมน์" onclick="nView(true)">${ic('grid',18)}</button><button type="button" class="${NGRID?'':'on'}" aria-label="มุมมองแถวเดี่ยว" onclick="nView(false)">${ic('list',18)}</button></div></div>
+<div id="nl">${nListH()}</div>
+<button type="button" class="nfab" onclick="nNew()">${ic('plus',18)}<span>โน้ตใหม่</span></button>`}
+function nView(g){NGRID=g;try{STO.setItem('sl_nview',g?'grid':'list')}catch(e){}R()}
+function nTab(c){NF=c;nDraw(true)}
+function nBlur(id){const n=nGet(id);if(!n)return;n.blur=!n.blur;nsave();nDraw(false)}
+function nPinC(id){const n=nGet(id);if(!n)return;n.pin=!n.pin;nsave();nDraw(false)}
+function nOpen(id){NID=id;NV='edit';scrollTo(0,0);R()}
+function nNew(){const n={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:'',body:'',kind:'text',items:[],cat:NF!='all'?NF:NCATS[0],col:'w',pin:false,blur:false,ts:Date.now()};NOTES.push(n);nsave();NID=n.id;NV='edit';NFOC='nti';scrollTo(0,0);R()}
+function nBack(){NV='list';NID=null;scrollTo(0,0);R()}
+function nAskDel(){const n=nGet(NID);if(!n)return;modal(`<h2 style="margin:0 0 6px">ลบโน้ตนี้?</h2><p class="mu" style="margin:0 0 16px;line-height:1.6">${n.title.trim()?'"'+esc(n.title)+'" ':''}จะถูกลบถาวร และไม่สามารถกู้คืนได้</p><div class="row"><button class="b" onclick="closeM()">ยกเลิก</button><button class="b p" style="background:#B91C1C;border-color:#B91C1C" onclick="nDel()">ลบโน้ต</button></div>`)}
+function nDel(){NOTES=NOTES.filter(n=>n.id!=NID);nsave();closeM();nBack()}
+// ----- หน้าเขียน/แก้ไข -----
+function nBodyH(n){
+if(n.kind=='text')return`<textarea class="nta" id="nta" placeholder="เริ่มพิมพ์บันทึกของคุณที่นี่..." aria-label="เนื้อหาโน้ต" oninput="nUp('body',this.value);nGrow(this)">${esc(n.body)}</textarea>`;
+return n.items.map((it,i)=>`<div class="cki${it.d?' d':''}"><button type="button" class="ckb" aria-label="${it.d?'ยกเลิกติ๊กถูก':'ติ๊กถูก'}" aria-pressed="${it.d}" onclick="nTick(${i})">${ckSvg(22)}</button><input class="cit" type="text" value="${esc(it.t)}" placeholder="รายการที่ ${i+1}" aria-label="รายการที่ ${i+1}" oninput="nItem(${i},this.value)" onkeydown="nKey(event,${i})" autocomplete="off"><button type="button" class="ckx" aria-label="ลบรายการ" onclick="nRm(${i})">${ic('close',16)}</button></div>`).join('')+`<button type="button" class="ckadd" onclick="nAdd()">${ic('plus',17)}<span>เพิ่มรายการ</span></button>`}
+function nEdit(){const n=nGet(NID);
+return`<div class="top"><button class="lk" onclick="nBack()">${ic('back',18)}กลับ</button><div class="nea"><button type="button" class="nib pn${n.pin?' on':''}" aria-label="${n.pin?'เลิกปักหมุด':'ปักหมุดโน้ต'}" aria-pressed="${n.pin}" onclick="nPinE()">${ic('pin',19)}</button><button type="button" class="nib" aria-label="ลบโน้ต" onclick="nAskDel()">${ic('trash',19)}</button></div></div>
+<div class="ned" style="background-color:${nBg(n.col)}"><input class="nti" id="nti" type="text" maxlength="80" placeholder="หัวข้อเรื่อง" aria-label="หัวข้อเรื่อง" value="${esc(n.title)}" oninput="nUp('title',this.value)" autocomplete="off">
+<div class="nmeta" id="nts">แก้ไขล่าสุด ${nFmt(n.ts)}</div>
+<div class="nlbl">หมวดหมู่</div><div class="nchips">${NCATS.map(c=>`<button type="button" class="nchip${n.cat==c?' on':''}" onclick="nSet('cat','${c}')">${c}</button>`).join('')}</div>
+<div class="nlbl">สีการ์ด</div><div class="ncol">${NCOL.map(c=>`<button type="button" class="ncd${n.col==c[0]?' on':''}" style="background:${c[1]}" aria-label="สี${c[2]}" aria-pressed="${n.col==c[0]}" onclick="nSet('col','${c[0]}')">${n.col==c[0]?ic('check',15):''}</button>`).join('')}</div>
+<div class="nseg" role="group" aria-label="รูปแบบโน้ต"><button type="button" class="${n.kind=='text'?'on':''}" onclick="nMode('text')">${ic('ltext',16)}ข้อความ</button><button type="button" class="${n.kind=='list'?'on':''}" onclick="nMode('list')">${ic('lcheck',16)}เช็กลิสต์</button></div>
+<div id="nbody">${nBodyH(n)}</div>
+<div class="nfoot"><span id="nprog"></span><span id="nstat"></span></div></div>`}
+function nFoot(){const n=nGet(NID);if(!n)return;const p=E('nprog'),s=E('nstat');if(p){const it=n.items.filter(i=>i.t.trim());p.textContent=n.kind=='list'&&it.length?'เสร็จแล้ว '+it.filter(i=>i.d).length+' / '+it.length:''}if(s)s.textContent=nStatH(n)}
+function nTouch(n){n.ts=Date.now();nsave();const t=E('nts');if(t)t.textContent='แก้ไขล่าสุด '+nFmt(n.ts);nFoot()}
+function nUp(f,v){const n=nGet(NID);if(!n)return;n[f]=v;nTouch(n)}
+function nGrow(el){el.style.height='auto';el.style.height=Math.max(el.scrollHeight+4,220)+'px'}
+function nSet(f,v){const n=nGet(NID);if(!n)return;n[f]=v;nTouch(n);R()}
+function nPinE(){const n=nGet(NID);if(!n)return;n.pin=!n.pin;nsave();R()}
+function nMode(k){const n=nGet(NID);if(!n||n.kind==k)return;
+if(k=='list'){if(n.body!==n.items.map(i=>i.t).join('\n')||!n.items.length){const ls=n.body.split('\n').map(s=>s.trim()).filter(Boolean);n.items=ls.length?ls.map(t=>({t,d:false})):[{t:'',d:false}]}}
+else{n.body=n.items.map(i=>i.t).join('\n')}
+n.kind=k;nTouch(n);R()}
+function nBodyDraw(f){const n=nGet(NID);if(!n)return;E('nbody').innerHTML=nBodyH(n);nFoot();if(f!=null){const a=document.querySelectorAll('#nbody .cit');if(a[f])a[f].focus()}}
+function nTick(i){const n=nGet(NID);if(!n||!n.items[i])return;n.items[i].d=!n.items[i].d;nTouch(n);nBodyDraw()}
+function nItem(i,v){const n=nGet(NID);if(!n||!n.items[i])return;n.items[i].t=v;nTouch(n)}
+function nAdd(){const n=nGet(NID);if(!n)return;n.items.push({t:'',d:false});nTouch(n);nBodyDraw(n.items.length-1)}
+function nRm(i){const n=nGet(NID);if(!n)return;n.items.splice(i,1);if(!n.items.length)n.items.push({t:'',d:false});nTouch(n);nBodyDraw()}
+function nKey(e,i){const n=nGet(NID);if(!n||e.isComposing)return;
+if(e.key=='Enter'){e.preventDefault();n.items.splice(i+1,0,{t:'',d:false});nTouch(n);nBodyDraw(i+1)}
+else if(e.key=='Backspace'&&n.items[i]&&n.items[i].t===''&&n.items.length>1){e.preventDefault();n.items.splice(i,1);nTouch(n);nBodyDraw(Math.max(0,i-1))}}
+const noteApp=()=>NV=='edit'&&nGet(NID)?nEdit():(NV='list',nHome());
+function nBind(){const ta=E('nta');if(ta)nGrow(ta);nFoot();if(NFOC){const e=E(NFOC);NFOC='';if(e)e.focus()}}
+// ================= Focus / Routine / Meditation =================
+const SLF=(function(){
+var P2=function(n){return n<10?'0'+n:''+n};
+var tk=function(d){d=d||new Date();return d.getFullYear()+'-'+P2(d.getMonth()+1)+'-'+P2(d.getDate())};
+var fe=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var $=function(i){return document.getElementById(i)};
+function jl(k,d){try{var v=JSON.parse(STO.getItem(k)||'null');return v||d}catch(e){return d}}
+function js(k,v){try{STO.setItem(k,JSON.stringify(v))}catch(e){}}
+var AC=null;
+function ctx(){if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;AC=new C()}if(AC.state=='suspended')AC.resume();return AC}
+function bell(){var c=ctx();if(!c)return;var t=c.currentTime;[880,1318.5,1760].forEach(function(fr,i){var o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=fr;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.2/(i+1),t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+3);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+3.1)})}
+function vib(){try{if(navigator.vibrate)navigator.vibrate([200,100,200])}catch(e){}}
+var fmt=function(s){return P2(Math.floor(s/60))+':'+P2(s%60)};
+var CIR=2*Math.PI*96;
+var SV=function(p,w){return'<svg width="'+(w||16)+'" height="'+(w||16)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'};
+var I={chk:SV('<path d="M5 12.5l4.5 4.5L19 7.5"/>',14),x:SV('<path d="M6 6l12 12M18 6L6 18"/>'),plus:SV('<path d="M12 5v14M5 12h14"/>',18),play:SV('<path d="M8 5.5v13l10.5-6.5z"/>'),pause:SV('<path d="M9 6v12M15 6v12"/>'),rst:SV('<path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5"/>'),zen:SV('<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>'),bk:SV('<path d="M15 6l-6 6 6 6"/>',18)};
+var TOP='<div class="xtop"><button class="lk" onclick="MSUB=null;R()">'+I.bk+'กลับ</button></div>';
+var pill=function(on,fn,t,dis){return'<button class="fc-pill'+(on?' on':'')+'" onclick="'+fn+'"'+(dis?' disabled':'')+'>'+t+'</button>'};
+function ringH(id,rem,dur,c1,c2){c1=c1||'#6366F1';c2=c2||'#EC4899';return'<svg viewBox="0 0 220 220" width="250" height="250" style="filter:drop-shadow(0 8px 16px '+c1+'44)"><defs><linearGradient id="g'+id+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+c1+'"/><stop offset="1" stop-color="'+c2+'"/></linearGradient></defs><circle cx="110" cy="110" r="96" fill="#FAFAFF" stroke="#EEF0F8" stroke-width="12"/><circle id="'+id+'" cx="110" cy="110" r="96" fill="none" stroke="url(#g'+id+')" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+CIR.toFixed(2)+'" stroke-dashoffset="'+(CIR*(1-rem/dur)).toFixed(2)+'" transform="rotate(-90 110 110)"/></svg>'}
+function heat(cells){return'<div class="fc-hm">'+cells+'</div>'}
+
+// ---------- Focus ----------
+var FC=(function(){
+var TAGS=['อ่านหนังสือ','เขียนโค้ด','ทำงาน/โปรเจกต์','ฝึกทักษะ'],PM=[[25,5],[50,10]];function PMX(){return D.pm==2?[D.cf||25,D.cb||5]:PM[D.pm]}
+var D=null,T={ph:'f',dur:1500,left:1500,run:false,end:0},iv=null,zen=false;
+function save(){js('sl_fc',D)}
+function setPh(p){T.ph=p;T.dur=(p=='f'?(D.mode=='s'?D.min:PMX()[0]):PMX()[1])*60;T.left=T.dur}
+function load(){if(D)return;D=jl('sl_fc',{});D.fm=D.fm||{};D.tg=D.tg||{};D.rd=D.rd||{};D.goal=D.goal||'';D.min=D.min||25;D.mode=D.mode||'s';D.pm=D.pm||0;D.tag=D.tag||TAGS[0];D.tk=D.tk||[];if(!T.run)setPh('f')}
+function upd(){var r=$('fc-ring'),t=$('fc-time');if(!r||!t)return;var rem=T.run?Math.max(0,(T.end-Date.now())/1000):T.left;r.setAttribute('stroke-dashoffset',(CIR*(1-rem/T.dur)).toFixed(2));t.textContent=fmt(Math.ceil(rem))}
+function tick(){if(!T.run)return;if(Date.now()>=T.end)finish();else upd()}
+function start(){ctx();if(T.run)return;if(T.left<=0)T.left=T.dur;T.run=true;T.end=Date.now()+T.left*1000;clearInterval(iv);iv=setInterval(tick,100);draw()}
+function pause(){if(!T.run)return;T.left=Math.max(1,Math.ceil((T.end-Date.now())/1000));T.run=false;clearInterval(iv);draw()}
+function reset(){T.run=false;clearInterval(iv);setPh(T.ph);draw()}
+function finish(){clearInterval(iv);T.run=false;bell();vib();
+if(T.ph=='f'){var k=tk(),m=T.dur/60,g=D.tg[k]=D.tg[k]||{};D.fm[k]=(D.fm[k]||0)+m;g[D.tag]=(g[D.tag]||0)+m;D.rd[k]=(D.rd[k]||0)+1;D.tk=D.tk.filter(function(x){return!x.d});
+if(D.mode=='p'){setPh('b');save();start();return}}
+setPh('f');save();draw()}
+function mode(m){if(T.run)return;D.mode=m;setPh('f');save();draw()}
+function setMin(m){if(T.run)return;m=Math.max(1,Math.min(180,Math.round(+m)||25));D.min=m;setPh('f');save();draw()}
+function setC(k,v){if(T.run)return;v=Math.max(1,Math.min(k=='f'?180:60,Math.round(+v)||1));if(k=='f')D.cf=v;else D.cb=v;setPh('f');save();draw()}
+function setPm(i){if(T.run)return;D.pm=i;setPh('f');save();draw()}
+function setTag(t){if(T.run&&T.ph=='f')return;D.tag=TAGS[t];save();draw()}
+function addT(){var i=$('fc-tin'),v=i?i.value.trim():'';if(!v)return;D.tk.push({t:v,d:0});save();draw()}
+function togT(i){D.tk[i].d=D.tk[i].d?0:1;save();draw()}
+function delT(i){D.tk.splice(i,1);save();draw()}
+function stats(){var d=new Date(),w=0,k=tk();for(var i=0;i<7;i++){w+=D.fm[tk(d)]||0;d.setDate(d.getDate()-1)}
+return'<div class="fc-bn"><span>วันนี้</span><span>'+Math.round(D.fm[k]||0)+' นาที · '+(D.rd[k]||0)+' รอบ</span></div><div class="fc-bn"><span>7 วันล่าสุด</span><span>'+Math.round(w)+' นาที</span></div>'}
+function ringBlock(){var f=T.ph=='f',c1=f?'#6366F1':'#06B6D4',c2=f?'#EC4899':'#22C55E',ph=D.mode=='p'?'<div class="fc-ph" style="color:'+c1+'">'+(f?'ช่วงโฟกัส':'ช่วงพัก')+'</div>':'';return'<div class="fc-rw">'+ringH('fc-ring',T.left,T.dur,c1,c2)+'<div class="fc-tm">'+ph+'<div id="fc-time" style="background:linear-gradient(135deg,'+c1+','+c2+');-webkit-background-clip:text;background-clip:text;color:transparent">'+fmt(T.left)+'</div><small>รอบวันนี้ '+(D.rd[tk()]||0)+'</small></div></div>'}
+function ctl(){return'<div class="fc-pr">'+(T.run?'<button class="fc-btn" onclick="FC.pause()">'+I.pause+'พักชั่วคราว</button>':'<button class="fc-btn" onclick="FC.start()">'+I.play+'เริ่มโฟกัส</button>')+'<button class="fc-btn ghost" onclick="FC.reset()">'+I.rst+'รีเซ็ต</button></div>'}
+function html(){
+if(zen)return'<div class="fc-zen"><button class="fc-x zx" onclick="FC.zen()" aria-label="ออก">'+I.x+'</button><div class="fc-zg">'+fe((D.tk.filter(function(x){return!x.d})[0]||{t:'โฟกัสทีละอย่าง'}).t)+'</div>'+ringBlock()+ctl()+'</div>';
+var md=pill(D.mode=='s','FC.mode(\'s\')','จับเวลาเดี่ยว',T.run)+pill(D.mode=='p','FC.mode(\'p\')','โหมดรอบ (Pomodoro)',T.run);
+var pr=D.mode=='s'?[15,25,45,60].map(function(m){return pill(D.min==m,'FC.setMin('+m+')',m+' นาที',T.run)}).join(''):PM.map(function(p,i){return pill(D.pm==i,'FC.setPm('+i+')','โฟกัส '+p[0]+' / พัก '+p[1],T.run)}).join('')+pill(D.pm==2,'FC.setPm(2)','กำหนดเอง',T.run);var dis=T.run?' disabled':'',cu=D.mode=='s'?'<div class="fc-cu">กำหนดเอง <input type="number" class="fc-num" min="1" max="180" value="'+D.min+'" onchange="FC.setMin(this.value)"'+dis+'> นาที</div>':(D.pm==2?'<div class="fc-cu">โฟกัส <input type="number" class="fc-num" min="1" max="180" value="'+PMX()[0]+'" onchange="FC.setC(\'f\',this.value)"'+dis+'> พัก <input type="number" class="fc-num" min="1" max="60" value="'+PMX()[1]+'" onchange="FC.setC(\'b\',this.value)"'+dis+'> นาที</div>':'');
+var tg=TAGS.map(function(t,i){return pill(D.tag==t,'FC.setTag('+i+')',t,T.run&&T.ph=='f')}).join('');
+var tks=D.tk.map(function(x,i){return'<div class="fc-h"><button class="fc-ck'+(x.d?' on':'')+'" onclick="FC.togT('+i+')">'+(x.d?I.chk:'')+'</button><span class="'+(x.d?'dn':'')+'">'+fe(x.t)+'</span><button class="fc-x" onclick="FC.delT('+i+')">'+I.x+'</button></div>'}).join('');
+return TOP+'<div class="nhead"><h1>Focus</h1><p class="sub">จับเวลา แบ่งรอบ และดูว่าโฟกัสกับอะไรมากที่สุด</p></div>'
++'<div class="fc-card"><div class="fc-pr">'+md+'</div>'+ringBlock()+'<div class="fc-pr">'+pr+'</div>'+cu+ctl()+'<div class="fc-pr"><button class="fc-pill" onclick="FC.zen()">'+I.zen+' โหมดหน้าจอนิ่ง</button></div></div>'
++'<div class="fc-card"><div class="fc-ti">เป้าหมายย่อยของรอบนี้</div>'+tks+(true?'<div class="fc-add"><input id="fc-tin" class="fc-in" maxlength="60" placeholder="รอบนี้จะทำอะไรให้เสร็จ..." onkeydown="if(event.key===\'Enter\')FC.addT()"><button class="fc-btn sq" onclick="FC.addT()">'+I.plus+'</button></div>':'')+'</div>'
++'<div class="fc-card"><div class="fc-ti">สรุปการโฟกัส</div>'+stats()+'</div>'}
+function draw(){var r=$('fc-root');if(!r)return;r.innerHTML=html();upd()}
+return{setC:setC,mount:function(){load();draw()},leave:function(){zen=false},zen:function(){zen=!zen;draw()},mode:mode,setMin:setMin,setPm:setPm,setTag:setTag,goal:function(v){D.goal=v;save()},start:start,pause:pause,reset:reset,addT:addT,togT:togT,delT:delT}})();
+
+// ---------- Routine ----------
+var RT=(function(){
+var PER=[['m','ช่วงเช้า'],['d','ระหว่างวัน'],['e','ช่วงเย็น/ก่อนนอน'],['a','ทำได้ตลอดวัน']],D=null,sel=null,np='m';
+function save(){js('sl_rt',D)}
+function load(){if(!D){D=jl('sl_rt',null);if(!D){var o=jl('sl_fc',{});D={h:(o.h||[]).map(function(h){return{id:h.id,t:h.t,p:'a'}}),dn:o.dn||{}};save()}}sel=tk()}
+function ratio(k){if(!D.h.length)return 0;var a=D.dn[k]||[],n=0;D.h.forEach(function(h){if(a.indexOf(h.id)>=0)n++});return n/D.h.length}
+function lvl(k){var r=ratio(k);return r<=0?0:r<.5?1:r<.75?2:r<1?3:4}
+function streak(){var d=new Date(),n=0,ok=function(){return D.h.length>0&&ratio(tk(d))>=1};if(!ok())d.setDate(d.getDate()-1);while(ok()){n++;d.setDate(d.getDate()-1)}return n}
+function tog(id){if(sel!=tk())return;var a=D.dn[sel]||[],i=a.indexOf(id);if(i<0)a.push(id);else a.splice(i,1);D.dn[sel]=a;save();draw()}
+function del(id){D.h=D.h.filter(function(h){return h.id!=id});save();draw()}
+function add(){var i=$('rt-in'),v=i?i.value.trim():'';if(!v)return;D.h.push({id:'h'+Date.now().toString(36),t:v,p:np});save();draw()}
+function html(){var td=tk(),a=D.dn[sel]||[],pct=Math.round(ratio(sel)*100),n=0,cells='',d=new Date();a.forEach(function(x){if(D.h.some(function(h){return h.id==x}))n++});
+d.setDate(d.getDate()-27);for(var i=0;i<28;i++){var k=tk(d);cells+='<button class="fc-c l'+lvl(k)+(k==td?' td':'')+(k==sel?' sl':'')+'" onclick="RT.pick(\''+k+'\')" aria-label="'+k+'"></button>';d.setDate(d.getDate()+1)}
+var grp=PER.map(function(p){var hs=D.h.filter(function(h){return h.p==p[0]});if(!hs.length)return'';return'<div class="rt-g">'+p[1]+'</div>'+hs.map(function(h){var on=a.indexOf(h.id)>=0;return'<div class="fc-h"><button class="fc-ck'+(on?' on':'')+'" onclick="RT.tog(\''+h.id+'\')">'+(on?I.chk:'')+'</button><span class="'+(on?'dn':'')+'">'+fe(h.t)+'</span><button class="fc-x" onclick="RT.del(\''+h.id+'\')">'+I.x+'</button></div>'}).join('')}).join('')||'<p class="fc-em">ยังไม่มีกิจวัตร เพิ่มรายการแรกได้เลย</p>';
+var ps=PER.map(function(p){return pill(np==p[0],'RT.per(\''+p[0]+'\')',p[1])}).join('');
+return TOP+'<div class="nhead"><h1>Routine</h1><p class="sub">กิจวัตรและวินัยประจำวัน</p></div>'
++'<div class="fc-card"><div class="fc-ti">'+(sel==td?'ความคืบหน้าวันนี้':'ย้อนหลัง '+sel)+' <span class="rt-p">'+pct+'%</span></div><div class="rt-bar"><i style="width:'+pct+'%"></i></div><p class="fc-em">ทำแล้ว '+n+' จาก '+D.h.length+' รายการ'+(sel!=td?' (ดูอย่างเดียว) ':'')+'</p>'+(sel!=td?'<div class="fc-pr l"><button class="fc-pill" onclick="RT.pick(\''+td+'\')">กลับมาวันนี้</button></div>':'')+grp+'</div>'
++'<div class="fc-card"><div class="fc-ti">เพิ่มกิจวัตร</div><div class="fc-pr l">'+ps+'</div><div class="fc-add"><input id="rt-in" class="fc-in" maxlength="60" placeholder="ชื่อกิจวัตร..." onkeydown="if(event.key===\'Enter\')RT.add()"><button class="fc-btn sq" onclick="RT.add()">'+I.plus+'</button></div></div>'
++'<div class="fc-card"><div class="fc-ti">ความสม่ำเสมอ 28 วันล่าสุด</div><div class="fc-sk"><b>'+streak()+'</b><span>วันต่อเนื่อง (Streak)</span></div>'+heat(cells)+'<p class="fc-em">แตะช่องเพื่อดูประวัติของวันนั้น ยิ่งเข้มยิ่งทำครบมาก</p></div>'}
+function draw(){var r=$('rt-root');if(r)r.innerHTML=html()}
+return{mount:function(){load();draw()},tog:tog,del:del,add:add,per:function(p){np=p;draw()},pick:function(k){sel=k;draw()}}})();
+
+// ---------- Meditation ----------
+var MD=(function(){
+var Q=[['เป้าหมายหลักตอนนี้',['ลดความฟุ้งซ่านและความเครียด','เพิ่มความนิ่งและสมาธิในการคิด','ฝึกสติรับรู้ร่างกาย','ผ่อนคลายก่อนนอน','รีเซ็ตสมองช่วงพักสั้นๆ']],
+['ประสบการณ์การทำสมาธิ',['มือใหม่ ไม่เคยฝึกมาก่อน','เคยลองบ้างแต่ความคิดหลุดบ่อย','ฝึกเป็นประจำอยู่แล้ว']],
+['สภาวะจิตใจและร่างกายขณะนี้',['หัวตื้อ คิดเยอะ','กระสับกระส่าย อยู่นิ่งยาก','ง่วงซึม ขาดพลัง','ปกติ แต่อยากยกระดับสติ']],
+['ท่าทางและสถานที่ที่สะดวก',['นั่งขัดสมาธิบนพื้น','นั่งเก้าอี้หลังตรง','นอนหงาย','ทำสั้นๆ ระหว่างนั่งโต๊ะ']],
+['ระยะเวลาที่ต้องการ',['3 นาที','5 นาที','10 นาที','15 นาที','20 นาที']]],MINS=[3,5,10,15,20];
+var TQ={box:{n:'Box Breathing 4-4-4-4',pat:[4,4,4,4],d:'หายใจเข้า กลั้น หายใจออก พัก ด้วยจังหวะเท่ากัน ช่วยลดความตึงเครียดและทำให้ใจนิ่ง',b:'เมื่อเผลอคิด ให้รับรู้ว่าคิดแล้ว แล้วกลับไปเริ่มนับจังหวะที่หายใจเข้าใหม่'},
+r478:{n:'4-7-8 Breathing',pat:[4,7,8,0],d:'เข้า 4 กลั้น 7 ออก 8 จังหวะออกที่ยาวช่วยให้ร่างกายผ่อนคลายก่อนนอน',b:'เมื่อเผลอคิด ปล่อยความคิดไป แล้วเริ่มรอบใหม่จากหายใจเข้า'},
+ana:{n:'อานาปานสติ นับลมหายใจ 1-10',pat:[4,0,4,0],d:'นับลมหายใจเข้า-ออกเป็น 1 ครั้ง ไปถึง 10 แล้ววนใหม่ เหมาะกับการฝึกโฟกัส',b:'ถ้านับหลุดหรือเลย 10 ไม่ต้องตำหนิตัวเอง กลับไปนับ 1 ใหม่ที่ปลายจมูกหรือหน้าท้อง'},
+body:{n:'Body Scan',pat:[5,0,6,0],d:'ไล่ความรู้สึกจากหัวถึงเท้าทีละส่วน ปล่อยความตึงของแต่ละจุดตอนหายใจออก ช่วยคลายความล้า',b:'เมื่อเผลอคิด ให้กลับไปที่ส่วนของร่างกายที่ค้างไว้ แล้วไล่ต่อจากตรงนั้น'}};
+var PH=['หายใจเข้า','กลั้นไว้','หายใจออก','พัก'],PC=['#0284C7','#7C3AED','#0D9488','#64748B'];
+var POS=['นั่งบนเบาะให้สะโพกสูงกว่าเข่าเล็กน้อย หลังตรงแต่ไม่เกร็ง วางมือบนตัก','เท้าราบพื้น หลังตรงห่างพนักเล็กน้อย วางมือบนต้นขา','แขนวางข้างลำตัว ฝ่ามือหงาย ปล่อยขาตามสบาย','เท้าราบพื้น ไหล่ผ่อนคลาย วางมือบนโต๊ะหรือตัก หายใจเบาๆ'];
+var GZ=['หลับตาเบาๆ หรือทอดสายตาลงพื้นห่างตัวประมาณ 1 เมตร','หลับตา หรือทอดสายตาต่ำที่จุดว่างบนพื้น','หลับตา หรือมองเพดานอย่างผ่อนคลาย','ทอดสายตาลงจุดเดียวบนโต๊ะ ไม่ต้องจ้อง'];
+var D=null,view='main',step=0,A=[],S={run:false,rate:false},iv=null,raf=0;
+function save(){js('sl_md',D)}
+function load(){if(D)return;D=jl('sl_md',{});D.log=D.log||{};if(D.bell==null)D.bell=true;if(D.pace==null)D.pace=true;view=D.p?'main':'quiz';step=0;A=[]}
+function tech(p){var t=['box','ana','body','r478','box'][p.g];if(p.s==1&&t=='ana')t='box';if(p.s==2&&t=='r478'&&p.g!=3)t='ana';return t}
+function streak(){var d=new Date(),n=0,ok=function(){return D.log[tk(d)]&&D.log[tk(d)].min>0};if(!ok())d.setDate(d.getDate()-1);while(ok()){n++;d.setDate(d.getDate()-1)}return n}
+function answer(i){A[step]=i;if(step<4){step++;draw();return}D.p={g:A[0],x:A[1],s:A[2],pos:A[3],min:MINS[A[4]]};D.pace=tech(D.p)!='body';save();view='main';draw()}
+function qback(){if(step>0){step--;draw()}}
+function redo(){stop(true);view='quiz';step=0;A=[];draw()}
+function pset(k){D[k]=!D[k];save();draw()}
+function setMin(m){m=Math.max(1,Math.min(120,Math.round(+m)||5));D.p.min=m;save();draw()}
+function start(){ctx();S={run:true,rate:false,dur:D.p.min*60,t0:Date.now()};S.end=S.t0+S.dur*1000;clearInterval(iv);iv=setInterval(tick,200);cancelAnimationFrame(raf);draw();loop()}
+function tick(){if(!S.run)return;if(Date.now()>=S.end)done(true);else{var t=$('md-time');if(t)t.textContent=fmt(Math.ceil((S.end-Date.now())/1000));var b=$('md-prog');if(b)b.style.width=((Date.now()-S.t0)/(S.dur*10))+'%'}}
+function stop(silent){clearInterval(iv);cancelAnimationFrame(raf);if(!S.run)return;var m=(Date.now()-S.t0)/60000;S.run=false;if(silent===true){S={run:false,rate:false};return}if(m>=.5)log(m);else{S={run:false,rate:false};draw()}}
+function done(full){clearInterval(iv);cancelAnimationFrame(raf);S.run=false;if(D.bell)bell();vib();log(S.dur/60)}
+function log(m){var k=tk(),l=D.log[k]=D.log[k]||{min:0,n:0,rs:[]};l.min+=Math.round(m*10)/10;l.n++;save();S={run:false,rate:true};draw()}
+function rate(v){var l=D.log[tk()];if(l){l.rs.push(v);save()}S={run:false,rate:false};draw()}
+function skip(){S={run:false,rate:false};draw()}
+function loop(){if(!S.run)return;var c=$('md-c'),t=$('md-t');if(c&&D.pace){var p=TQ[tech(D.p)].pat,cy=p[0]+p[1]+p[2]+p[3],e=((Date.now()-S.t0)/1000)%cy,i=0,r=40;while(i<3&&e>=p[i]){e-=p[i];i++}var f=p[i]?e/p[i]:0;f=f*f*(3-2*f);r=i==0?40+60*f:i==1?100:i==2?100-60*f:40;c.setAttribute('r',r.toFixed(1));c.setAttribute('fill',PC[i]);c.setAttribute('fill-opacity','.22');if(t){t.textContent=PH[i];t.style.color=PC[i]}}raf=requestAnimationFrame(loop)}
+function pacer(){return'<svg viewBox="0 0 220 220" width="250" height="250" style="filter:drop-shadow(0 8px 18px rgba(99,102,241,.3))"><defs><linearGradient id="mdg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#818CF8"/><stop offset="1" stop-color="#2DD4BF"/></linearGradient></defs><circle cx="110" cy="110" r="104" fill="none" stroke="url(#mdg)" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round"/><circle id="md-c" cx="110" cy="110" r="'+(S.run&&D.pace?40:70)+'" fill="#818CF8" fill-opacity=".2" stroke="url(#mdg)" stroke-width="3"/></svg><div class="fc-tm md-pt"><span id="md-t" style="color:#6366F1">'+(D.pace?(S.run?'':'พร้อมเริ่ม'):'นั่งเงียบๆ')+'</span></div>'}
+function html(){
+if(view=='quiz'){var q=Q[step];return TOP+'<div class="nhead"><h1>Meditation</h1><p class="sub">คำถามข้อ '+(step+1)+' จาก 5</p></div><div class="fc-card"><div class="fc-ti">'+q[0]+'</div>'+q[1].map(function(o,i){return'<button class="md-o'+(A[step]==i?' on':'')+'" onclick="MD.ans('+i+')">'+o+'</button>'}).join('')+(step>0?'<div class="fc-pr l"><button class="fc-pill" onclick="MD.qback()">ย้อนกลับ</button></div>':'')+'</div>'}
+if(S.rate)return TOP+'<div class="nhead"><h1>จบเซสชัน</h1><p class="sub">ใจนิ่งแค่ไหนหลังฝึก</p></div><div class="fc-card"><div class="fc-pr">'+[1,2,3,4,5].map(function(v){return'<button class="fc-btn ghost sq" onclick="MD.rate('+v+')">'+v+'</button>'}).join('')+'</div><p class="fc-em" style="text-align:center">1 = ยังวุ่นวาย · 5 = สงบมาก</p><div class="fc-pr"><button class="fc-pill" onclick="MD.skip()">ข้าม</button></div></div>';
+var t=tech(D.p),T=TQ[t];
+if(S.run)return TOP+'<div class="fc-card md-b" style="text-align:center"><div class="fc-rw">'+pacer()+'</div><div id="md-time" class="md-big">'+fmt(Math.ceil((S.end-Date.now())/1000))+'</div><div class="rt-bar"><i id="md-prog" style="width:0%"></i></div><div class="fc-pr" style="margin-top:14px"><button class="fc-btn ghost" onclick="MD.stop()">จบเซสชัน</button></div></div>';
+var k=tk(),tot=0,ns=0,rs=[];for(var d in D.log){tot+=D.log[d].min;ns+=D.log[d].n;rs=rs.concat(D.log[d].rs||[])}
+var av=rs.length?(rs.reduce(function(a,b){return a+b},0)/rs.length).toFixed(1):'-',last=rs.slice(-10).map(function(v){return'<i style="height:'+v*6+'px"></i>'}).join('');
+return TOP+'<div class="nhead"><h1>Meditation</h1><p class="sub">เทคนิคที่จัดให้เหมาะกับคุณ ไม่มีเสียงพื้นหลัง</p></div>'
++'<div class="fc-card md-a"><div class="fc-ti">เทคนิคที่แนะนำ: '+T.n+'</div><p class="md-tx">'+T.d+'</p><p class="md-tx"><b>ท่านั่ง</b> '+POS[D.p.pos]+'</p><p class="md-tx"><b>สายตา</b> '+GZ[D.p.pos]+'</p><p class="md-tx"><b>เมื่อเผลอคิด</b> '+T.b+'</p></div>'
++'<div class="fc-card md-b"><div class="fc-ti">เริ่มฝึก</div><div class="fc-pr">'+MINS.map(function(m){return pill(D.p.min==m,'MD.setMin('+m+')',m+' นาที')}).join('')+'</div><div class="fc-cu">กำหนดเอง <input type="number" class="fc-num" min="1" max="120" value="'+D.p.min+'" onchange="MD.setMin(this.value)"> นาที</div><div class="fc-rw">'+pacer()+'</div><div class="fc-pr">'+pill(D.pace,'MD.pset(\'pace\')','ตัวนำจังหวะ: '+(D.pace?'เปิด':'ปิด'))+pill(D.bell,'MD.pset(\'bell\')','เสียงกระดิ่งตอนครบเวลา: '+(D.bell?'เปิด':'ปิด'))+'</div><div class="fc-pr"><button class="fc-btn" onclick="MD.start()">'+I.play+'เริ่มทำสมาธิ</button></div></div>'
++'<div class="fc-card"><div class="fc-ti">พัฒนาการ</div><div class="fc-sk"><b>'+streak()+'</b><span>วันต่อเนื่อง (Streak)</span></div><p class="md-tx">สะสม '+Math.round(tot)+' นาที จาก '+ns+' เซสชัน · ความนิ่งเฉลี่ย '+av+'/5</p><div class="md-sp">'+last+'</div><div class="fc-pr l"><button class="fc-pill" onclick="MD.redo()">ปรับรูปแบบสมาธิใหม่</button></div></div>'}
+function draw(){var r=$('md-root');if(r)r.innerHTML=html()}
+return{mount:function(){load();draw()},leave:function(){stop(true)},ans:answer,qback:qback,redo:redo,pset:pset,setMin:setMin,start:start,stop:stop,rate:rate,skip:skip}})();
+return{FC:FC,RT:RT,MD:MD}})();
+const FC=SLF.FC,RT=SLF.RT,MD=SLF.MD;
+function R0(){if(!(PAGE=='menu'&&MSUB=='focus'))FC.leave();if(!(PAGE=='menu'&&MSUB=='med'))MD.leave();if(!(PAGE=='menu'&&MSUB=='running')&&window.RunBetaUI)RunBetaUI.leave();const home=PAGE=='home',light=true;document.documentElement.classList.toggle('lt',light);
+const mt=document.querySelector('meta[name=theme-color]');if(mt)mt.setAttribute('content',light?'#F8FAFC':'#0D0916');
+const dockOn=!home&&MSUB=='workout'&&!!S&&!W&&VIEW=='wk';
+E('app').classList.toggle('wd',dockOn);E('tb').style.display=dockOn?'flex':'none';if(!dockOn)closeSh();
+if(home){E('app').innerHTML=navH()+(HSUB=='profile'?homeP():homeHub()+qnWrap());bindProf();qnBind();return}
+if(!MSUB){E('app').innerHTML=navH()+menuHub();return}
+if(MSUB=='note'){E('app').innerHTML=navH()+noteApp();nBind();return}
+if(MSUB=='focus'){E('app').innerHTML=navH()+'<div id="fc-root"></div>';FC.mount();return}
+if(MSUB=='routine'){E('app').innerHTML=navH()+'<div id="rt-root"></div>';RT.mount();return}
+if(MSUB=='med'){E('app').innerHTML=navH()+'<div id="md-root"></div>';MD.mount();return}
+if(MSUB=='running'){E('app').innerHTML=navH()+'<div id="run-root"></div>';RunBetaUI.mount(E('run-root'));return}
+if(!S&&!W){wizStart();return}if(!S||W){wiz();return}ensure();
+E('app').innerHTML=navH()+(VIEW=='ov'?ov():VIEW=='wk'?wkView():VIEW=='tree'?tree():set());tview()}
+Object.assign(IC,{run:'<circle cx="14.5" cy="4.5" r="2"/><path d="M13 8.2l-2.6 6 3.6 2.8-1 4M10.4 14.2L7.5 17l-3 .6M13 8.2l3.4 3 2.6-.4M13 8.2L9.6 9.6 7.4 13"/>',timer:'<circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.5M9.5 3.5h5M12 3.5v3"/>',close:'<path d="M6 6l12 12M18 6L6 18"/>',warn:'<path d="M12 4l9 15.5H3zM12 10v4.5M12 17.2v.1"/>'});
+
+/* ============ 1) LOGIC LAYER (ไม่แตะ DOM) ============ */
+var RunBetaLogic = (() => {
+  const TYPES = {
+    runwalk:{name:'Run-Walk (วิ่งสลับเดิน)',desc:'สลับวิ่งเบาๆ กับเดิน ลดแรงกระแทก เหมาะกับมือใหม่ น้ำหนักตัวมาก หรือมีอาการบาดเจ็บ'},
+    easy:{name:'Easy Run (วิ่งช้าโซน 2)',desc:'วิ่งสบายๆ พูดเป็นประโยคได้ สร้างฐานความอึดและเผาผลาญไขมัน'},
+    long:{name:'Long Run (วิ่งระยะไกล)',desc:'วิ่งต่อเนื่องนานกว่าวันปกติ ฝึกความทนทานของกล้ามเนื้อและหัวใจ'},
+    tempo:{name:'Tempo Run (วิ่งคุมความเร็ว)',desc:'วิ่งเร็วปานกลางค่อนข้างหนัก (โซน 3-4) ฝึกการทนกรดแลคติก'},
+    interval:{name:'Interval / Fartlek (วิ่งเร็วสลับช้า)',desc:'กระตุ้นความเร็วและระบบหัวใจสูงสุด (VO2 Max)'},
+    recovery:{name:'Recovery / Cross-Training',desc:'วิ่งเบามากหรือออกกำลังกายแรงกระแทกต่ำ (ปั่นจักรยาน ว่ายน้ำ เดินเร็ว) เพื่อฟื้นตัว'},
+    rest:{name:'Rest Day (วันพัก)',desc:'พักเต็มที่ให้ร่างกายซ่อมแซมและแข็งแรงขึ้น'}
+  };
+  const DAYS = ['จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์','อาทิตย์'];
+  // ตำแหน่งวันวิ่งที่กระจายสมดุล (0=จันทร์) ตามจำนวนวัน
+  const PATTERN = {2:[1,5],3:[0,2,5],4:[0,2,4,5],5:[0,1,3,4,5],6:[0,1,2,3,4,5]};
+  const heartZone = (mhr, lo, hi) => `${Math.round(mhr*lo)}-${Math.round(mhr*hi)} bpm`;
+
+  function analyse(u){
+    const bmi = u.weight / Math.pow(u.height/100, 2);
+    const mhr = 220 - u.age;
+    const g = new Set(u.goals);
+    const inj = new Set(u.injuries);
+    const kneeAnkle = inj.has('knee') || inj.has('ankle');
+    const heavy = bmi >= 25 || inj.has('overweight');
+    const beginner = u.experience === 'beginner';
+    const senior = u.age >= 50;
+    const lowImpact = bmi >= 25 || kneeAnkle;
+    const cautious = lowImpact || beginner || senior || inj.has('back');
+    const canSpeed = !lowImpact && !beginner && !inj.has('back') && !inj.has('overweight');
+    return {bmi,mhr,g,inj,kneeAnkle,heavy,beginner,senior,lowImpact,cautious,canSpeed};
+  }
+
+  function baseMinutes(u, a){
+    const m = {lt10:15,'15-30':25,'30-60':40,gt60:55}[u.maxRun] || 20;
+    let t = Math.min(m, a.beginner ? 25 : 60);
+    if (a.beginner) t = Math.min(t, 25);
+    return Math.max(15, Math.round(t/5)*5);
+  }
+
+  /* ---------- Leveling Engine ---------- */
+  const MAX_LEVEL = 12, VOL_STEP = 1.07; // เพิ่มปริมาณ ~7% ต่อ Level (ช่วงปลอดภัย 5-10%)
+  const HARD = ['long','tempo','interval'];
+  const isDeload = L => L >= 4 && L % 4 === 0;
+  const stageOf = L => L<=2 ? 'Run-Walk + Easy Run สั้น: เส้นเอ็นและข้อต่อปรับตัวช้ากว่ากล้ามเนื้อ จึงต้องค่อยๆ สร้างฐาน' : L<=4 ? 'Easy Run เต็มรูปแบบ + ปลดล็อก Long Run' : 'ปลดล็อก Tempo และ Interval/Fartlek (เฉพาะผู้ไม่มีอาการบาดเจ็บและเลือกเป้าหมายความเร็ว/ความอึด)';
+
+  function computeStartLevel(u){
+    const a = analyse(u), reg = u.experience === 'regular';
+    const lab = {lt10:'<10','15-30':'15-30','30-60':'30-60',gt60:'>60'}[u.maxRun] || '<10';
+    const why = ['วิ่งต่อเนื่องได้ ' + lab + ' นาที'];
+    let L = {lt10:1,'15-30':2,'30-60':4,gt60:6}[u.maxRun] || 1;
+    if (reg && (L === 2 || L === 4)) L++;
+    if (u.experience === 'beginner' && L > 2) { L = 2; why.push('เป็นมือใหม่ จึงจำกัดไม่เกิน Level 2'); }
+    if (u.experience === 'intermediate' && L > 5) L = 5;
+    if (a.bmi >= 27 || a.kneeAnkle) {
+      L = 1;
+      why.push(a.bmi >= 27 ? 'BMI ' + a.bmi.toFixed(1) + ' (≥ 27): ข้อต่อต้องปรับตัวก่อน จึงเริ่ม Level 1' : 'มีประวัติเจ็บเข่า/ข้อเท้า จึงเริ่ม Level 1');
+    } else {
+      if (a.bmi >= 25 && L > 3) { L = 3; why.push('BMI ' + a.bmi.toFixed(1) + ' (≥ 25): จำกัดไม่เกิน Level 3'); }
+      if ((a.senior || a.inj.has('back') || a.inj.has('overweight')) && L > 1) { L--; why.push('อายุ 50+ หรือมีข้อจำกัดร่างกาย: ลด 1 Level เพื่อความปลอดภัย'); }
+    }
+    if (why.length === 1) why.push(L >= 6 ? 'นักวิ่งประจำ ร่างกายพร้อมโปรแกรมซับซ้อน' : 'ร่างกายสมดุล ไม่มีอาการบาดเจ็บรุนแรง');
+    return {level: L, reasons: why};
+  }
+
+  /* ---------- Scheduling ---------- */
+  const adj = (x, y) => { const d = Math.abs(x - y); return d === 1 || d === 6; };
+  function pickRunDays(free, n){ // เลือก n วันจากวันว่าง ให้กระจายสมดุลและไม่ติดกันถ้าทำได้
+    const F = (free && free.length ? free : [0,1,2,3,4,5,6]).slice().sort((x,y) => x-y);
+    n = Math.min(n, F.length);
+    let best = F.slice(0, n), bs = 1e9;
+    (function rec(i, cur){
+      if (cur.length === n) {
+        let s = cur.some(d => d >= 5) ? -0.6 : 0;
+        for (let k = 0; k < n; k++) {
+          const gap = n > 1 ? (cur[(k+1) % n] - cur[k] + 7) % 7 : 7;
+          if (n > 1 && gap === 1) s += 100;
+          s += Math.pow(gap - 7/n, 2);
+        }
+        if (s < bs) { bs = s; best = cur.slice(); }
+        return;
+      }
+      for (let j = i; j < F.length; j++) { cur.push(F[j]); rec(j+1, cur); cur.pop(); }
+    })(0, []);
+    return best;
+  }
+
+  function build(u, level, o){
+    const a = analyse(u);
+    const n = u.daysPerWeek, g = a.g, stress = g.has('stress'), raceEnd = g.has('race') || g.has('endurance');
+    const deload = o.deload && isDeload(level);
+    a.level = level;
+    a.scale = Math.pow(VOL_STEP, level - o.startLevel) * (deload ? 0.85 : 1) * (o.k || 1);
+    const base = baseMinutes(u, a);
+    const hardOK = level >= 5 && u.injuries.length === 0 && !a.lowImpact && !stress;
+    const intvAllowed = hardOK && n >= 3 && g.has('speed');
+    const hard = [];
+    if (level >= 3 && !stress) hard.push('long');
+    if (intvAllowed && !deload) hard.push('interval');
+    if (hardOK && n >= 3 && (raceEnd || g.has('speed')) && !deload) hard.push('tempo');
+    hard.length = Math.min(hard.length, n <= 2 ? 1 : n <= 4 ? 2 : 3);
+
+    const fillT = level <= 2 ? 'runwalk' : 'easy';
+    const types = hard.slice();
+    while (types.length < n) types.push(fillT);
+    if (level === 2 && n >= 3) types[n-1] = 'easy';
+    if (n >= 5 && level >= 3 && !stress) types[n-1] = 'recovery';
+
+    // จัดลงเฉพาะวันว่าง: วันหนักห้ามติดกัน (นับ อาทิตย์-จันทร์ ว่าติดกัน)
+    const rd = pickRunDays(u.freeDays, n), placed = {}, hd = [];
+    const mind = d => hd.length ? Math.min(...hd.map(h => { const x = Math.abs(h-d); return Math.min(x, 7-x); })) : 9;
+    hard.forEach(t => {
+      const c = rd.filter(d => placed[d] === undefined && !hd.some(h => adj(h, d)));
+      if (!c.length) { types[types.indexOf(t)] = fillT; return; }
+      const pick = t === 'long' ? (c.includes(6) ? 6 : c.includes(5) ? 5 : c[c.length-1]) : c.reduce((b, d) => mind(d) > mind(b) ? d : b, c[0]);
+      placed[pick] = t; hd.push(pick);
+    });
+    const soft = types.filter(t => !HARD.includes(t));
+    rd.filter(d => placed[d] === undefined).forEach(d => { placed[d] = soft.shift() || fillT; });
+
+    const ctx = {stressOnly: stress, raceOrEnd: raceEnd};
+    const week = DAYS.map((name, i) => {
+      if (placed[i] !== undefined) return {day: name, ...detail(placed[i], a, u, base, i, ctx)};
+      const free = !u.freeDays || u.freeDays.includes(i);
+      return {day: name, type: 'rest', desc: TYPES.rest.desc, name: free ? TYPES.rest.name : 'ไม่ว่าง (วันพัก)', duration: '-', zone: '-', rpe: 'RPE 1',
+        why: !free ? 'คุณไม่ได้เลือกวันนี้เป็นวันว่าง จึงไม่จัดวิ่ง' : stress ? 'วันพักยืดหยุ่น: เดินเล่นหรือยืดเหยียดเบาๆ ก็ได้' : 'วันพักคั่นระหว่างวันวิ่ง ให้ร่างกายซ่อมแซม'};
+    });
+
+    const W = [];
+    if (a.lowImpact) W.push('BMI ≥ 25 หรือมีอาการเจ็บเข่า/ข้อเท้า: ตัด Interval/Tempo ออก เน้น Run-Walk / Easy Run บนพื้นเรียบ / Cross-training วอร์มอัพ 5-10 นาที (เดินเร็ว + หมุนข้อเท้า สะโพก) ก่อนวิ่งทุกครั้ง');
+    if (a.inj.has('back')) W.push('มีอาการปวดหลัง: เลี่ยงทางชันและความเร็วสูง เสริมแกนกลางลำตัว และหยุดหากปวดร้าวลงขา');
+    if (a.senior) W.push('อายุ 50 ปีขึ้นไป: เพิ่มเวลาทีละน้อย และควรปรึกษาแพทย์ก่อนเริ่มโปรแกรมหนัก');
+    if (u.restingHR > 100) W.push('Resting HR สูงกว่า 100 bpm: ควรตรวจสุขภาพก่อนเริ่มโปรแกรม');
+    if (u.surface === 'trail' && level < 5) W.push('ทางชัน/เทรลเสี่ยงต่อข้อต่อ: ช่วง Level ต้นๆ แนะนำพื้นเรียบหรือลู่วิ่ง');
+    if (g.has('speed') && !intvAllowed) W.push(level < 5 ? 'เป้าหมายเพิ่มความเร็ว: จะปลดล็อก Interval/Fartlek ที่ Level 5 ตอนนี้สร้างฐานด้วย Easy Run ก่อน' : 'เป้าหมายเพิ่มความเร็ว: ยังไม่แทรก Interval เพราะอาการบาดเจ็บ/BMI หรือจำนวนวันวิ่งน้อย');
+    if (deload) W.push('Level ' + level + ' คือช่วงฟื้นตัว (Deload): ลดปริมาณ ~15% และพักจากวันเข้มข้น ให้เอ็นและข้อต่อตามทัน ก่อนไต่ระดับต่อ');
+    const totalMins = week.reduce((s, d) => s + (d.type === 'rest' || d.type === 'recovery' ? 0 : (d.mins || 0)), 0);
+    return {week, meta: {bmi: a.bmi.toFixed(1), mhr: a.mhr, note: blendNote(a, u), warnings: W, dayCount: rd.length, totalMins, deload, level, stage: stageOf(level)}};
+  }
+
+  function generateRunningSchedule(u, levelOverride){
+    const st = computeStartLevel(u);
+    const level = Math.max(1, Math.min(MAX_LEVEL, levelOverride || st.level));
+    const o = {startLevel: st.level, deload: true};
+    let r = build(u, level, o), prev = null;
+    if (level > 1) { // ไม่ให้ปริมาณเพิ่มเกิน 10% จาก Level ก่อนหน้า (แม้มีการปลดล็อกเซสชันใหม่)
+      prev = build(u, level - 1, {startLevel: st.level, deload: false}).meta.totalMins;
+      if (prev && r.meta.totalMins > prev * 1.10) r = build(u, level, {...o, k: prev * 1.10 / r.meta.totalMins});
+    }
+    r.meta.deltaPct = prev ? Math.round((r.meta.totalMins / prev - 1) * 100) : null;
+    return r;
+  }
+
+  function blendNote(a,u){
+    const g=a.g, out=[];
+    if (g.has('weight') && g.has('general')) out.push('เป้าหมายลดน้ำหนัก + สุขภาพทั่วไป: เน้น Easy Run โซน 2 ประมาณ 30-45 นาที หลายวันต่อสัปดาห์');
+    if (g.has('endurance') && g.has('race')) out.push('ความอึด + ซ้อมลงแข่ง: มี Long Run ท้ายสัปดาห์ 1 วัน Tempo 1 วัน ที่เหลือเป็น Easy Run');
+    if (g.has('stress')) out.push('คลายเครียด: เน้นวิ่งตามความรู้สึก (effort-based) ไม่ต้องจับเวลาหรือกดดันความเร็ว');
+    if (!out.length) out.push('ตารางนี้ผสมเป้าหมายที่คุณเลือกกับข้อมูลร่างกายอัตโนมัติ');
+    return out;
+  }
+
+  function detail(t, a, u, base, dayIdx, ctx){
+    const T = TYPES[t];
+    const mhr = a.mhr;
+    const surface = u.surface==='treadmill'?'ลู่วิ่ง (ตั้งความชัน 1%)':u.surface==='concrete'?'ถ้าเลือกได้ให้เลี่ยงคอนกรีตล้วน':u.surface==='trail'?'ทางชัน/เทรล':'พื้นเรียบ';
+    const cap = a.senior ? 0.85 : 1;
+    const dur = m => Math.max(10, Math.round(m*cap*a.scale));
+    let r = {type:t, name:T.name, desc:T.desc};
+    switch(t){
+      case 'runwalk': {
+        const run = a.level<=1?1:a.level==2?2:3, walk = a.level<=1?2:1;
+        const total = dur(Math.max(20, base)); r.mins = total; r.run = run; r.walk = walk; r.rounds = Math.max(1, Math.round(total/(run+walk)));
+        r.duration = `${total} นาที (วิ่ง ${run} / เดิน ${walk} นาที ทำซ้ำ)`;
+        r.zone = heartZone(mhr,.6,.7)+' (โซน 2)'; r.rpe='RPE 3-4';
+        r.why = a.lowImpact ? 'BMI สูงหรือมีอาการเจ็บข้อ: การสลับเดินช่วยลดแรงกระแทกสะสมที่เข่าและข้อเท้า' : 'มือใหม่ควรให้ร่างกายปรับตัวทีละน้อย การสลับเดินช่วยสร้างฐานโดยไม่หักโหม';
+        break; }
+      case 'easy': {
+        const w = a.g.has('weight') ? Math.max(30, Math.min(45, base+10)) : base;
+        const e = Math.min(dur(ctx.stressOnly?base:w), a.level<=2?25:999); r.mins = e; r.duration = `${e} นาที`;
+        r.zone = heartZone(mhr,.6,.7)+' (โซน 2)'; r.rpe='RPE 3-4 พูดเป็นประโยคได้';
+        r.why = a.g.has('weight') ? 'วิ่งโซน 2 นานพอดี ใช้ไขมันเป็นพลังงานหลักและเสี่ยงบาดเจ็บต่ำ' : 'สร้างฐานแอโรบิกซึ่งเป็นรากของการพัฒนาทุกเป้าหมาย';
+        if (ctx.stressOnly) { r.duration += ' (ไม่ต้องจับเวลา)'; r.why='วิ่งตามความรู้สึก ไม่กดดันความเร็ว เพื่อให้ใจโล่งและผ่อนคลาย'; }
+        break; }
+      case 'long': {
+        const m = a.beginner ? base+10 : base+Math.min(30,base*0.6);
+        r.mins = dur(m); r.duration = `${r.mins} นาที`;
+        r.zone = heartZone(mhr,.6,.72)+' (โซน 2)'; r.rpe='RPE 4';
+        r.why = 'เป้าหมายความอึด/ลงแข่ง: Long Run ท้ายสัปดาห์ฝึกความทนทานและความพร้อมระยะทาง เพิ่มไม่เกิน 10% ต่อสัปดาห์';
+        break; }
+      case 'tempo':
+        r.mins = 20 + dur(Math.max(15,base*0.5)); r.duration = `วอร์ม 10 + วิ่งเร็ว ${r.mins-20} + คูลดาวน์ 10 นาที`;
+        r.zone = heartZone(mhr,.8,.9)+' (โซน 3-4)'; r.rpe='RPE 6-7 พูดได้แค่ประโยคสั้นๆ';
+        r.why = 'ฝึกให้ร่างกายทนกรดแลคติกได้นานขึ้น ช่วยให้เพซแข่งสบายขึ้น';
+        break;
+      case 'interval':
+        r.rounds = Math.max(4, Math.min(10, Math.round(6*a.scale))); r.mins = 20 + r.rounds*3; r.duration = `วอร์ม 10 + Fartlek/Interval ${r.rounds} รอบ (เร็ว 1 / ช้า 2 นาที) + คูลดาวน์ 10`;
+        r.zone = heartZone(mhr,.85,.95)+' ช่วงเร็ว'; r.rpe='RPE 7-8 ช่วงเร็ว / RPE 3 ช่วงช้า';
+        r.why = 'คุณเลือกเพิ่มความเร็วและร่างกายพร้อม จึงแทรก 1 วัน/สัปดาห์ เพื่อกระตุ้น VO2 Max โดยมี Easy Run คั่น';
+        break;
+      default:
+        r.duration = a.lowImpact ? '30-40 นาที (ปั่นจักรยาน/ว่ายน้ำ/เดินเร็ว)' : '20-30 นาที (วิ่งเบามากหรือ Cross-training)';
+        r.zone = heartZone(mhr,.5,.6)+' (โซน 1)'; r.rpe='RPE 2-3'; r.mins = a.lowImpact?35:25;
+        r.why = a.lowImpact ? 'ใช้ Cross-training แทนการวิ่ง เพื่อรักษาความฟิตโดยลดแรงกระแทกต่อข้อต่อ' : 'ช่วยให้กล้ามเนื้อฟื้นตัวและยังคงความต่อเนื่อง';
+    }
+    r.surface = surface;
+    return r;
+  }
+  /* ---------- XP / Phases ---------- */
+  const TITLES = ['Rookie Strider','Pace Builder','Base Roller','Steady Miler','Tempo Hunter','Road Racer','Distance Driver','Split Breaker','Track Commander','Endurance Ace','Marathon Mind','Elite Pacer'];
+  const levelTitle = L => TITLES[Math.max(1, Math.min(MAX_LEVEL, L)) - 1];
+  const xpNeeded = L => 700 + (L - 1) * 100; // 1 วัน = 100 XP → ~7 เซสชันที่ Level 1 และเพิ่มขึ้นทุกเลเวล
+  const zonesOf = mhr => [['Z1 เบามาก',.5,.6],['Z2 สบาย (Easy)',.6,.7],['Z3 ปานกลาง',.7,.8],['Z4 หนัก (Tempo)',.8,.9],['Z5 สูงสุด',.9,1]].map(([n,l,h]) => [n, Math.round(mhr*l) + '-' + Math.round(mhr*h) + ' bpm']);
+  function sessionPhases(d){
+    if (!d || d.type === 'rest') return [];
+    const rows = [['เวลา', d.duration], ['โซนหัวใจ', d.zone], ['ความเหนื่อย', d.rpe]];
+    if (d.surface) rows.push(['พื้นที่', d.surface]);
+    let timers = [{label: (d.mins || 20) + ' นาที', secs: (d.mins || 20) * 60}], extra = '';
+    if (d.type === 'runwalk') { extra = ` วิ่ง ${d.run} นาที สลับเดิน ${d.walk} นาที จำนวน ${d.rounds} รอบ`; timers = [{label: 'วิ่ง ' + d.run + ' นาที', secs: d.run*60}, {label: 'เดิน ' + d.walk + ' นาที', secs: d.walk*60}]; }
+    if (d.type === 'interval') { extra = ` ช่วงเร็ว 1 นาที สลับช้า 2 นาที จำนวน ${d.rounds} รอบ`; timers = [{label: 'เร็ว 1 นาที', secs: 60}, {label: 'ช้า 2 นาที', secs: 120}]; }
+    if (d.type === 'tempo') timers = [{label: 'ช่วงเร็ว ' + (d.mins-20) + ' นาที', secs: (d.mins-20)*60}];
+    return [
+      {key:'warm', title:'วอร์มอัพ & Mobility', xp:20, rows:[], insight:'', detail:'เดินเร็ว 2-3 นาที แล้วแกว่งขาหน้า-หลังและข้าง หมุนข้อเท้า สะโพก ยกเข่าสูงเบาๆ รวม 5 นาที', timers:[{label:'5 นาที', secs:300}]},
+      {key:'main', title:d.name, xp:60, rows, insight:d.why, detail:d.desc + extra, timers},
+      {key:'cool', title:'คูลดาวน์ & Stretch', xp:20, rows:[], insight:'', detail:'เดินผ่อนคลาย 5 นาทีจนหัวใจลดลง แล้วยืดน่อง ต้นขาหน้า-หลัง สะโพก ข้างละ 20-30 วินาที', timers:[{label:'5 นาที', secs:300}]}
+    ];
+  }
+
+  return {generateRunningSchedule, computeStartLevel, sessionPhases, xpNeeded, levelTitle, zonesOf, TYPES, MAX_LEVEL};
+})();
+
+/* ============ 2) UI LAYER ============ */
+var RunBetaUI = (() => {
+  let root = null, step = 1; // 1 ฟอร์ม, 2 เป้าหมาย, 3 แดชบอร์ด
+  const S = {xp:0,week:1,done:{},sel:0,modal:false,levelUp:0,freeDays:[],level:null,gender:'',age:'',weight:'',height:'',experience:'beginner',daysPerWeek:3,maxRun:'lt10',injuries:['none'],surface:'park',time:'flex',restingHR:'',goals:[]};
+  const S0 = JSON.stringify(S);
+  const RB_KEY='sl_run';
+  function rbSave(){try{STO.setItem(RB_KEY,JSON.stringify({S:S,step:step}))}catch(e){}}
+  try{const q=JSON.parse(STO.getItem(RB_KEY));if(q&&q.S){Object.assign(S,q.S);S.modal=false;S.levelUp=0;if(q.step>=1&&q.step<=3)step=q.step;if(step===3&&S.level==null)step=1}}catch(e){}
+  const $ = (s,el=root)=>el.querySelector(s);
+  const opt = (type,name,val,label,checked)=>`<label class="run-beta-opt"><input type="${type}" name="${name}" value="${val}" ${checked?'checked':''}><span>${label}</span></label>`;
+  const radios = (name,list,cur)=>`<div class="run-beta-opts">${list.map(([v,l])=>opt('radio',name,v,l,cur==v)).join('')}</div>`;
+  const dots = n=>`<div class="run-beta-steps">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`;
+
+  function profile(){
+    const inj=[['none','ไม่มี'],['knee','เจ็บเข่า'],['ankle','เจ็บข้อเท้า/ฝ่าเท้า'],['back','ปวดหลัง'],['overweight','น้ำหนักตัวเกิน/เหนื่อยง่าย']];
+    root.innerHTML = `${dots(1)}<div class="run-beta-card"><h2>ข้อมูลพื้นฐาน</h2><p class="run-beta-sub">จำเป็นต้องกรอก</p>
+    <div class="run-beta-field"><span class="run-beta-lbl">เพศ</span>${radios('gender',[['m','ชาย'],['f','หญิง'],['n','ไม่ระบุ']],S.gender)}</div>
+    <div class="run-beta-grid"><div class="run-beta-field"><label for="rb-age">อายุ (ปี)</label><input class="run-beta-input" id="rb-age" type="number" inputmode="numeric" value="${S.age}"></div>
+    <div class="run-beta-field"><label for="rb-w">น้ำหนัก (กก.)</label><input class="run-beta-input" id="rb-w" type="number" inputmode="decimal" value="${S.weight}"></div></div>
+    <div class="run-beta-field"><label for="rb-h">ส่วนสูง (ซม.)</label><input class="run-beta-input" id="rb-h" type="number" inputmode="numeric" value="${S.height}"></div></div>
+    <div class="run-beta-card"><h2>รายละเอียดเพิ่มเติม</h2><p class="run-beta-sub">ไม่บังคับ มีค่าเริ่มต้นให้แล้ว</p>
+    <div class="run-beta-field"><span class="run-beta-lbl">ประสบการณ์การวิ่ง</span><div class="run-beta-opts run-beta-list">${[['beginner','มือใหม่ (ไม่เคยวิ่ง/เพิ่งเริ่ม)'],['intermediate','ระดับกลาง (วิ่ง 1-2 ครั้ง/สัปดาห์)'],['regular','นักวิ่งประจำ (วิ่งสม่ำเสมอ)']].map(([v,l])=>opt('radio','experience',v,l,S.experience==v)).join('')}</div></div>
+    <div class="run-beta-field"><span class="run-beta-lbl">วันที่สะดวกวิ่งต่อสัปดาห์</span>${radios('daysPerWeek',[2,3,4,5,6].map(d=>[d,d+' วัน']),S.daysPerWeek)}</div>
+    <div class="run-beta-field"><span class="run-beta-lbl">วันที่ว่างสำหรับการวิ่ง</span><div class="run-beta-opts run-beta-days">${['จันทร์','อังคาร','พุธ','พฤหัส','ศุกร์','เสาร์','อาทิตย์'].map((d,i)=>opt('checkbox','freeDays',i,d,S.freeDays.includes(i))).join('')}</div><p class="run-beta-sub" id="rb-cnt" style="margin:8px 0 0"></p><div id="rb-dwarn"></div></div>
+    <div class="run-beta-field"><span class="run-beta-lbl">วิ่งต่อเนื่องได้นานสุด</span>${radios('maxRun',[['lt10','<10 นาที'],['15-30','15-30 นาที'],['30-60','30-60 นาที'],['gt60','>60 นาที']],S.maxRun)}</div>
+    <div class="run-beta-field"><span class="run-beta-lbl">อาการบาดเจ็บ/ข้อจำกัด (เลือกได้หลายข้อ)</span><div class="run-beta-opts">${inj.map(([v,l])=>opt('checkbox','injuries',v,l,S.injuries.includes(v))).join('')}</div></div>
+    <div class="run-beta-field"><span class="run-beta-lbl">สถานที่วิ่งหลัก</span>${radios('surface',[['treadmill','ลู่วิ่งไฟฟ้า'],['park','สวนสาธารณะ/พื้นเรียบ'],['concrete','ถนนคอนกรีต'],['trail','ทางชัน/เทรล']],S.surface)}</div>
+    <div class="run-beta-field"><span class="run-beta-lbl">ช่วงเวลาที่สะดวก</span>${radios('time',[['am','เช้า'],['pm','เย็น/ค่ำ'],['flex','ไม่แน่นอน']],S.time)}</div>
+    <div class="run-beta-field"><label for="rb-hr">อัตราการเต้นหัวใจขณะพัก (bpm)</label><input class="run-beta-input" id="rb-hr" type="number" inputmode="numeric" value="${S.restingHR}"></div></div>
+    <div class="run-beta-err" id="rb-err" role="alert"></div>
+    <button class="run-beta-btn" id="rb-next" data-go="2" disabled>ถัดไป</button>`;
+  }
+
+  function readProfile(){
+    S.age=$('#rb-age').value; S.weight=$('#rb-w').value; S.height=$('#rb-h').value; S.restingHR=$('#rb-hr').value;
+    S.gender=(root.querySelector('[name=gender]:checked')||{}).value||'';
+    ['experience','daysPerWeek','maxRun','surface','time'].forEach(k=>{const c=root.querySelector(`[name=${k}]:checked`); if(c) S[k]=k==='daysPerWeek'?+c.value:c.value;});
+    S.injuries=[...root.querySelectorAll('[name=injuries]:checked')].map(c=>c.value);
+    S.freeDays=[...root.querySelectorAll('[name=freeDays]:checked')].map(c=>+c.value);
+    if(!S.injuries.length) S.injuries=['none'];
+  }
+  function validate(){
+    const a=+S.age,w=+S.weight,h=+S.height;
+    if(!S.gender) return 'กรุณาเลือกเพศ';
+    if(!(a>=10&&a<=90)) return 'อายุต้องอยู่ระหว่าง 10-90 ปี';
+    if(!(w>=30&&w<=250)) return 'น้ำหนักต้องอยู่ระหว่าง 30-250 กก.';
+    if(!(h>=120&&h<=230)) return 'ส่วนสูงต้องอยู่ระหว่าง 120-230 ซม.';
+    if(S.freeDays.length<S.daysPerWeek) return `เลือกวันว่างอย่างน้อย ${S.daysPerWeek} วัน`;
+    return '';
+  }
+
+  function goals(){
+    const g=[['weight','ลดน้ำหนัก / เผาผลาญไขมัน'],['endurance','เพิ่มความอึด / พัฒนาระบบหัวใจและปอด'],['race','ฝึกซ้อมเพื่อลงงานวิ่ง / ทำระยะ (5K / 10K / Mini-Half)'],['speed','เพิ่มความเร็วและพละกำลัง'],['stress','คลายเครียด / ปรับสมดุลสุขภาพจิต'],['general','รักษาสุขภาพทั่วไป / สร้างวินัย']];
+    root.innerHTML = `${dots(2)}<div class="run-beta-card"><h2>คุณออกวิ่งเพราะอะไร?</h2><p class="run-beta-sub">เลือกได้มากกว่า 1 ข้อ</p><div class="run-beta-opts run-beta-list">${g.map(([v,l])=>opt('checkbox','goals',v,l,S.goals.includes(v))).join('')}</div></div>
+    <div class="run-beta-err" id="rb-err" role="alert"></div>
+    <button class="run-beta-btn" data-go="3" ${S.freeDays.length<S.daysPerWeek?'disabled':''}>สร้างตารางการวิ่ง</button><button class="run-beta-btn run-beta-ghost" data-go="1">กลับ</button>`;
+  }
+
+  const SHORT = ['จ.','อ.','พ.','พฤ.','ศ.','ส.','อา.'], KEYS = ['warm','main','cool'];
+  /* ----- Timer (state ชั่วคราวใน memory) ----- */
+  const tm = {s:300, last:300, run:false, id:null, end:0};
+  const timerEl = document.createElement('div'); timerEl.id = 'run-beta-timer'; timerEl.className = 'run-beta-timer'; timerEl.hidden = true; document.body.appendChild(timerEl);
+  const fmt = s => String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+  function drawTimer(){
+    timerEl.innerHTML = `<div class="run-beta-tdisp" id="rb-td">${fmt(tm.s)}</div><div class="run-beta-tbtns"><button data-t="-15">-15 วิ</button><button data-t="go" class="p">${tm.run?'หยุดชั่วคราว':'เริ่ม'}</button><button data-t="15">+15 วิ</button><button data-t="reset">รีเซ็ต</button></div>`;
+    timerEl.classList.toggle('is-end', tm.s === 0 && !tm.run);
+  }
+  function stopT(){ clearInterval(tm.id); tm.run = false; }
+  function startT(){
+    if (tm.s <= 0) tm.s = tm.last;
+    tm.end = Date.now() + tm.s*1000; tm.run = true;
+    tm.id = setInterval(() => {
+      tm.s = Math.max(0, Math.ceil((tm.end - Date.now())/1000));
+      const el = document.getElementById('rb-td'); if (el) el.textContent = fmt(tm.s);
+      if (tm.s === 0) { stopT(); if (navigator.vibrate) navigator.vibrate([300,150,300]); drawTimer(); }
+    }, 250);
+    drawTimer();
+  }
+  function setTimer(s){ stopT(); tm.s = tm.last = s; drawTimer(); }
+  function showTimer(on){ timerEl.hidden = !on; if (on) drawTimer(); else stopT(); }
+  timerEl.addEventListener('click', e => {
+    const b = e.target.closest('[data-t]'); if (!b) return; const t = b.dataset.t;
+    if (t === 'go') { if (tm.run) { stopT(); drawTimer(); } else startT(); }
+    else if (t === 'reset') { stopT(); tm.s = tm.last; drawTimer(); }
+    else { const d = +t; if (tm.run) { tm.end += d*1000; tm.s = Math.max(0, Math.ceil((tm.end-Date.now())/1000)); } else tm.s = Math.max(0, tm.s + d); drawTimer(); }
+  });
+
+  /* ----- Dashboard ----- */
+  function act(el){
+    const a = el.dataset.act, L = RunBetaLogic;
+    if (a === 'day') S.sel = +el.dataset.i;
+    else if (a === 'tick') {
+      const k = el.dataset.k, x = +el.dataset.xp;
+      if (S.done[k]) { delete S.done[k]; S.xp = Math.max(0, S.xp - x); }
+      else { S.done[k] = 1; S.xp += x;
+        if (S.level < L.MAX_LEVEL && S.xp >= L.xpNeeded(S.level)) { S.xp -= L.xpNeeded(S.level); S.level++; S.done = {}; S.levelUp = S.level; } }
+    }
+    else if (a === 'modal') S.modal = el.dataset.v === '1';
+    else if (a === 'lv') { S.level = Math.max(1, Math.min(L.MAX_LEVEL, S.level + (+el.dataset.v))); S.xp = 0; S.done = {}; }
+    else if (a === 'nextweek') { S.done = {}; S.week++; }
+    else if (a === 'lvup-close') S.levelUp = 0;
+    else if (a === 'tset') { setTimer(+el.dataset.s); return; }
+    else if (a === 'reset') { Object.keys(S).forEach(k => delete S[k]); Object.assign(S, JSON.parse(S0)); step = 1; profile(); refreshDays(); showTimer(false); window.scrollTo(0,0); STO.removeItem(RB_KEY); return; }
+    result();
+  }
+
+  function result(){
+    const data = {...S, age:+S.age, weight:+S.weight, height:+S.height, restingHR:+S.restingHR||0, injuries:S.injuries.filter(i=>i!=='none')};
+    const L = RunBetaLogic, st = L.computeStartLevel(data);
+    if (S.level == null) { S.level = st.level; S.xp = 0; S.week = 1; S.done = {}; S.modal = false; S.levelUp = 0; S.sel = (new Date().getDay() + 6) % 7; }
+    const {week, meta} = L.generateRunningSchedule(data, S.level), T = L.TYPES;
+    const need = L.xpNeeded(S.level), pct = Math.min(100, Math.round(S.xp / need * 100));
+    const complete = i => week[i].type !== 'rest' && KEYS.every(k => S.done[i + ':' + k]);
+    const sessTotal = week.filter(d => d.type !== 'rest').length, sessDone = week.filter((d,i) => complete(i)).length;
+    const sel = week[S.sel], phases = L.sessionPhases(sel);
+    const dayBtn = (d,i) => `<button class="run-beta-dayb ${d.type==='rest'?'is-rest':'is-run'} ${i===S.sel?'is-sel':''}" data-act="day" data-i="${i}" aria-pressed="${i===S.sel}"><b>${SHORT[i]}</b><i>${complete(i)?ic('check',13):d.type==='rest'?'พัก':'วิ่ง'}</i></button>`;
+    const phase = (p,n) => { const k = S.sel + ':' + p.key, done = !!S.done[k]; return `<article class="run-beta-ph ${done?'is-done':''}"><div class="run-beta-phn">${done?ic('check',16):n}</div><div class="run-beta-phb"><h3>${p.title}</h3><p>${p.detail}</p>
+      ${p.rows.length?`<dl class="run-beta-rows">${p.rows.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:''}${p.insight?`<div class="run-beta-why">${p.insight}</div>`:''}
+      <div class="run-beta-ph-act">${p.timers.map(t=>`<button class="run-beta-mini" data-act="tset" data-s="${t.secs}">${ic('timer',14)} ${t.label}</button>`).join('')}<button class="run-beta-done" data-act="tick" data-k="${k}" data-xp="${p.xp}">${done?ic('close',16)+' ยกเลิกการทำสำเร็จ (−'+p.xp+' XP)':'ทำสำเร็จ (+'+p.xp+' XP)'}</button></div></div></article>`; };
+    const modal = !S.modal ? '' : `<div class="run-beta-modal" role="dialog" aria-modal="true" aria-label="คู่มือและตั้งค่า"><div class="run-beta-sheet">
+      <div class="run-beta-sheethd"><h2>คู่มือ &amp; ตั้งค่า</h2><button class="run-beta-ic" data-act="modal" data-v="0" aria-label="ปิด">${ic('close',18)}</button></div>
+      <section><h3>วิเคราะห์ข้อมูลของคุณ</h3><div class="run-beta-sum"><span>BMI ${meta.bmi}</span><span>Max HR ≈ ${meta.mhr} bpm</span><span>Level เริ่มต้น ${st.level}</span></div>
+        <p class="run-beta-sub"><b>เหตุผลที่เริ่ม Level ${st.level}:</b> ${st.reasons.join('; ')}</p>${meta.note.map(n=>`<p class="run-beta-sub">${n}</p>`).join('')}
+        ${L.zonesOf(meta.mhr).map(z=>`<div class="run-beta-zone"><span>${z[0]}</span><b>${z[1]}</b></div>`).join('')}</section>
+      <section><h3>คู่มือประเภทการวิ่งและ RPE</h3><dl class="run-beta-types">${['runwalk','easy','long','tempo','interval'].map(t=>`<dt>${T[t].name}</dt><dd>${T[t].desc}</dd>`).join('')}</dl>
+        <p class="run-beta-sub">RPE 1-2 เบามาก · 3-4 สบาย พูดเป็นประโยคได้ · 5-6 เริ่มหนัก · 7-8 หนัก พูดได้แค่คำสั้นๆ · 9-10 สุดแรง</p></section>
+      <section><h3>โหมดทดสอบ (Sandbox)</h3><p class="run-beta-sub">ตอนนี้ Level ${S.level} · ปุ่มนี้รีเซ็ต XP และภารกิจของสัปดาห์</p><div class="run-beta-row"><button class="run-beta-btn run-beta-ghost" data-act="lv" data-v="-1" ${S.level<=1?'disabled':''}>ลดระดับ (Level -1)</button><button class="run-beta-btn run-beta-ghost" data-act="lv" data-v="1" ${S.level>=L.MAX_LEVEL?'disabled':''}>จำลองอัปเลเวล (Level +1)</button></div></section>
+      <section><button class="run-beta-danger" data-act="reset">ล้างข้อมูลและทำแบบทดสอบใหม่</button></section></div></div>`;
+    const lvup = !S.levelUp ? '' : `<div class="run-beta-lvup" role="alertdialog" aria-label="Level Up"><div class="run-beta-pop"><h2>LEVEL UP!</h2><p><b>LV. ${S.levelUp} · ${L.levelTitle(S.levelUp)}</b></p><p class="run-beta-sub">ตารางสัปดาห์ใหม่ปรับความเข้มข้นและเวลาให้เหมาะกับระดับของคุณแล้ว</p><button class="run-beta-btn" data-act="lvup-close">ลุยต่อ</button></div></div>`;
+    root.innerHTML = `<div class="run-beta-dash"><header class="run-beta-top"><div><h1>Running</h1><p class="run-beta-sub">โปรแกรมฝึกซ้อมของคุณ</p></div><button class="run-beta-set" data-act="modal" data-v="1">${ic('book',16)}<span>คู่มือ &amp; ตั้งค่า</span></button></header>
+    <section class="run-beta-lane"><div class="run-beta-lanehead"><div><span class="run-beta-lvtag">LV. ${S.level}</span><b>${L.levelTitle(S.level)}</b></div><span class="run-beta-xp">${S.xp} / ${need} XP</span></div>
+      <div class="run-beta-track" role="progressbar" aria-valuemin="0" aria-valuemax="${need}" aria-valuenow="${S.xp}"><div class="run-beta-fill" style="width:${pct}%"></div><span class="run-beta-runner" style="left:${Math.max(3,Math.min(97,pct))}%"></span></div>
+      <div class="run-beta-marks"><span>START</span><span>LV. ${Math.min(S.level+1,L.MAX_LEVEL)}</span></div>
+      <div class="run-beta-sum" style="margin:10px 0 0"><span>สัปดาห์ที่ ${S.week} · ${sessDone}/${sessTotal} เซสชัน</span><span>≈ ${meta.totalMins} นาที/สัปดาห์</span></div></section>
+    ${sessTotal&&sessDone===sessTotal?`<div class="run-beta-card"><h2>ครบทุกเซสชันของสัปดาห์นี้แล้ว</h2><p class="run-beta-sub">พร้อมเริ่มสัปดาห์ถัดไปเพื่อสะสม XP ต่อ</p><button class="run-beta-btn" data-act="nextweek">เริ่มสัปดาห์ถัดไป</button></div>`:''}
+    ${meta.warnings.length?`<details class="run-beta-warnbox"><summary>${ic('warn',16)} ข้อควรระวัง (${meta.warnings.length})</summary>${meta.warnings.map(w=>`<div class="run-beta-warn">${w}</div>`).join('')}</details>`:''}
+    <nav class="run-beta-week" aria-label="เลือกวัน">${week.map(dayBtn).join('')}</nav>
+    <h2 style="margin:0 0 8px;font-size:1.1rem">วัน${sel.day} · ${sel.type==='rest'?'วันพัก':'วันวิ่ง'}</h2>
+    ${sel.type==='rest'?`<div class="run-beta-card"><h3 style="margin:0 0 4px">${sel.name}</h3><p class="run-beta-sub">${sel.why}</p><ul style="margin:0;padding-left:20px;font-size:.9rem"><li>ดื่มน้ำให้พอและนอนให้ครบ 7-9 ชั่วโมง</li><li>ยืดเหยียดเบาๆ หรือเดินเล่นได้ถ้าอยาก</li><li>สังเกตอาการเจ็บค้าง หากเจ็บแปลบให้พักต่อ</li></ul></div>`:phases.map((p,i)=>phase(p,i+1)).join('')}
+    </div>${modal}${lvup}`;rbSave();
+  }
+
+  function onClick(e){
+    const ac=e.target.closest('[data-act]');
+    if(ac){ act(ac); return; }
+    const b=e.target.closest('[data-go]'); if(!b) return;
+    const to=+b.dataset.go;
+    if(step===1) readProfile();
+    if(step===2) S.goals=[...root.querySelectorAll('[name=goals]:checked')].map(c=>c.value);
+    if(step===1 && to===2){ const m=validate(); if(m){ $('#rb-err').textContent=m; return; } }
+    if(step===2 && to===3 && !S.goals.length){ $('#rb-err').textContent='กรุณาเลือกอย่างน้อย 1 ข้อ'; return; }
+    step=to; if(to===3) S.level=null; [null,profile,goals,result][step](); if(to===1) refreshDays(); showTimer(step===3); window.scrollTo(0,0); rbSave();
+  }
+  function refreshDays(){ // ล็อกปุ่มถัดไปแบบ real-time เมื่อวันว่าง < จำนวนวันวิ่ง
+    const c=$('#rb-cnt'); if(!c) return;
+    const need=+(root.querySelector('[name=daysPerWeek]:checked')||{value:S.daysPerWeek}).value;
+    const got=root.querySelectorAll('[name=freeDays]:checked').length;
+    c.textContent=`เลือกวันว่างแล้ว ${got}/${need} วัน (ต้องเลือกขั้นต่ำ ${need} วัน)`;
+    $('#rb-dwarn').innerHTML=got<need?`<div class="run-beta-warn">วันว่างน้อยกว่าจำนวนครั้งที่ต้องการวิ่ง ต้องเลือกวันว่างเพิ่มอีก ${need-got} วัน หรือลดจำนวนวันวิ่งต่อสัปดาห์</div>`:'';
+    $('#rb-next').disabled=got<need;
+  }
+  function onChange(){ if(step===1) refreshDays(); }
+  function mount(el){
+    root = el; root.addEventListener('click', onClick); root.addEventListener('change', onChange);
+    [null,profile,goals,result][step](); if(step===1) refreshDays(); showTimer(step===3);
+  }
+  return {mount, leave: () => showTimer(false), save: rbSave};
+})();
+
+
+// ================= ระบบบันทึกข้อมูล (ปุ่มบันทึกหน้า Home) =================
+Object.assign(IC,{disk:'<path d="M5 4.5h11l3.5 3.5V19a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 19V6A1.5 1.5 0 0 1 6 4.5z"/><path d="M8 4.5v4.5h7V4.5M8 20.5v-6h8v6"/>'});
+let svMsg='',SVC='',SVBUSY=false;
+const svLayers=st=>'localStorage '+(st.ls?'✓':'✗')+' · IndexedDB '+(st.idb?'✓':'✗');
+function svShow(m,c){svMsg=m;SVC=c?' '+c:'';const e=E('svs');if(e){e.className='svs'+SVC;e.textContent=svMsg}}
+function svInit(){const st=STO.status();
+if(!st.ls&&!st.idb)svShow('เครื่องนี้ยังไม่อนุญาตให้แอปเก็บข้อมูลถาวร กดบันทึกเพื่อทดสอบอีกครั้ง','err');
+else svShow((st.restored?'กู้คืนข้อมูลจากที่เก็บสำรองแล้ว · ':'')+'ที่เก็บข้อมูล: '+svLayers(st),'')}
+async function doSaveAll(){if(SVBUSY)return;SVBUSY=true;const t=E('svt');if(t)t.textContent='กำลังบันทึก...';
+let r={ls:false,idb:false,keys:0,media:0};
+try{
+try{if(S)save()}catch(e){}
+try{nsave()}catch(e){}
+try{if(window.RunBetaUI)RunBetaUI.save()}catch(e){}
+try{pset('bio',PROF.bio)}catch(e){}
+try{if(qnDirty())qnSave()}catch(e){}
+r=await STO.flush();
+}catch(e){}
+const ok=r.ls||r.idb,tm=new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+if(ok)svShow('บันทึกแล้ว ✓ '+tm+' น. · '+svLayers(r)+(r.media?' · รูป/วิดีโอ '+r.media+' ไฟล์':''),'ok');
+else svShow('บันทึกไม่สำเร็จ: แอปนี้ไม่มีที่เก็บข้อมูลถาวรให้ใช้ (ข้อมูลจะอยู่แค่ตอนเปิดแอปอยู่)','err');
+const t2=E('svt');if(t2){t2.textContent=ok?'บันทึกแล้ว ✓':'บันทึกไม่ได้';setTimeout(()=>{const t3=E('svt');if(t3)t3.textContent='บันทึก'},1800)}
+SVBUSY=false}
+
+// ================= ปุ่มกลับของมือถือ (History API) =================
+let KS=[],HI=0,NAVPOP=false,NAVIGN=false;
+function navSnap(){return{p:PAGE,h:HSUB,m:MSUB,v:VIEW,nv:NV,nid:NID,tb:TBK,wz:W?W.i:null}}
+function navSync(){const sn=navSnap(),k=JSON.stringify(sn);
+try{
+if(!KS.length){KS=[k];HI=0;history.replaceState({s:sn,i:0},'');return}
+if(NAVPOP||k===KS[HI])return;
+if(HI>0&&k===KS[HI-1]){HI--;NAVIGN=true;history.back();return}
+KS.splice(HI+1);KS.push(k);HI++;history.pushState({s:sn,i:HI},'')
+}catch(e){}}
+function R(){R0();navSync()}
+window.addEventListener('popstate',e=>{
+if(NAVIGN){NAVIGN=false;return}
+const md=E('md'),open=(md&&md.style.display=='flex')||SH;
+if(open){closeM();closeSh();try{history.pushState({s:JSON.parse(KS[HI]),i:HI},'')}catch(x){}return}
+const st=e.state;if(!st||!st.s)return;const s=st.s;
+HI=st.i||0;KS[HI]=JSON.stringify(s);
+PAGE=s.p;HSUB=s.h;MSUB=s.m;VIEW=s.v;NV=s.nv;NID=s.nid;TBK=s.tb;PV=false;
+if(s.wz==null)W=null;else if(W)W.i=s.wz;
+NAVPOP=true;try{R0()}finally{NAVPOP=false}
+scrollTo(0,0)});
+svInit();R();
+</script>
+<script>
+(function(){var ok=function(t){return t&&t.closest&&t.closest('input,textarea,[contenteditable="true"],[contenteditable=""]')};document.addEventListener('selectstart',function(e){if(!ok(e.target&&e.target.nodeType==1?e.target:e.target.parentElement))e.preventDefault()},true);document.addEventListener('contextmenu',function(e){if(!ok(e.target))e.preventDefault()},true);document.addEventListener('dragstart',function(e){e.preventDefault()},true)})();
+(function(){var st=false;function go(){if(st)return;st=true;var s=document.createElement('script');s.textContent=document.getElementById('appsrc').textContent;document.body.appendChild(s)}
+STO.load().then(go,go);setTimeout(go,6000)})();
+</script>
+</body></html>
